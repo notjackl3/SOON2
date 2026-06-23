@@ -8,8 +8,16 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-playfair);
+
+  /* SOON design tokens (from Figma) */
+  --color-accent: #c7ff46;
+  --color-ink: #1f1f1f;
+  --color-ink-soft: #353535;
+  --color-muted: #878787;
+  --color-surface: #f2f2f2;
+  --color-line: #cdced8;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +30,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
