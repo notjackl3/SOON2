@@ -18,6 +18,12 @@
   --color-muted: #878787;
   --color-surface: #f2f2f2;
   --color-line: #cdced8;
+  --color-cobalt: #4662ff;
+
+  /* Letter-spacing tokens (from Figma text styles).
+     -0.04em is the default (set on body); -0.06em = `tracking-body`. */
+  --tracking-tight: -0.04em; /* Figma: Caption + display headings */
+  --tracking-body: -0.06em; /* Figma: Body */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -31,4 +37,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  /* Default tracking; inherits everywhere (em-relative, so it scales per font size).
+     Body copy opts into the looser value with `tracking-body`. */
+  letter-spacing: var(--tracking-tight);
 }

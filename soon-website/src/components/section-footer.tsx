@@ -14,7 +14,7 @@ function Field({
     <div className="flex flex-1 flex-col gap-1">
       <label
         htmlFor={name}
-        className="text-[14px] uppercase tracking-[-0.04em] text-muted"
+        className="text-[14px] uppercase text-muted"
       >
         {label}
       </label>
@@ -22,7 +22,7 @@ function Field({
         id={name}
         name={name}
         type={type}
-        className="h-9 rounded-md border border-line bg-surface px-3 text-[14px] text-ink outline-none focus:border-ink/40"
+        className="h-9 rounded-md border border-line bg-surface px-3 text-[14px] tracking-normal text-ink outline-none focus:border-ink/40"
       />
     </div>
   );
@@ -32,14 +32,14 @@ export default function SectionFooter() {
   return (
     <footer className="w-full bg-white">
       {/* ---- Contact section ---- */}
-      <section className="mx-auto flex w-full max-w-360 flex-col gap-16 px-6 py-20 mt-12 lg:flex-row lg:items-center lg:gap-12 lg:px-30">
+      <section className="mx-auto flex w-full max-w-360 flex-col gap-16 px-8 py-20 mt-12 md:px-34 lg:flex-row lg:items-center lg:gap-12">
         {/* Left: heading + copy */}
         <div className="flex flex-1 flex-col gap-12">
           <div className="flex flex-col gap-3">
-            <p className="text-[20px] tracking-[-0.06em] text-ink-soft">
+            <p className="text-[20px] tracking-body text-ink-soft">
               Knock, knock
             </p>
-            <h2 className="max-w-135.5 lg:text-[80px] text-[48px] font-medium leading-none tracking-[-0.04em] text-ink">
+            <h2 className="max-w-135.5 lg:text-[80px] text-[48px] font-medium leading-none text-ink tracking-body">
               We&rsquo;d love to hear from{" "}
               <span className="relative inline-block font-display italic">
                 <span
@@ -52,7 +52,7 @@ export default function SectionFooter() {
             </h2>
           </div>
 
-          <div className="max-w-110.5 space-y-4 text-[20px] tracking-[-0.06em] text-ink-soft">
+          <div className="max-w-110.5 space-y-4 text-[20px] tracking-body text-ink-soft">
             <p>
               Not sure which pipeline or tier fits best? Our team will walk you
               through it&mdash;pricing, availability, and what works for your
@@ -82,20 +82,20 @@ export default function SectionFooter() {
           <div className="flex flex-col gap-1">
             <label
               htmlFor="info"
-              className="text-[14px] uppercase tracking-[-0.04em] text-muted"
+              className="text-[14px] uppercase text-muted"
             >
               Availability and Additional Information
             </label>
             <textarea
               id="info"
               name="info"
-              className="h-34.75 resize-none rounded-md border border-line bg-surface p-3 text-[14px] text-ink outline-none focus:border-ink/40"
+              className="h-34.75 resize-none rounded-md border border-line bg-surface p-3 text-[14px] tracking-normal text-ink outline-none focus:border-ink/40"
             />
           </div>
 
           <button
             type="submit"
-            className="self-start rounded-[18px] border border-[#a8e618] bg-accent/30 px-8 py-2 text-[14px] uppercase tracking-[-0.04em] text-ink transition-colors hover:bg-accent/50"
+            className="self-start rounded-[18px] border border-[#a8e618] bg-accent/30 px-8 py-2 text-[14px] uppercase text-ink transition-colors hover:bg-accent/50"
           >
             I&rsquo;m in
           </button>
@@ -104,7 +104,7 @@ export default function SectionFooter() {
 
       {/* ---- Footer bar ---- */}
       <div className="bg-surface">
-        <div className="mx-auto flex w-full max-w-360 flex-col items-center justify-between gap-8 px-6 py-12 lg:flex-row lg:items-center lg:px-30">
+        <div className="mx-auto flex w-full max-w-360 flex-col items-center justify-between gap-8 px-8 py-12 md:px-34 lg:flex-row lg:items-center">
           {/* Brand + copyright */}
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-2">
@@ -115,11 +115,11 @@ export default function SectionFooter() {
                 height={60}
                 className="size-15 object-contain"
               />
-              <span className="text-[36px] font-medium tracking-[-0.04em] text-muted">
+              <span className="text-[36px] font-medium text-muted">
                 SOON
               </span>
             </div>
-            <p className="text-[14px] uppercase tracking-[-0.04em] text-muted pl-4">
+            <p className="text-[14px] uppercase text-muted pl-4">
               &copy; 2026 SOON. All rights reserved.
             </p>
           </div>
@@ -147,7 +147,7 @@ export default function SectionFooter() {
               </div>
               <a
                 href="mailto:uoft.soon@gmail.com"
-                className="text-[11.66px] uppercase tracking-[-0.04em] text-ink hover:underline"
+                className="text-[11.66px] uppercase text-ink hover:underline"
               >
                 UOFT.SOON@GMAIL.COM
               </a>
@@ -155,7 +155,7 @@ export default function SectionFooter() {
 
             <div className="h-20.75 w-px bg-line" />
 
-            <p className="w-22.5 text-[18.6px] uppercase leading-tight tracking-[-0.04em] text-muted">
+            <p className="w-22.5 text-[18.6px] uppercase leading-tight text-muted">
               We live here too
             </p>
           </div>
