@@ -20,67 +20,68 @@ function CornerBadge({ children }: { children: React.ReactNode }) {
 
 export default function SectionHero() {
   return (
-    <section className="relative overflow-hidden px-8 py-16 md:px-34">
+    <section className="relative flex min-h-dvh flex-col overflow-hidden px-8 py-16 md:px-34">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-60"
         style={dotGrid}
       />
+      <div className="relative mx-auto flex w-full max-w-360 flex-1 flex-col justify-start">
+        <div className="flex w-full max-w-195 flex-col gap-3">
+          {/* Everything except the CTA row */}
+          <div className="flex max-w-165 flex-col gap-6">
+            {/* title-text */}
+            <div className="flex flex-col gap-2">
+              {/* eyebrow + Something */}
+              <div className="flex flex-col gap-1">
+                <p className="px-1.5 text-[16px] tracking-body text-muted">
+                  Ontario&rsquo;s best builders. All making
+                </p>
+                <h1 className="font-display tracking-body text-[clamp(64px,10vw,120px)] leading-none text-black">
+                  Something
+                </h1>
+              </div>
 
-      <div className="flex w-full max-w-195 flex-col gap-3">
-        {/* Everything except the CTA row */}
-        <div className="flex max-w-165 flex-col gap-6">
-          {/* title-text */}
-          <div className="flex flex-col gap-2">
-            {/* eyebrow + Something */}
-            <div className="flex flex-col gap-1">
-              <p className="px-1.5 text-[16px] tracking-body text-muted">
-                Ontario&rsquo;s best builders. All making
-              </p>
-              <h1 className="font-display tracking-body text-[clamp(64px,10vw,120px)] leading-none text-black">
-                Something
-              </h1>
-            </div>
-
-            {/* out of / Nothing */}
-            <div className="flex items-end justify-between gap-3">
-              <span className="self-start shrink-0 text-[clamp(23px,4.1vw,50px)] leading-none tracking-body text-black">
-                out of
-              </span>
-              <span className="h-[clamp(64px,10.5vw,132px)] relative flex flex-1 items-center justify-start">
-                <span className="relative inline-flex">
-                  <span
-                    aria-hidden
-                    className="absolute inset-x-0 top-1/2 h-[55%] -translate-y-1/2 bg-accent"
-                  />
-                  <span className="relative font-display text-[clamp(79px,13.2vw,165px)] italic leading-[0.8] text-black">
-                    Nothing
+              {/* out of / Nothing */}
+              <div className="flex items-end justify-between gap-3">
+                <span className="self-start shrink-0 text-[clamp(23px,4.1vw,50px)] leading-none tracking-body text-black">
+                  out of
+                </span>
+                <span className="h-[clamp(64px,10.5vw,132px)] relative flex flex-1 items-center justify-start">
+                  <span className="relative inline-flex">
+                    <span
+                      aria-hidden
+                      className="absolute inset-x-0 top-1/2 h-[55%] -translate-y-1/2 bg-accent"
+                    />
+                    <span className="relative font-display text-[clamp(79px,13.2vw,165px)] italic leading-[0.8] text-black">
+                      Nothing
+                    </span>
                   </span>
                 </span>
-              </span>
+              </div>
+            </div>
+
+            {/* goodbye / coming */}
+            <div className="flex flex-col gap-4 md:pr-35">
+              <div className="flex justify-end">
+                <CornerBadge>Coming Oct &rsquo;26</CornerBadge>
+              </div>
+              <p className="max-w-60 text-[16px] tracking-body text-muted">
+                Say goodbye to conventional hackathons.
+              </p>
             </div>
           </div>
 
-          {/* goodbye / coming */}
-          <div className="flex flex-col gap-4 md:pr-35">
-            <div className="flex justify-end">
-              <CornerBadge>Coming Oct &rsquo;26</CornerBadge>
-            </div>
-            <p className="max-w-60 text-[16px] tracking-body text-muted">
-              Say goodbye to conventional hackathons.
-            </p>
+          {/* CTA row */}
+          <div className="flex items-center justify-between gap-4">
+            <button
+              type="button"
+              className="rounded-[26px] border-[1.5px] border-[#a8e618] bg-accent/30 px-7 py-2.5 text-[clamp(12px,1.5vw,15px)] uppercase text-ink transition-colors hover:bg-accent/50"
+            >
+              Reserve your room
+            </button>
+            <CornerBadge>Location: TBA</CornerBadge>
           </div>
-        </div>
-
-        {/* CTA row */}
-        <div className="flex items-center justify-between gap-4">
-          <button
-            type="button"
-            className="rounded-[26px] border-[1.5px] border-[#a8e618] bg-accent/30 px-7 py-2.5 text-[clamp(12px,1.5vw,15px)] uppercase text-ink transition-colors hover:bg-accent/50"
-          >
-            Reserve your room
-          </button>
-          <CornerBadge>Location: TBA</CornerBadge>
         </div>
       </div>
     </section>

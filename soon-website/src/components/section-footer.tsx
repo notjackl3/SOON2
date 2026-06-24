@@ -104,7 +104,7 @@ export default function SectionFooter() {
 
       {/* ---- Footer bar ---- */}
       <div className="bg-surface">
-        <div className="mx-auto flex w-full max-w-360 flex-col items-center justify-between gap-8 px-8 py-12 md:px-34 lg:flex-row lg:items-center">
+        <div className="mx-auto flex w-full max-w-360 flex-col items-center justify-between gap-8 px-6 py-12 lg:flex-row lg:items-center lg:px-30">
           {/* Brand + copyright */}
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-2">
