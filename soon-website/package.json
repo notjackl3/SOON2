@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "optimize:glb": "gltf-transform optimize public/models/scene.glb public/models/scene.tmp.glb --simplify false --texture-compress webp --texture-size 2048 && mv -f public/models/scene.tmp.glb public/models/scene.glb"
   },
   "dependencies": {
     "@gltf-transform/cli": "^4.4.0",
