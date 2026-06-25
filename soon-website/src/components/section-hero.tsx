@@ -1,7 +1,7 @@
 /** Dotted-grid texture behind the hero. Rendered at its natural size and
  *  centered, so resizing the window clips the artwork instead of scaling it. */
 const dotGrid: React.CSSProperties = {
-  backgroundImage: "url('/hero/bg-dots.svg')",
+  backgroundImage: "url('/background-patterns/bg-dots.svg')",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
   backgroundSize: "auto",

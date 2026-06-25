@@ -2,6 +2,8 @@ import Nav from "@/components/nav";
 import SectionHero from "@/components/section-hero";
 import SectionConcept from "@/components/section-concept";
 import SectionSpill from "@/components/section-spill";
+import SectionRecap from "@/components/section-recap";
+import SectionGuestsSponsors from "@/components/section-guests-sponsors";
 import SectionFooter from "@/components/section-footer";
 import SceneBackground from "@/components/three/scene-background";
 import { SCROLL_SPAN_ID } from "@/components/three/constants";
@@ -24,11 +26,14 @@ export default function Home() {
         <SectionSpill />
       </div>
 
-      {/* Footer sits on its own opaque background, after the 3D has faded out.
-          It's the final snap stop ("one more slide into the next section").
-          When you add sections after Concept/Spill, move/extend
-          `data-snap-section` onto whichever sections should be slides. */}
-      <div data-snap-section className="relative bg-white">
+      {/* Snap sequence ends at Spill. From here it's normal free-scroll, so the
+          Recap (not a snap target) isn't flown past by the auto-glide. */}
+      <SectionRecap />
+
+      <SectionGuestsSponsors />
+
+      {/* Footer sits on its own opaque background, after the 3D has faded out. */}
+      <div className="relative bg-white">
         <SectionFooter />
       </div>
     </main>
