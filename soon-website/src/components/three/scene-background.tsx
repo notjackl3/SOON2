@@ -11,8 +11,9 @@ const SceneCanvas = dynamic(() => import("./scene-canvas"), { ssr: false });
 
 /**
  * Fixed, full-screen canvas pinned *behind* all page content
- * (`-z-10`, `pointer-events-none`). Fades out as the user scrolls through the
- * Spill placeholder section so the 3D is gone before the Footer.
+ * (`-z-10`, `pointer-events-none`). A solid white layer stays put while only the
+ * 3D canvas fades out across the Spill placeholder — so the section resolves to
+ * white (not the page background behind it) before the Footer.
  */
 export default function SceneBackground() {
   const ref = useRef<HTMLDivElement>(null);
@@ -52,11 +53,13 @@ export default function SceneBackground() {
 
   return (
     <div
-      ref={ref}
       aria-hidden
       className="pointer-events-none fixed inset-0 -z-10 bg-white"
     >
-      <SceneCanvas />
+      {/* Only the canvas fades; the white layer above stays solid. */}
+      <div ref={ref} className="absolute inset-0">
+        <SceneCanvas />
+      </div>
     </div>
   );
 }
