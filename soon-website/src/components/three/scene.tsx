@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useAnimations, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
@@ -12,11 +12,59 @@ import {
   FADE_ID,
   MODEL_URL,
   SCROLL_SPAN_ID,
+  SCRUB_CURVE,
   SCRUB_END_FRACTION,
+  UNLIT_BAKED,
 } from "./constants";
 
 /** How quickly the scrub catches up to the scroll position (higher = snappier). */
 const SCRUB_DAMP = 6;
+
+/**
+ * Replace every material with an unlit MeshBasicMaterial that shows the baked
+ * texture (base-color `map`, or `emissiveMap` if baked via an Emission node)
+ * exactly as exported — no relighting, no tone mapping. Idempotent.
+ */
+function makeUnlit(root: THREE.Object3D) {
+  if (root.userData.__unlit) return;
+  root.userData.__unlit = true;
+
+  const convert = (m: THREE.Material) => {
+    const src = m as THREE.MeshStandardMaterial;
+    // Baked texture lives in base color OR emissive (Emission-node route).
+    const map = src.map ?? src.emissiveMap ?? null;
+    if (map) map.colorSpace = THREE.SRGBColorSpace;
+    // When a baked map exists, show it unmodulated (white tint). Otherwise keep
+    // the material's flat color. This avoids black base-color factors (common
+    // with the Emission route) multiplying the texture to black.
+    const color = map
+      ? new THREE.Color(0xffffff)
+      : (src.color?.clone() ?? new THREE.Color(0xffffff));
+    const basic = new THREE.MeshBasicMaterial({
+      map,
+      color,
+      transparent: src.transparent,
+      opacity: src.opacity,
+      alphaMap: src.alphaMap ?? null,
+      alphaTest: src.alphaTest,
+      side: src.side,
+      vertexColors: src.vertexColors,
+      depthWrite: src.depthWrite,
+    });
+    basic.toneMapped = false; // show baked pixels 1:1
+    basic.name = src.name;
+    src.dispose();
+    return basic;
+  };
+
+  root.traverse((obj) => {
+    const mesh = obj as THREE.Mesh;
+    if (!mesh.isMesh) return;
+    mesh.material = Array.isArray(mesh.material)
+      ? mesh.material.map(convert)
+      : convert(mesh.material);
+  });
+}
 
 /**
  * Loads the Blender GLB, uses its *exported camera* as the render camera, and
@@ -40,6 +88,11 @@ export function Scene() {
 
   const camera = cameras[0] as THREE.PerspectiveCamera | undefined;
   const duration = animations[0]?.duration ?? 0;
+
+  // Render the baked scene unlit (before first paint) so it never gets relit.
+  useLayoutEffect(() => {
+    if (UNLIT_BAKED) makeUnlit(scene);
+  }, [scene]);
 
   // Promote the Blender camera to the render camera and remember its lens.
   useEffect(() => {
@@ -69,11 +122,13 @@ export function Scene() {
       delta,
     );
 
-    // --- Keyframe → scroll mapping (Option A: linear) -----------------------
-    // The whole baked timeline maps proportionally to the scroll span.
+    // --- Keyframe → scroll mapping (Option A: linear + curve) ---------------
+    // The baked timeline maps onto the scroll span, reshaped by SCRUB_CURVE
+    // (1 = linear/Blender spacing, <1 = front-load early keyframes).
     // For Option B (pin a specific keyframe to a specific section), replace
-    // this line with a piecewise lerp over an ordered [{progress,time}] table.
-    const time = Math.min(smoothed.current * duration, duration - 1e-3);
+    // `curved` with a piecewise lerp over an ordered [{progress,time}] table.
+    const curved = Math.pow(smoothed.current, SCRUB_CURVE);
+    const time = Math.min(curved * duration, duration - 1e-3);
     mixer.setTime(time);
 
     // Keep framing faithful to the Blender camera at any viewport aspect.

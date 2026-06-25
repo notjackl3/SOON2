@@ -11,6 +11,10 @@ import { SceneErrorBoundary } from "./scene-error-boundary";
  * The WebGL canvas. Loaded client-only (see scene-background.tsx) since it
  * touches browser/WebGL APIs. No `camera` prop — Scene swaps in the Blender
  * camera from the GLB at runtime.
+ *
+ * The GLB is rendered *unlit* (UNLIT_BAKED → Scene/makeUnlit): baked Cycles
+ * lighting shows exactly as exported — no scene lights, no tone mapping. The
+ * canvas is transparent over a flat white wrapper (see scene-background.tsx).
  */
 export default function SceneCanvas() {
   return (
@@ -18,20 +22,11 @@ export default function SceneCanvas() {
       gl={{ alpha: true, antialias: true }}
       dpr={[1, 2]}
       onCreated={({ gl }) => {
-        // Approximate the Blender look; tune against a Blender screenshot.
-        gl.toneMapping = THREE.ACESFilmicToneMapping;
-        gl.toneMappingExposure = 1;
+        gl.toneMapping = THREE.NoToneMapping;
       }}
     >
       <SceneErrorBoundary>
         <Suspense fallback={null}>
-          {/*
-            Fallback lighting so the scene is visible even if the GLB ships
-            without exported lights. Remove these two lights if you exported
-            "Punctual Lights" from Blender and want only those.
-          */}
-          <ambientLight intensity={0.6} />
-          <directionalLight position={[3, 5, 2]} intensity={1.2} />
           <Scene />
         </Suspense>
       </SceneErrorBoundary>

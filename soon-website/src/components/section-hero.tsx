@@ -1,7 +1,10 @@
-/** Dotted-grid texture behind the hero. */
+/** Dotted-grid texture behind the hero. Rendered at its natural size and
+ *  centered, so resizing the window clips the artwork instead of scaling it. */
 const dotGrid: React.CSSProperties = {
-  backgroundImage: "radial-gradient(#dcdcdc 1px, transparent 1px)",
-  backgroundSize: "18px 18px",
+  backgroundImage: "url('/hero/bg-dots.svg')",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  backgroundSize: "auto",
 };
 
 /** A bordered label box with little squares at each corner (e.g. "COMING OCT '26"). */
@@ -20,10 +23,13 @@ function CornerBadge({ children }: { children: React.ReactNode }) {
 
 export default function SectionHero() {
   return (
-    <section className="relative flex min-h-dvh flex-col overflow-hidden px-8 py-16 md:px-34">
+    <section
+      data-snap-section
+      className="relative flex min-h-dvh flex-col overflow-hidden px-8 pb-16 pt-28 md:px-34"
+    >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 opacity-60"
+        className="pointer-events-none absolute inset-0 -z-10"
         style={dotGrid}
       />
       <div className="relative mx-auto flex w-full max-w-360 flex-1 flex-col justify-start">

@@ -28,15 +28,10 @@ export default function SceneBackground() {
       let opacity = 1;
       if (fadeEl) {
         const rect = fadeEl.getBoundingClientRect();
-        const distance = fadeEl.offsetHeight - window.innerHeight;
-        // 0 while the placeholder's top is below the viewport top, ramping to 1
-        // as we scroll through it.
-        const p =
-          distance > 0
-            ? Math.min(1, Math.max(0, -rect.top / distance))
-            : rect.top <= 0
-              ? 1
-              : 0;
+        // Fully visible while the placeholder is at/above the viewport top,
+        // ramping to 0 over one viewport of scrolling past it (i.e. across the
+        // glide into the next section).
+        const p = Math.min(1, Math.max(0, -rect.top / window.innerHeight));
         opacity = 1 - p;
       }
       el.style.opacity = String(opacity);
@@ -59,7 +54,7 @@ export default function SceneBackground() {
     <div
       ref={ref}
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10"
+      className="pointer-events-none fixed inset-0 -z-10 bg-white"
     >
       <SceneCanvas />
     </div>
