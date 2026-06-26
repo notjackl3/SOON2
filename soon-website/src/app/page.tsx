@@ -4,6 +4,7 @@ import SectionConcept from "@/components/section-concept";
 import SectionSpill from "@/components/section-spill";
 import SectionRecap from "@/components/section-recap";
 import SectionGuestsSponsors from "@/components/section-guests-sponsors";
+import SectionSponsors from "@/components/section-sponsors";
 import SectionFooter from "@/components/section-footer";
 import SceneBackground from "@/components/three/scene-background";
 import { SCROLL_SPAN_ID } from "@/components/three/constants";
@@ -31,6 +32,8 @@ export default function Home() {
       <SectionRecap />
 
       <SectionGuestsSponsors />
+
+      <SectionSponsors />
 
       {/* Footer sits on its own opaque background, after the 3D has faded out. */}
       <div className="relative bg-white">

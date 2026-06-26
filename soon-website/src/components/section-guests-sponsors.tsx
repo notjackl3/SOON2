@@ -244,7 +244,7 @@ export default function SectionGuestsSponsors() {
               src={v.src}
               alt=""
               aria-hidden
-              className="pointer-events-none absolute opacity-60"
+              className="pointer-events-none absolute"
               style={{ left: v.x, top: v.y, width: v.w, height: v.h }}
             />
           ))}
