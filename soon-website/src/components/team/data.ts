@@ -22,10 +22,10 @@ const JACK_BIO = `Starting 2026, I have been to 15 hackathons in a row, won 7, a
  */
 export const TEAM_GROUPS: TeamMember[][][] = [
   [
-    [{ name: "First Lastname", role: "Partnerships", col: 6 }],
+    [{ name: "Nikita Nathania", role: "Logistics Lead", image: "/team/nikita.jpg", col: 6 }],
     [
-      { name: "First Lastname", role: "Partnerships", col: 0 },
-      { name: "Ariah D'Souza", role: "Marketing", image: "/team/ariah.jpg", col: 3 },
+      { name: "Ariah D'Souza", role: "Marketing Lead", image: "/team/ariah.jpg", col: 0 },
+      { name: "Natasha Ejercito", role: "Operations Lead", image: "/team/natasha.jpg", col: 3 },
       { name: "Phin Truong", role: "Director", image: "/team/phin.jpg", col: 5 },
     ],
   ],
@@ -46,9 +46,10 @@ export const TEAM_GROUPS: TeamMember[][][] = [
     [
       { name: "Erin Manalo", role: "Design", image: "/team/erin.jpg", col: 0 },
       { name: "Sophie Shu", role: "Design, Tech", image: "/team/sophie.jpg", col: 1 },
-      { name: "Natasha Ejercito", role: "Operations", image: "/team/natasha.jpg", col: 3 },
-      { name: "Nikita Nathania", role: "Logistics", image: "/team/nikita.jpg", col: 4 },
+      { name: "Dorothy Zheng", role: "Operations", image: "/team/dorothy.jpg", col: 3 },
+      { name: "Sohaila Ali", role: "Operations", image: "/team/sohaila.jpg", col: 4 },
     ],
+    [{ name: "Mohammad Mashrur", role: "Operations", image: "/team/mohammad.jpg", col: 2 }]
   ],
 ];
 
@@ -89,6 +90,7 @@ export const MOBILE_CARDS: MobilePlacement[] = [
   { card: { name: "Sophie Shu", role: "Design, Tech", image: "/team/sophie.jpg" }, x: 198, y: 470 },
   { card: { name: "Natasha Ejercito", role: "Operations", image: "/team/natasha.jpg" }, x: 135, y: 620 },
   { card: { name: "Nikita Nathania", role: "Logistics", image: "/team/nikita.jpg" }, x: 28, y: 692 },
-  { card: { name: "First Lastname", role: "Partnerships" }, x: 293, y: 581 },
-  { card: { name: "First Lastname", role: "Partnerships" }, x: 293, y: 691 },
+  { card: { name: "Mohammad Mashrur", role: "Operations", image: "/team/mohammad.jpg" }, x: 190, y: 748 },
+  { card: { name: "Dorothy Zheng", role: "Operations", image: "/team/dorothy.jpg" }, x: 293, y: 581 },
+  { card: { name: "Sohaila Ali", role: "Operations", image: "/team/sohaila.jpg" }, x: 293, y: 691 },
 ];
