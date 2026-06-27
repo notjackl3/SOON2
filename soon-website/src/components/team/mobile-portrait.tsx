@@ -34,8 +34,8 @@ export function MobilePortrait({
           )}
         </div>
         <div className="flex w-full flex-col gap-0.5">
-          <p className={`w-full break-words ${NAME}`}>{card.name}</p>
-          <p className={`w-full break-words ${ROLE}`}>{card.role}</p>
+          <p className={`w-full wrap-break-word ${NAME}`}>{card.name}</p>
+          <p className={`w-full wrap-break-word ${ROLE}`}>{card.role}</p>
         </div>
       </div>
     </div>
