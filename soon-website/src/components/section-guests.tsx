@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { ShapeGridEdge } from "@/components/shape-grid-edge";
 import { Vista } from "@/components/guests/vista";
 import {
   BG_VECTORS,
@@ -199,7 +200,14 @@ export default function SectionGuests() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-white">
+    <section
+      className="relative w-full overflow-hidden bg-white"
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
+    >
+      {/* Animated shape grid, faded in from the left edge (desktop only) */}
+      <ShapeGridEdge side="left" />
+
       {/* Mobile: static stacked grid, no physics/lines */}
       <div className="px-8 py-14 md:hidden">
         <FeedbackHeading className="font-sans text-[clamp(40px,12vw,72px)] font-medium leading-none tracking-tight text-ink" />
@@ -219,16 +227,16 @@ export default function SectionGuests() {
         </div>
       </div>
 
-      {/* Desktop: floating stage */}
+      {/* Desktop: floating stage. pointer-events-none so hovers fall through to
+          the grid behind; the cursor-push physics is driven by the section's
+          pointer handlers (which still fire via event bubbling). */}
       <div
         ref={wrapRef}
-        className="relative hidden md:block"
+        className="pointer-events-none relative hidden md:block"
         style={{ height: layout.height }}
       >
         <div
           ref={stageRef}
-          onPointerMove={onPointerMove}
-          onPointerLeave={onPointerLeave}
           className="absolute left-0 top-0 origin-top-left"
           style={{
             width: STAGE_W,

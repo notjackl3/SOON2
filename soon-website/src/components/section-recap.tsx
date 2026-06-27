@@ -49,7 +49,12 @@ export default function SectionRecap() {
     >
       {/* Header (z-10 so the grid bleeding up stays behind the heading) */}
       <div className="relative z-10 mx-auto w-full max-w-360 px-8 md:px-34">
-        <PixelCluster />
+        <img
+          src="/recap/vectors-top.svg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute left-0 top-0 hidden w-[clamp(160px,17vw,256px)] md:block"
+        />
         <h2 className="mt-4 font-sans text-[clamp(36px,8vw,80px)] font-medium leading-none tracking-tight text-ink">
           Last time, we had&hellip;
         </h2>

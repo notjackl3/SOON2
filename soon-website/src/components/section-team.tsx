@@ -25,11 +25,20 @@ const DESKTOP_H = 967;
 export default function SectionTeam() {
   return (
     <section className="relative w-full overflow-hidden bg-white">
-      {/* Animated dot field (bottom), desktop only */}
-      <div className="pointer-events-none absolute inset-0 hidden md:block">
+      {/* Animated dot field (bottom), desktop only. Masked so the dots fade
+          out toward the edges into the white background. */}
+      <div
+        className="pointer-events-none absolute inset-0 hidden md:block"
+        style={{
+          maskImage:
+            "radial-gradient(ellipse 60% 60% at 50% 50%, black 45%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 60% 60% at 50% 50%, black 45%, transparent 100%)",
+        }}
+      >
         <DotField
-          dotRadius={2}
-          dotSpacing={18}
+          dotRadius={3}
+          dotSpacing={17}
           gradientFrom="rgba(205, 206, 216, 0.9)"
           gradientTo="rgba(205, 206, 216, 0.5)"
           glowColor="transparent"
