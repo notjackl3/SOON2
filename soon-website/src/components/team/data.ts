@@ -51,3 +51,44 @@ export const TEAM_GROUPS: TeamMember[][][] = [
     ],
   ],
 ];
+
+// --- Mobile scatter layout --------------------------------------------------
+// Cards are absolutely positioned (x, y) inside a 390×971 stage; the content
+// group sits MOBILE_CONTENT_TOP below the top. Same members as desktop.
+
+export interface MobileCard {
+  name: string;
+  role: string;
+  image?: string;
+  bio?: string;
+}
+
+export interface MobilePlacement {
+  card: MobileCard;
+  x: number;
+  y: number;
+}
+
+export const MOBILE_STAGE_W = 390;
+export const MOBILE_STAGE_H = 971;
+export const MOBILE_CONTENT_TOP = 50;
+/** who-we-are.svg slot (replaces the Figma's per-piece title). */
+export const MOBILE_TITLE = { x: 131, y: 290, w: 259 };
+
+export const MOBILE_JACK: MobilePlacement = {
+  card: { name: "Jack Le", role: "Founder", image: "/team/jack.jpg", bio: JACK_BIO },
+  x: 42,
+  y: 0,
+};
+
+export const MOBILE_CARDS: MobilePlacement[] = [
+  { card: { name: "Saanvi Mogla", role: "Co-President", image: "/team/saanvi.jpg" }, x: 207, y: 179.68 },
+  { card: { name: "Phin Truong", role: "Director", image: "/team/phin.jpg" }, x: 303.33, y: 69 },
+  { card: { name: "Ariah D'Souza", role: "Marketing", image: "/team/ariah.jpg" }, x: 0, y: 359 },
+  { card: { name: "Erin Manalo", role: "Design", image: "/team/erin.jpg" }, x: 86, y: 470 },
+  { card: { name: "Sophie Shu", role: "Design, Tech", image: "/team/sophie.jpg" }, x: 198, y: 470 },
+  { card: { name: "Natasha <?>", role: "Operations", image: "/team/natasha.jpg" }, x: 135, y: 620 },
+  { card: { name: "Nikita <?>", role: "Logistics", image: "/team/nikita.jpg" }, x: 28, y: 692 },
+  { card: { name: "First Lastname", role: "Partnerships" }, x: 293, y: 581 },
+  { card: { name: "First Lastname", role: "Partnerships" }, x: 293, y: 691 },
+];

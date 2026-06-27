@@ -69,8 +69,6 @@ export function Marquee({
   const trackRef = useRef<HTMLDivElement>(null);
   const setRef = useRef<HTMLDivElement>(null);
   const offset = useRef(0);
-  const hovering = useRef(false);
-  const speedMul = useRef(1); // eases 1 → 0 on hover for a gradual stop
   const scrolling = useRef(false);
 
   useEffect(() => {
@@ -87,10 +85,9 @@ export function Marquee({
       last = t;
       const vel = Math.abs(velocityRef.current);
 
-      // The browser freezes :hover / mouse events during active scroll, which
-      // would otherwise keep the row paused and the card lifted. Drop the row's
-      // pointer-events while scrolling so :hover releases (card lowers), and
-      // resume the drift below.
+      // The browser freezes :hover during active scroll, which would otherwise
+      // leave a card stuck lifted. Drop pointer-events while scrolling so the
+      // hover releases (the card lowers).
       const isScrolling = vel > 40;
       if (isScrolling !== scrolling.current) {
         scrolling.current = isScrolling;
@@ -101,11 +98,7 @@ export function Marquee({
 
       const setWidth = setRef.current?.offsetWidth ?? 0;
       if (setWidth > 0 && !reduce) {
-        // Ease the drift to a stop on hover (unless the page is scrolling).
-        const target = hovering.current && !isScrolling ? 0 : 1;
-        speedMul.current += (target - speedMul.current) * Math.min(1, dt * 6);
-        const speed =
-          (baseSpeed + vel * velocityFactor) * speedMul.current;
+        const speed = baseSpeed + vel * velocityFactor;
         let next = offset.current + speed * direction * dt;
         // Keep within (-setWidth, 0] so the duplicated set wraps seamlessly.
         next = (((next % setWidth) + setWidth) % setWidth) - setWidth;
@@ -119,16 +112,7 @@ export function Marquee({
   }, [baseSpeed, velocityFactor, direction, velocityRef]);
 
   return (
-    <div
-      ref={rowRef}
-      className="relative h-[clamp(150px,26vw,330px)]"
-      onMouseEnter={() => {
-        hovering.current = true;
-      }}
-      onMouseLeave={() => {
-        hovering.current = false;
-      }}
-    >
+    <div ref={rowRef} className="relative h-[clamp(150px,26vw,330px)]">
       <div ref={trackRef} className="flex h-full w-max will-change-transform">
         <div ref={setRef} className="flex h-full">
           {tiles.map((tile, i) => (

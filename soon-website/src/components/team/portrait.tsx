@@ -61,9 +61,9 @@ export function Portrait({
           />
         )}
       </div>
-      <div className="flex flex-col gap-1">
-        <p className={NAME}>{member.name}</p>
-        <p className={ROLE}>{member.role}</p>
+      <div className="flex w-full flex-col gap-1">
+        <p className={`w-full break-words ${NAME}`}>{member.name}</p>
+        <p className={`w-full break-words ${ROLE}`}>{member.role}</p>
       </div>
     </div>
   );
