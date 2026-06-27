@@ -1,6 +1,6 @@
 export default function Nav() {
   return (
-    <div className="absolute inset-x-0 top-0 z-50 flex w-full items-center justify-between px-6 py-4 tracking-body text-background">
+    <div className="absolute inset-x-0 top-0 z-50 flex w-full items-center justify-between px-6 py-4 tracking-body">
       <span className="font-small">Logo</span>
       <div className="hidden items-center gap-10 md:flex">
         <a href="#soon" className="hover:opacity-70">

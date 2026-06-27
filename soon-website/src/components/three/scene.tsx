@@ -76,6 +76,7 @@ export function Scene() {
   const { actions, mixer } = useAnimations(animations, scene);
   const set = useThree((s) => s.set);
   const size = useThree((s) => s.size);
+  const invalidate = useThree((s) => s.invalidate);
 
   // Scrub runs from the top of the span to halfway through the placeholder, so
   // the camera animation finishes early and then holds while the scene fades.
@@ -99,7 +100,21 @@ export function Scene() {
     if (!camera) return;
     refFovDeg.current = camera.fov; // vertical FOV at the Blender (16:9) aspect
     set({ camera });
-  }, [camera, set]);
+    invalidate(); // draw the first frame now that the camera exists
+  }, [camera, set, invalidate]);
+
+  // With `frameloop="demand"` the scene only renders when we ask. Scrolling is
+  // the only thing that changes it, so request a frame on every scroll; the
+  // useFrame below keeps requesting until the inertial scrub has caught up.
+  useEffect(() => {
+    const onScroll = () => invalidate();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [invalidate]);
 
   // Enable every clip so `mixer.setTime` evaluates it. We never call
   // `mixer.update(delta)`, so the animation only advances when *we* scrub it.
@@ -137,6 +152,10 @@ export function Scene() {
       refFovDeg: refFovDeg.current,
       mode: "cover",
     });
+
+    // Still easing toward the scroll position → request another frame. Once the
+    // scrub has settled we stop, so an idle page renders nothing.
+    if (Math.abs(progress.current - smoothed.current) > 1e-4) invalidate();
   });
 
   return <primitive object={scene} />;

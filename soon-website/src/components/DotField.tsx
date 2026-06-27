@@ -2,6 +2,8 @@
 
 import { useEffect, useId, useRef, memo } from 'react';
 
+import { observeVisibility, prefersReducedMotion } from './visibility';
+
 const TWO_PI = Math.PI * 2;
 
 interface Dot {
@@ -133,8 +135,10 @@ const DotField = memo(({
       m.prevY = m.y;
     }
 
-    const speedInterval = setInterval(updateMouseSpeed, 20);
-
+    const reduce = prefersReducedMotion();
+    let speedInterval: ReturnType<typeof setInterval> | null = null;
+    let visible = false;
+    let running = false;
     let frameCount = 0;
 
     function tick() {
@@ -231,7 +235,33 @@ const DotField = memo(({
 
       ctx!.fill();
 
+      // Only keep the loop alive while on-screen (and motion is allowed). Under
+      // reduced motion we render a single static frame and stop.
+      if (visible && !reduce) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        rafRef.current = null;
+        running = false;
+      }
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+      if (!reduce && !speedInterval) speedInterval = setInterval(updateMouseSpeed, 20);
       rafRef.current = requestAnimationFrame(tick);
+    }
+
+    function stop() {
+      running = false;
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+      if (speedInterval) {
+        clearInterval(speedInterval);
+        speedInterval = null;
+      }
     }
 
     doResize();
@@ -241,7 +271,13 @@ const DotField = memo(({
     // height is set after mount), not just on window resize.
     const ro = new ResizeObserver(resize);
     if (canvas.parentElement) ro.observe(canvas.parentElement);
-    rafRef.current = requestAnimationFrame(tick);
+
+    // Pause the loop whenever the field scrolls off-screen.
+    const stopObserving = observeVisibility(canvas.parentElement ?? canvas, (v) => {
+      visible = v;
+      if (v) start();
+      else stop();
+    });
 
     rebuildRef.current = () => {
       const { w, h } = sizeRef.current;
@@ -249,8 +285,9 @@ const DotField = memo(({
     };
 
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      clearInterval(speedInterval);
+      stopObserving();
+      stop();
+      ro.disconnect();
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMouseMove);

@@ -36,6 +36,8 @@ export default function SceneBackground() {
         opacity = 1 - p;
       }
       el.style.opacity = String(opacity);
+      // Fully faded → take it out of the compositor entirely.
+      el.style.visibility = opacity <= 0 ? "hidden" : "visible";
     };
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);

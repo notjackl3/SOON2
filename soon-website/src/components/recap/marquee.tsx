@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, type RefObject } from "react";
 
+import { observeVisibility } from "../visibility";
+
 export interface MarqueeTile {
   /** Optional image src under /public; omit for a gray placeholder tile. */
   src?: string;
@@ -80,6 +82,7 @@ export function Marquee({
 
     let raf = 0;
     let last = performance.now();
+    let visible = false;
     const tick = (t: number) => {
       const dt = Math.min(0.05, Math.max(0, (t - last) / 1000));
       last = t;
@@ -105,10 +108,36 @@ export function Marquee({
         offset.current = next;
         track.style.transform = `translate3d(${next}px,0,0)`;
       }
+      // Stop scheduling frames while the row is off-screen (or motion reduced).
+      if (visible && !reduce) raf = requestAnimationFrame(tick);
+      else raf = 0;
+    };
+
+    const start = () => {
+      if (raf) return;
+      // Reset the clock so the first resumed frame has a small dt, not a jump.
+      last = performance.now();
       raf = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+
+    const stop = () => {
+      if (raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    };
+
+    // Pause the drift whenever the row scrolls off-screen.
+    const stopObserving = observeVisibility(rowRef.current ?? track, (v) => {
+      visible = v;
+      if (v && !reduce) start();
+      else stop();
+    });
+
+    return () => {
+      stopObserving();
+      stop();
+    };
   }, [baseSpeed, velocityFactor, direction, velocityRef]);
 
   return (

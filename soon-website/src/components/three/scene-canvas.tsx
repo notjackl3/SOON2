@@ -19,6 +19,9 @@ import { SceneErrorBoundary } from "./scene-error-boundary";
 export default function SceneCanvas() {
   return (
     <Canvas
+      // Render-on-demand: the scene is scrubbed by scroll, so it only needs to
+      // draw when scroll changes (see Scene's invalidate-on-scroll), not 60×/sec.
+      frameloop="demand"
       gl={{ alpha: true, antialias: true }}
       dpr={[1, 2]}
       onCreated={({ gl }) => {

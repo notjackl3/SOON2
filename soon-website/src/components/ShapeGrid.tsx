@@ -2,6 +2,8 @@
 
 import React, { useRef, useEffect } from 'react';
 
+import { observeVisibility, prefersReducedMotion } from './visibility';
+
 type CanvasStrokeStyle = string | CanvasGradient | CanvasPattern;
 
 interface GridOffset {
@@ -247,6 +249,10 @@ const ShapeGrid: React.FC<ShapeGridProps> = ({
       ctx.fillRect(0, 0, cssWidth, cssHeight);
     };
 
+    const reduce = prefersReducedMotion();
+    let visible = false;
+    let running = false;
+
     const updateAnimation = () => {
       const effectiveSpeed = Math.max(speed, 0.1);
       const wrapX = isHex ? hexHoriz * 2 : squareSize;
@@ -275,7 +281,28 @@ const ShapeGrid: React.FC<ShapeGridProps> = ({
 
       updateCellOpacities();
       drawGrid();
+      // Stop scheduling frames while off-screen; under reduced motion draw a
+      // single static frame and stop.
+      if (visible && !reduce) {
+        requestRef.current = requestAnimationFrame(updateAnimation);
+      } else {
+        requestRef.current = null;
+        running = false;
+      }
+    };
+
+    const start = () => {
+      if (running) return;
+      running = true;
       requestRef.current = requestAnimationFrame(updateAnimation);
+    };
+
+    const stop = () => {
+      running = false;
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+        requestRef.current = null;
+      }
     };
 
     const updateCellOpacities = () => {
@@ -420,12 +447,19 @@ const ShapeGrid: React.FC<ShapeGridProps> = ({
     // fixed-resolution canvas gets stretched and the cells render non-square.
     const ro = new ResizeObserver(resizeCanvas);
     ro.observe(canvas);
-    requestRef.current = requestAnimationFrame(updateAnimation);
+
+    // Pause the loop whenever the grid scrolls off-screen.
+    const stopObserving = observeVisibility(canvas, (v) => {
+      visible = v;
+      if (v) start();
+      else stop();
+    });
 
     return () => {
+      stopObserving();
+      stop();
       window.removeEventListener('resize', resizeCanvas);
       ro.disconnect();
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
       canvas.removeEventListener('mousemove', handleMouseMove);
       canvas.removeEventListener('mouseleave', handleMouseLeave);
     };
