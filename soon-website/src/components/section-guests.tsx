@@ -59,7 +59,7 @@ function FeedbackHeading({ className }: { className?: string }) {
   );
 }
 
-export default function SectionGuestsSponsors() {
+export default function SectionGuests() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const vistaRefs = useRef<(HTMLDivElement | null)[]>([]);

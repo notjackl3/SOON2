@@ -1,6 +1,5 @@
 "use client";
 
-import { RecapGrid } from "@/components/recap/grid";
 import { Marquee, type MarqueeTile } from "@/components/recap/marquee";
 import { StatCallout } from "@/components/recap/stat-callout";
 import { useScrollVelocity } from "@/components/recap/use-scroll-velocity";
@@ -59,10 +58,16 @@ export default function SectionRecap() {
       {/* Carousels (full-bleed) with stats overlaid */}
       <div className="relative mt-10 md:mt-16">
         <div className="flex flex-col gap-10 md:gap-16">
-          {/* Top row with the interactive grid behind it */}
+          {/* Top row with the grid pattern behind it */}
           <div className="relative">
-            <RecapGrid className="pointer-events-auto absolute left-0 top-1/2 h-[170%] w-3/4 -translate-y-1/2" />
-            <div className="relative z-10">
+            {/* eslint-disable-next-line @next/next/no-img-element -- decorative bg */}
+            <img
+              src="/background-patterns/bg-grid.svg"
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute left-0 top-[120%] w-3/4 -translate-y-1/2"
+            />
+            <div className="relative">
               <Marquee tiles={TOP_TILES} direction={-1} velocityRef={velocity} />
             </div>
           </div>
