@@ -1,4 +1,5 @@
 import { FaqList } from "@/components/faq/accordion";
+import { Highlight } from "@/components/highlight";
 import { ShapeGridEdge } from "@/components/shape-grid-edge";
 
 /**
@@ -40,15 +41,14 @@ export default function SectionFaq() {
       <div className="pointer-events-none relative mx-auto w-full max-w-360 px-8 md:px-34">
         {/* Heading — "FAQ" with the Q in display italic and an accent swipe */}
         <h2 className="mb-10 w-fit font-sans text-[clamp(52px,9vw,80px)] font-medium leading-none tracking-tight text-ink md:mb-14">
-          <span className="relative inline-flex">
-            <span
-              aria-hidden
-              className="absolute inset-x-[-0.06em] bottom-[0.1em] top-[0.46em] bg-accent"
-            />
-            <span className="relative">
+          <Highlight
+            trigger="in-view"
+            barClassName="inset-x-[-0.06em] bottom-[0.1em] top-[0.46em]"
+          >
+            <>
               FA<span className="font-display">Q</span>
-            </span>
-          </span>
+            </>
+          </Highlight>
         </h2>
 
         {/* Accordion stack (single-open) */}

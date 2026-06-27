@@ -1,3 +1,6 @@
+import { Button } from "@/components/button";
+import { Highlight } from "@/components/highlight";
+
 /** Dotted-grid texture behind the hero. Rendered at its natural size and
  *  centered, so resizing the window clips the artwork instead of scaling it. */
 const dotGrid: React.CSSProperties = {
@@ -54,15 +57,14 @@ export default function SectionHero() {
                   out of
                 </span>
                 <span className="h-[clamp(64px,10.5vw,132px)] relative flex flex-1 items-center justify-start">
-                  <span className="relative inline-flex">
-                    <span
-                      aria-hidden
-                      className="absolute inset-x-0 top-1/2 h-[55%] -translate-y-1/2 bg-accent"
-                    />
-                    <span className="relative font-display text-[clamp(79px,13.2vw,165px)] italic leading-[0.8] text-black">
+                  <Highlight
+                    trigger="in-view"
+                    barClassName="inset-x-0 top-1/2 h-[55%] -translate-y-1/2"
+                  >
+                    <span className="font-display text-[clamp(79px,13.2vw,165px)] italic leading-[0.8] text-black">
                       Nothing
                     </span>
-                  </span>
+                  </Highlight>
                 </span>
               </div>
             </div>
@@ -80,12 +82,7 @@ export default function SectionHero() {
 
           {/* CTA row */}
           <div className="flex items-center justify-between gap-4">
-            <button
-              type="button"
-              className="rounded-[26px] border-[1.5px] border-[#a8e618] bg-accent/30 px-7 py-2.5 text-[clamp(12px,1.5vw,15px)] uppercase text-ink transition-colors hover:bg-accent/50"
-            >
-              Reserve your room
-            </button>
+            <Button>Reserve your room</Button>
             <CornerBadge>Location: TBA</CornerBadge>
           </div>
         </div>

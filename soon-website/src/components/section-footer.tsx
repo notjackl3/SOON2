@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+import { Button } from "@/components/button";
+import { Highlight } from "@/components/highlight";
+
 /** A labelled text input used in the contact form. */
 function Field({
   label,
@@ -44,13 +47,13 @@ export default function SectionFooter() {
             </p>
             <h2 className="max-w-135.5 lg:text-[80px] text-5xl font-medium leading-none text-ink tracking-body">
               We&rsquo;d love to hear from{" "}
-              <span className="relative inline-block font-display italic">
-                <span
-                  aria-hidden
-                  className="absolute inset-x-[-0.05em] bottom-[0.12em] top-[0.28em] z-0 bg-accent"
-                />
-                <span className="relative">you</span>
-              </span>
+              <Highlight
+                trigger="in-view"
+                className="font-display italic"
+                barClassName="inset-x-[-0.05em] bottom-[0.12em] top-[0.28em] z-0"
+              >
+                you
+              </Highlight>
               !
             </h2>
           </div>
@@ -96,12 +99,12 @@ export default function SectionFooter() {
             />
           </div>
 
-          <button
+          <Button
             type="submit"
-            className="self-start rounded-[18px] border border-[#a8e618] bg-accent/30 px-8 py-2 text-sm uppercase text-ink transition-colors hover:bg-accent/50"
+            className="self-start rounded-[18px] border px-8 py-2 text-sm"
           >
             I&rsquo;m in
-          </button>
+          </Button>
         </form>
       </section>
 

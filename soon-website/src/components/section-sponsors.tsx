@@ -1,3 +1,5 @@
+import { Button } from "@/components/button";
+
 export default function SectionSponsors() {
   return (
     <section className="relative w-full overflow-hidden bg-white py-20 md:py-28">
@@ -31,12 +33,9 @@ export default function SectionSponsors() {
 
           {/* Pill (top, level with "Sponsors") + subtext (bottom, level with "coming SOON") */}
           <div className="flex shrink-0 flex-col items-start gap-5 md:justify-between md:gap-0 md:self-stretch md:py-1">
-            <button
-              type="button"
-              className="rounded-[26px] border-[1.5px] border-[#a8e618] bg-accent/30 px-7 py-3 text-[clamp(13px,1.4vw,20px)] uppercase tracking-tight text-ink transition-colors hover:bg-accent/50"
-            >
+            <Button className="py-3 text-[clamp(13px,1.4vw,20px)] tracking-tight">
               Partner with us
-            </button>
+            </Button>
             <p className="max-w-52 text-[clamp(16px,1.6vw,20px)] tracking-body text-ink-soft">
               but trust us, you&rsquo;ll know the names.
             </p>

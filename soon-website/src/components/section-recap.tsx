@@ -1,5 +1,6 @@
 "use client";
 
+import ShapeGrid from "@/components/ShapeGrid";
 import { Marquee, type MarqueeTile } from "@/components/recap/marquee";
 import { StatCallout } from "@/components/recap/stat-callout";
 import { useScrollVelocity } from "@/components/recap/use-scroll-velocity";
@@ -63,15 +64,31 @@ export default function SectionRecap() {
       {/* Carousels (full-bleed) with stats overlaid */}
       <div className="relative mt-10 md:mt-16">
         <div className="flex flex-col gap-10 md:gap-16">
-          {/* Top row with the grid pattern behind it */}
+          {/* Top row with the shape grid behind it. Same box and radial fade
+              as the old bg-grid.svg it replaces (gray squares fading out from
+              ~center); the grid's own vignette is off so the CSS mask fades it. */}
           <div className="relative">
-            {/* eslint-disable-next-line @next/next/no-img-element -- decorative bg */}
-            <img
-              src="/background-patterns/bg-grid.svg"
-              alt=""
+            <div
               aria-hidden
-              className="pointer-events-none absolute left-0 top-[120%] w-3/4 -translate-y-1/2"
-            />
+              className="absolute left-0 top-[120%] aspect-square w-3/4 -translate-y-1/2"
+              style={{
+                maskImage:
+                  "radial-gradient(ellipse 55% 60% at 45% 45%, black 0%, transparent 100%)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 55% 60% at 45% 45%, black 0%, transparent 100%)",
+              }}
+            >
+              <ShapeGrid
+                shape="square"
+                squareSize={26}
+                speed={0.1}
+                direction="right"
+                hoverTrailAmount={0}
+                borderColor="rgba(205, 206, 216, 0.7)"
+                hoverFillColor="rgba(199, 255, 70, 0.6)"
+                fadeColor="rgba(0, 0, 0, 0)"
+              />
+            </div>
             <div className="relative">
               <Marquee tiles={TOP_TILES} direction={-1} velocityRef={velocity} />
             </div>
