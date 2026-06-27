@@ -24,7 +24,7 @@ const DESKTOP_H = 967;
  */
 export default function SectionTeam() {
   return (
-    <section className="relative isolate w-full overflow-hidden bg-white">
+    <section className="relative w-full overflow-hidden bg-white">
       {/* Animated dot field (bottom), desktop only */}
       <div className="pointer-events-none absolute inset-0 hidden md:block">
         <DotField
@@ -36,14 +36,14 @@ export default function SectionTeam() {
         />
       </div>
 
-      {/* Decorative SVG above the dots — multiply lets its white reveal the dots
-          while the gray shapes sit on top */}
+      {/* Decorative SVG above the dots — it's transparent (only its shapes
+          paint), so the dots show through the gaps. */}
       {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
       <img
         src="/team/background.svg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute inset-0 hidden size-full mix-blend-multiply md:block"
+        className="pointer-events-none absolute inset-0 hidden size-full md:block"
       />
 
       {/* Desktop (md+) — fills width, scales up/down */}
@@ -52,7 +52,7 @@ export default function SectionTeam() {
         height={DESKTOP_H}
         className="hidden md:block"
       >
-        <div className="absolute left-0 top-0 flex w-[971px] flex-col gap-3 py-[13px]">
+        <div className="absolute left-0 top-0 flex w-242.75 flex-col gap-3 py-3.25">
           {TEAM_GROUPS.map((group, gi) => (
             <div key={gi} className="flex flex-col">
               {group.map((row, ri) => (

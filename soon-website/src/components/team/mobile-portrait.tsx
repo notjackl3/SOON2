@@ -18,10 +18,10 @@ export function MobilePortrait({
 }) {
   return (
     <div
-      className="absolute flex h-[111px] w-[86px] items-start border-[0.5px] border-line bg-white px-[8px] pb-[9px] pt-[8px]"
+      className="absolute flex h-27.75 w-21.5 items-start border-[0.5px] border-line bg-white px-2 pt-2 pb-2.25"
       style={style}
     >
-      <div className="flex w-[69px] flex-col gap-[7px]">
+      <div className="flex w-17.25 flex-col gap-1.75">
         <div className="relative aspect-square w-full bg-[#d9d9d9]">
           {card.image && (
             <Image
@@ -33,7 +33,7 @@ export function MobilePortrait({
             />
           )}
         </div>
-        <div className="flex w-full flex-col gap-[2px]">
+        <div className="flex w-full flex-col gap-0.5">
           <p className={`w-full break-words ${NAME}`}>{card.name}</p>
           <p className={`w-full break-words ${ROLE}`}>{card.role}</p>
         </div>
@@ -52,10 +52,10 @@ export function MobileFounder({
 }) {
   return (
     <div
-      className="absolute h-[180px] w-[262px] border-[0.5px] border-line bg-white"
+      className="absolute h-45 w-65.5 border-[0.5px] border-line bg-white"
       style={style}
     >
-      <div className="absolute left-[9px] top-[8px] h-[162px] w-[95px] bg-[#d9d9d9]">
+      <div className="absolute top-2 left-2.25 h-40.5 w-23.75 bg-[#d9d9d9]">
         {card.image && (
           <Image
             src={card.image}
@@ -66,13 +66,13 @@ export function MobileFounder({
           />
         )}
       </div>
-      <p className="absolute left-[112px] top-[9px] w-[150px] font-display text-[16.807px] font-medium leading-[15.607px] tracking-[0.3361px] text-ink-soft">
+      <p className="absolute left-28 top-2.25 w-37.5 font-display text-[16.807px] font-medium leading-[15.607px] tracking-[0.3361px] text-ink-soft">
         {card.name}
       </p>
-      <p className="absolute right-[9px] top-[9px] text-[7.733px] uppercase tracking-[-0.3093px] text-muted">
+      <p className="absolute right-2.25 top-2.25 text-[7.733px] uppercase tracking-[-0.3093px] text-muted">
         {card.role}
       </p>
-      <p className="absolute left-[113px] top-[41px] w-[116px] whitespace-pre-wrap text-[6.467px] leading-[7.761px] tracking-[-0.2587px] text-muted">
+      <p className="absolute left-28.25 top-10.25 w-29 whitespace-pre-wrap text-[6.467px] leading-[7.761px] tracking-[-0.2587px] text-muted">
         {card.bio}
       </p>
     </div>

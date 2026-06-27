@@ -7,7 +7,7 @@ function Stat({ value, label }: { value: string; label: string }) {
       <span className="font-display text-[clamp(64px,9vw,110px)] leading-none text-black">
         {value}
       </span>
-      <span className="text-[14px] uppercase text-black">{label}</span>
+      <span className="text-sm uppercase text-black">{label}</span>
     </div>
   );
 }

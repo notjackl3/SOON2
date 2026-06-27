@@ -4,9 +4,9 @@ import type { CSSProperties } from "react";
 import type { TeamMember } from "./data";
 
 const CARD = "bg-white border-[0.87px] border-line";
-const PAD = "pl-[14px] pr-[13px] pt-[13px] pb-[14px]";
+const PAD = "pl-3.5 pr-3.25 pt-3.25 pb-3.5";
 const NAME =
-  "font-display text-[14px] font-medium leading-[13px] tracking-[0.28px] text-ink-soft";
+  "font-display text-sm font-medium leading-3.25 tracking-[0.28px] text-ink-soft";
 const ROLE = "text-[9.565px] uppercase leading-none tracking-[-0.38px] text-muted";
 
 /**
@@ -36,11 +36,11 @@ export function Portrait({
           )}
         </div>
         <div className="flex flex-1 flex-col gap-5">
-          <div className="flex items-center gap-[22px]">
+          <div className="flex items-center gap-5.5">
             <p className={`flex-1 ${NAME}`}>{member.name}</p>
             <p className={`${ROLE} text-right`}>{member.role}</p>
           </div>
-          <p className="whitespace-pre-wrap text-[10px] leading-[12px] tracking-[-0.4px] text-muted">
+          <p className="whitespace-pre-wrap text-[10px] leading-3 tracking-[-0.4px] text-muted">
             {member.bio}
           </p>
         </div>

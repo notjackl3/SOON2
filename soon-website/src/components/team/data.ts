@@ -46,8 +46,8 @@ export const TEAM_GROUPS: TeamMember[][][] = [
     [
       { name: "Erin Manalo", role: "Design", image: "/team/erin.jpg", col: 0 },
       { name: "Sophie Shu", role: "Design, Tech", image: "/team/sophie.jpg", col: 1 },
-      { name: "Natasha <?>", role: "Operations", image: "/team/natasha.jpg", col: 3 },
-      { name: "Nikita <?>", role: "Logistics", image: "/team/nikita.jpg", col: 4 },
+      { name: "Natasha Ejercito", role: "Operations", image: "/team/natasha.jpg", col: 3 },
+      { name: "Nikita Nathania", role: "Logistics", image: "/team/nikita.jpg", col: 4 },
     ],
   ],
 ];

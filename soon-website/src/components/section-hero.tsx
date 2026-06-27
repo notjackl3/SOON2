@@ -13,10 +13,10 @@ function CornerBadge({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative inline-flex items-center justify-center border border-line bg-white px-4 py-1.5">
       <span className="text-[11px] uppercase text-black">{children}</span>
-      <span className={`${corner} -left-[3px] -top-[3px]`} />
-      <span className={`${corner} -right-[3px] -top-[3px]`} />
-      <span className={`${corner} -bottom-[3px] -left-[3px]`} />
-      <span className={`${corner} -bottom-[3px] -right-[3px]`} />
+      <span className={`${corner} -left-0.75 -top-0.75`} />
+      <span className={`${corner} -right-0.75 -top-0.75`} />
+      <span className={`${corner} -bottom-0.75 -left-0.75`} />
+      <span className={`${corner} -bottom-0.75 -right-0.75`} />
     </div>
   );
 }
@@ -40,7 +40,7 @@ export default function SectionHero() {
             <div className="flex flex-col gap-2">
               {/* eyebrow + Something */}
               <div className="flex flex-col gap-1">
-                <p className="px-1.5 text-[16px] tracking-body text-muted">
+                <p className="px-1.5 text-base tracking-body text-muted">
                   Ontario&rsquo;s best builders. All making
                 </p>
                 <h1 className="font-display tracking-body text-[clamp(64px,10vw,120px)] leading-none text-black">
@@ -72,7 +72,7 @@ export default function SectionHero() {
               <div className="flex justify-end">
                 <CornerBadge>Coming Oct &rsquo;26</CornerBadge>
               </div>
-              <p className="max-w-60 text-[16px] tracking-body text-muted">
+              <p className="max-w-60 text-base tracking-body text-muted">
                 Say goodbye to conventional hackathons.
               </p>
             </div>
