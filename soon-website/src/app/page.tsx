@@ -38,10 +38,10 @@ export default function Home() {
 
       <SectionTeam />
 
-      {/* Footer sits on its own opaque background, after the 3D has faded out. */}
-      <div className="relative bg-white">
-        <SectionFooter />
-      </div>
+    {/* Footer sits on its own opaque background, after the 3D has faded out. */}
+    <div className="relative bg-white">
+      <SectionFooter />
+    </div>
     </main>
   );
 }

@@ -87,8 +87,8 @@ export const MOBILE_CARDS: MobilePlacement[] = [
   { card: { name: "Ariah D'Souza", role: "Marketing", image: "/team/ariah.jpg" }, x: 0, y: 359 },
   { card: { name: "Erin Manalo", role: "Design", image: "/team/erin.jpg" }, x: 86, y: 470 },
   { card: { name: "Sophie Shu", role: "Design, Tech", image: "/team/sophie.jpg" }, x: 198, y: 470 },
-  { card: { name: "Natasha <?>", role: "Operations", image: "/team/natasha.jpg" }, x: 135, y: 620 },
-  { card: { name: "Nikita <?>", role: "Logistics", image: "/team/nikita.jpg" }, x: 28, y: 692 },
+  { card: { name: "Natasha Ejercito", role: "Operations", image: "/team/natasha.jpg" }, x: 135, y: 620 },
+  { card: { name: "Nikita Nathania", role: "Logistics", image: "/team/nikita.jpg" }, x: 28, y: 692 },
   { card: { name: "First Lastname", role: "Partnerships" }, x: 293, y: 581 },
   { card: { name: "First Lastname", role: "Partnerships" }, x: 293, y: 691 },
 ];

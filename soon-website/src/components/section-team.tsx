@@ -1,3 +1,4 @@
+import DotField from "@/components/DotField";
 import { MobileFounder, MobilePortrait } from "@/components/team/mobile-portrait";
 import { Portrait } from "@/components/team/portrait";
 import { ScaledStage } from "@/components/team/scaled-stage";
@@ -23,20 +24,34 @@ const DESKTOP_H = 967;
  */
 export default function SectionTeam() {
   return (
-    <section className="relative w-full overflow-hidden bg-white">
+    <section className="relative isolate w-full overflow-hidden bg-white">
+      {/* Animated dot field (bottom), desktop only */}
+      <div className="pointer-events-none absolute inset-0 hidden md:block">
+        <DotField
+          dotRadius={2}
+          dotSpacing={18}
+          gradientFrom="rgba(205, 206, 216, 0.9)"
+          gradientTo="rgba(205, 206, 216, 0.5)"
+          glowColor="transparent"
+        />
+      </div>
+
+      {/* Decorative SVG above the dots — multiply lets its white reveal the dots
+          while the gray shapes sit on top */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
+      <img
+        src="/team/background.svg"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute inset-0 hidden size-full mix-blend-multiply md:block"
+      />
+
       {/* Desktop (md+) — fills width, scales up/down */}
       <ScaledStage
         width={DESKTOP_W}
         height={DESKTOP_H}
         className="hidden md:block"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
-        <img
-          src="/team/background.svg"
-          alt=""
-          aria-hidden
-          className="pointer-events-none absolute inset-0 size-full"
-        />
         <div className="absolute left-0 top-0 flex w-[971px] flex-col gap-3 py-[13px]">
           {TEAM_GROUPS.map((group, gi) => (
             <div key={gi} className="flex flex-col">
