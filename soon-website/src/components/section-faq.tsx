@@ -14,27 +14,38 @@ export default function SectionFaq() {
       {/* Animated shape grid, faded in from the right edge (desktop only) */}
       <ShapeGridEdge side="right" />
 
-      {/* Decorative vectors (desktop only) */}
-      {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
-      <img
+      {/* Decorative vectors (desktop only) — slide in from their edges. The
+          bottom two keep their resting translate via restTransform. */}
+      <Reveal
+        as="img"
+        x={-50}
+        y={0}
         src="/faq/deco-top.svg"
         alt=""
         aria-hidden
         className="pointer-events-none absolute left-6 top-6 hidden w-[clamp(160px,17vw,256px)] md:block md:left-20"
       />
-      {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
-      <img
+      <Reveal
+        as="img"
+        x={-50}
+        y={0}
+        duration={900}
+        restTransform="translateX(-50%)"
         src="/faq/deco-bottom-left.svg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute bottom-0 left-0 hidden w-[clamp(360px,54vw,777px)] -translate-x-1/2 md:block"
+        className="pointer-events-none absolute bottom-0 left-0 hidden w-[clamp(360px,54vw,777px)] md:block"
       />
-      {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
-      <img
+      <Reveal
+        as="img"
+        x={50}
+        y={0}
+        duration={900}
+        restTransform="translateX(8%)"
         src="/faq/deco-bottom-right.svg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute bottom-0 right-0 hidden w-[clamp(320px,46vw,657px)] translate-x-[8%] md:block"
+        className="pointer-events-none absolute bottom-0 right-0 hidden w-[clamp(320px,46vw,657px)] md:block"
       />
 
       {/* pointer-events-none lets hovers fall through to the grid behind;

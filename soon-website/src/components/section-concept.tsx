@@ -1,13 +1,22 @@
 import Image from "next/image";
 
+import { CountUp } from "@/components/count-up";
 import { Reveal } from "@/components/reveal";
 
-/** A single stat: big number + uppercase caption. */
-function Stat({ value, label }: { value: string; label: string }) {
+/** A single stat: big number (counts up on scroll-in) + uppercase caption. */
+function Stat({
+  value,
+  label,
+  delay = 0,
+}: {
+  value: string;
+  label: string;
+  delay?: number;
+}) {
   return (
     <div className="flex flex-col items-center">
       <span className="font-display text-[clamp(64px,9vw,110px)] leading-none text-black">
-        {value}
+        <CountUp value={value} delay={delay} />
       </span>
       <span className="text-sm uppercase text-black">{label}</span>
     </div>
@@ -80,9 +89,9 @@ export default function SectionConcept() {
                 />
                 <div className="aspect-461/328 w-full border border-[#b8b8b8] bg-white" />
                 <div className="flex w-full items-end justify-between gap-6">
-                  <Stat value="40" label="hackers" />
-                  <Stat value="36" label="hours" />
-                  <Stat value="01" label="house" />
+                  <Stat value="40" label="hackers" delay={0} />
+                  <Stat value="36" label="hours" delay={120} />
+                  <Stat value="01" label="house" delay={240} />
                 </div>
               </Reveal>
             </div>

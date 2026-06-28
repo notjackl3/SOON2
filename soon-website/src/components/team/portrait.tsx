@@ -1,6 +1,8 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 
+import { Reveal } from "@/components/reveal";
+
 import type { TeamMember } from "./data";
 
 const CARD = "bg-white border-[0.87px] border-line";
@@ -17,13 +19,16 @@ const ROLE = "text-[9.565px] uppercase leading-none tracking-[-0.38px] text-mute
 export function Portrait({
   member,
   style,
+  delay = 0,
 }: {
   member: TeamMember;
   style?: CSSProperties;
+  /** ms stagger for the scroll-in reveal. */
+  delay?: number;
 }) {
   if (member.bio) {
     return (
-      <div className={`${CARD} ${PAD} flex items-end gap-4`} style={style}>
+      <Reveal className={`${CARD} ${PAD} flex items-end gap-4`} style={style} delay={delay} y={14}>
         <div className="relative h-[152.954px] w-[195.857px] shrink-0 bg-[#d9d9d9]">
           {member.image && (
             <Image
@@ -44,12 +49,12 @@ export function Portrait({
             {member.bio}
           </p>
         </div>
-      </div>
+      </Reveal>
     );
   }
 
   return (
-    <div className={`${CARD} ${PAD} flex flex-col gap-3`} style={style}>
+    <Reveal className={`${CARD} ${PAD} flex flex-col gap-3`} style={style} delay={delay} y={14}>
       <div className="relative aspect-square w-full bg-[#d9d9d9]">
         {member.image && (
           <Image
@@ -65,6 +70,6 @@ export function Portrait({
         <p className={`w-full wrap-break-word ${NAME}`}>{member.name}</p>
         <p className={`w-full wrap-break-word ${ROLE}`}>{member.role}</p>
       </div>
-    </div>
+    </Reveal>
   );
 }

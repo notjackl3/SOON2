@@ -16,9 +16,10 @@ import { observeVisibility } from "./visibility";
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 type RevealProps = {
-  children: ReactNode;
-  /** Element to render as (default `div`). Use `"h2"`, `"p"`, `"form"`, etc.
-   *  to *replace* an existing element rather than wrap it in a new div. */
+  children?: ReactNode;
+  /** Element to render as (default `div`). Use `"h2"`, `"p"`, `"form"`, `"img"`,
+   *  etc. to *replace* an existing element rather than wrap it in a new div.
+   *  Extra props (e.g. `src`, `alt`, `aria-hidden`) are forwarded. */
   as?: ElementType;
   /** ms before the reveal starts — stagger siblings by bumping this. */
   delay?: number;
@@ -26,17 +27,20 @@ type RevealProps = {
   duration?: number;
   /** Starting vertical offset in px (positive = rises up into place). */
   y?: number;
-  /** Starting horizontal offset in px. */
+  /** Starting horizontal offset in px (e.g. negative = slides in from the left). */
   x?: number;
   /** Starting scale (1 = none, e.g. 0.96 to grow in slightly). */
   scale?: number;
+  /** Transform the element keeps once revealed — use when it has a resting
+   *  CSS transform (e.g. `translateY(-50%)`) the reveal must not clobber. */
+  restTransform?: string;
   /** Re-hide when scrolled away and replay on re-entry (default: once). */
   repeat?: boolean;
   /** IntersectionObserver rootMargin — default fires a touch before fully in view. */
   rootMargin?: string;
   className?: string;
   style?: CSSProperties;
-};
+} & Record<string, unknown>;
 
 /**
  * Reveal-on-scroll wrapper: fades + rises its children into place the first time
@@ -56,10 +60,12 @@ export function Reveal({
   y = 20,
   x = 0,
   scale = 1,
+  restTransform,
   repeat = false,
   rootMargin = "0px 0px -12% 0px",
   className,
   style,
+  ...rest
 }: RevealProps) {
   const Tag = (as ?? "div") as ElementType;
   const elRef = useRef<HTMLElement | null>(null);
@@ -86,9 +92,10 @@ export function Reveal({
   }, [repeat, rootMargin]);
 
   const hidden = !revealed;
+  const rest3d = restTransform ? ` ${restTransform}` : "";
   const transform = hidden
-    ? `translate3d(${x}px, ${y}px, 0)${scale !== 1 ? ` scale(${scale})` : ""}`
-    : "none";
+    ? `translate3d(${x}px, ${y}px, 0)${scale !== 1 ? ` scale(${scale})` : ""}${rest3d}`
+    : restTransform ?? "none";
 
   const revealStyle: CSSProperties = {
     opacity: hidden ? 0 : 1,
@@ -110,6 +117,7 @@ export function Reveal({
       className,
       style: revealStyle,
       "data-reveal": "",
+      ...rest,
     },
     children,
   );

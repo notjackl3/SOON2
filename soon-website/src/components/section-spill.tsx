@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/reveal";
 import { FADE_ID } from "@/components/three/constants";
 
 /**
@@ -12,8 +13,11 @@ export default function SectionSpill() {
       data-snap-section
       className="relative flex h-dvh items-center justify-center px-8"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
-      <img
+      <Reveal
+        as="img"
+        y={0}
+        scale={0.94}
+        duration={900}
         src="/concept/meaningful.svg"
         alt="Ready to build something meaningful?"
         className="mx-auto w-full max-w-275.75"

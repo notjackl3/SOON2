@@ -103,17 +103,20 @@ export default function SectionRecap() {
             <StatCallout
               value="70"
               label="Hackers"
+              delay={0}
               className="absolute left-8 top-[4%] md:left-34"
             />
             <StatCallout
               value="18"
               label="Sponsors"
               align="right"
+              delay={150}
               className="absolute right-8 top-1/2 -translate-y-1/2 md:right-34"
             />
             <StatCallout
               value="09"
               label="Activities"
+              delay={300}
               className="absolute bottom-[4%] left-8 md:left-34"
             />
           </div>

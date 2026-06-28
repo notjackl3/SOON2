@@ -1,4 +1,5 @@
 import DotField from "@/components/DotField";
+import { Reveal } from "@/components/reveal";
 import { MobileFounder, MobilePortrait } from "@/components/team/mobile-portrait";
 import { Portrait } from "@/components/team/portrait";
 import { ScaledStage } from "@/components/team/scaled-stage";
@@ -76,6 +77,7 @@ export default function SectionTeam() {
                     <Portrait
                       key={m.name}
                       member={m}
+                      delay={gi * 80 + ri * 50 + m.col * 25}
                       style={{
                         gridColumn: m.span
                           ? `${m.col + 1} / span ${m.span}`
@@ -88,8 +90,12 @@ export default function SectionTeam() {
             </div>
           ))}
         </div>
-        {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
-        <img
+        <Reveal
+          as="img"
+          y={0}
+          scale={0.96}
+          duration={800}
+          delay={200}
           src="/team/who-we-are.svg"
           alt="Who we are"
           className="pointer-events-none absolute"
@@ -116,10 +122,19 @@ export default function SectionTeam() {
             style={{ left: MOBILE_JACK.x, top: MOBILE_JACK.y }}
           />
           {MOBILE_CARDS.map((p, i) => (
-            <MobilePortrait key={i} card={p.card} style={{ left: p.x, top: p.y }} />
+            <MobilePortrait
+              key={i}
+              card={p.card}
+              delay={60 + i * 55}
+              style={{ left: p.x, top: p.y }}
+            />
           ))}
-          {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
-          <img
+          <Reveal
+            as="img"
+            y={0}
+            scale={0.96}
+            duration={800}
+            delay={150}
             src="/team/who-we-are.svg"
             alt="Who we are"
             className="pointer-events-none absolute"

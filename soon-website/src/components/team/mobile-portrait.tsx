@@ -1,6 +1,8 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 
+import { Reveal } from "@/components/reveal";
+
 import type { MobileCard } from "./data";
 
 const NAME =
@@ -12,14 +14,18 @@ const ROLE =
 export function MobilePortrait({
   card,
   style,
+  delay = 0,
 }: {
   card: MobileCard;
   style?: CSSProperties;
+  delay?: number;
 }) {
   return (
-    <div
+    <Reveal
       className="absolute flex h-27.75 w-21.5 items-start border-[0.5px] border-line bg-white px-2 pt-2 pb-2.25"
       style={style}
+      delay={delay}
+      y={12}
     >
       <div className="flex w-17.25 flex-col gap-1.75">
         <div className="relative aspect-square w-full bg-[#d9d9d9]">
@@ -38,7 +44,7 @@ export function MobilePortrait({
           <p className={`w-full wrap-break-word ${ROLE}`}>{card.role}</p>
         </div>
       </div>
-    </div>
+    </Reveal>
   );
 }
 
@@ -46,14 +52,18 @@ export function MobilePortrait({
 export function MobileFounder({
   card,
   style,
+  delay = 0,
 }: {
   card: MobileCard;
   style?: CSSProperties;
+  delay?: number;
 }) {
   return (
-    <div
+    <Reveal
       className="absolute h-45 w-65.5 border-[0.5px] border-line bg-white"
       style={style}
+      delay={delay}
+      y={12}
     >
       <div className="absolute top-2 left-2.25 h-40.5 w-23.75 bg-[#d9d9d9]">
         {card.image && (
@@ -75,6 +85,6 @@ export function MobileFounder({
       <p className="absolute left-28.25 top-10.25 w-29 whitespace-pre-wrap text-[6.467px] leading-[7.761px] tracking-[-0.2587px] text-muted">
         {card.bio}
       </p>
-    </div>
+    </Reveal>
   );
 }
