@@ -1,5 +1,6 @@
 import { Button } from "@/components/button";
 import { Highlight } from "@/components/highlight";
+import { Reveal } from "@/components/reveal";
 
 /** Dotted-grid texture behind the hero. Rendered at its natural size and
  *  centered, so resizing the window clips the artwork instead of scaling it. */
@@ -43,16 +44,16 @@ export default function SectionHero() {
             <div className="flex flex-col gap-2">
               {/* eyebrow + Something */}
               <div className="flex flex-col gap-1">
-                <p className="px-1.5 text-base tracking-body text-muted">
+                <Reveal as="p" className="px-1.5 text-base tracking-body text-muted">
                   Ontario&rsquo;s best builders. All making
-                </p>
-                <h1 className="font-display tracking-body text-[clamp(64px,10vw,120px)] leading-none text-black">
+                </Reveal>
+                <Reveal as="h1" delay={90} className="font-display tracking-body text-[clamp(64px,10vw,120px)] leading-none text-black">
                   Something
-                </h1>
+                </Reveal>
               </div>
 
               {/* out of / Nothing */}
-              <div className="flex items-end justify-between gap-3">
+              <Reveal delay={180} className="flex items-end justify-between gap-3">
                 <span className="self-start shrink-0 text-[clamp(23px,4.1vw,50px)] leading-none tracking-body text-black">
                   out of
                 </span>
@@ -66,25 +67,25 @@ export default function SectionHero() {
                     </span>
                   </Highlight>
                 </span>
-              </div>
+              </Reveal>
             </div>
 
             {/* goodbye / coming */}
-            <div className="flex flex-col gap-4 md:pr-35">
+            <Reveal delay={270} className="flex flex-col gap-4 md:pr-35">
               <div className="flex justify-end">
                 <CornerBadge>Coming Oct &rsquo;26</CornerBadge>
               </div>
               <p className="max-w-60 text-base tracking-body text-muted">
                 Say goodbye to conventional hackathons.
               </p>
-            </div>
+            </Reveal>
           </div>
 
           {/* CTA row */}
-          <div className="flex items-center justify-between gap-4">
+          <Reveal delay={360} className="flex items-center justify-between gap-4">
             <Button>Reserve your room</Button>
             <CornerBadge>Location: TBA</CornerBadge>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

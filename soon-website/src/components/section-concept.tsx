@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { Reveal } from "@/components/reveal";
+
 /** A single stat: big number + uppercase caption. */
 function Stat({ value, label }: { value: string; label: string }) {
   return (
@@ -45,7 +47,7 @@ export default function SectionConcept() {
             <div className="flex flex-col gap-16 md:flex-row md:flex-wrap md:items-end md:justify-between md:gap-x-12 md:gap-y-16">
               {/* INFO — welcome to soon */}
               <div className="flex max-w-160 flex-1 flex-col md:min-w-110">
-                <div className="flex items-end gap-3">
+                <Reveal className="flex items-end gap-3">
                   {/* sized a touch below the hero's "Something" */}
                   <span className="font-display text-[clamp(56px,8.5vw,104px)] font-medium italic leading-none text-black">
                     Welcome
@@ -54,19 +56,21 @@ export default function SectionConcept() {
                   <span className="text-[clamp(23px,4.1vw,50px)] leading-none tracking-body text-black">
                     to
                   </span>
-                </div>
-                <Image
-                  src="/soon-concept.png"
-                  alt="SOON"
-                  width={1311}
-                  height={667}
-                  priority
-                  className="h-auto w-full max-w-145"
-                />
+                </Reveal>
+                <Reveal delay={120}>
+                  <Image
+                    src="/soon-concept.png"
+                    alt="SOON"
+                    width={1311}
+                    height={667}
+                    priority
+                    className="h-auto w-full max-w-145"
+                  />
+                </Reveal>
               </div>
 
               {/* right panel — arrow + image placeholder + stats */}
-              <div className="flex w-full flex-col items-end gap-4 md:w-115.25 md:shrink-0">
+              <Reveal delay={180} className="flex w-full flex-col items-end gap-4 md:w-115.25 md:shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
                 <img
                   src="/concept/arrow.svg"
@@ -80,7 +84,7 @@ export default function SectionConcept() {
                   <Stat value="36" label="hours" />
                   <Stat value="01" label="house" />
                 </div>
-              </div>
+              </Reveal>
             </div>
 
             {/* divider */}
@@ -88,12 +92,12 @@ export default function SectionConcept() {
 
             {/* text + floating starblock */}
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-              <p className="max-w-103.75 text-4 tracking-body text-ink-soft">
+              <Reveal as="p" className="max-w-103.75 text-4 tracking-body text-ink-soft">
                 A 36-hour build experience where 40 top hackers live, eat, and
                 build under one roof, collaborating with a group of partner
                 companies to turn bold ideas into real products, while exposing
                 talents.
-              </p>
+              </Reveal>
               {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
              <div className="flex flex-row">
                 {/* scale (not height) so it spills over without growing the row */}

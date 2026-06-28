@@ -124,3 +124,13 @@ body {
     @apply font-sans;
   }
 }
+
+/* Scroll-reveal (see components/reveal.tsx): users who prefer reduced motion
+   get the content shown immediately, with no entrance transform or transition. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { Button } from "@/components/button";
 import { Highlight } from "@/components/highlight";
+import { Reveal } from "@/components/reveal";
 
 /** A labelled text input used in the contact form. */
 function Field({
@@ -41,7 +42,7 @@ export default function SectionFooter() {
       <section className="mx-auto flex w-full max-w-360 flex-col gap-16 px-8 py-20 mt-12 md:px-34 lg:flex-row lg:items-center lg:gap-12">
         {/* Left: heading + copy */}
         <div className="flex flex-1 flex-col gap-12">
-          <div className="flex flex-col gap-3">
+          <Reveal className="flex flex-col gap-3">
             <p className="text-xl tracking-body text-ink-soft">
               Knock, knock
             </p>
@@ -56,28 +57,30 @@ export default function SectionFooter() {
               </Highlight>
               !
             </h2>
-          </div>
+          </Reveal>
 
-          <div className="max-w-110.5 space-y-4 text-xl tracking-body text-ink-soft">
+          <Reveal delay={130} className="max-w-110.5 space-y-4 text-xl tracking-body text-ink-soft">
             <p>
               Not sure which pipeline or tier fits best? Our team will walk you
               through it&mdash;pricing, availability, and what works for your
               goals.
             </p>
             <p>Drop your details and we&rsquo;ll keep the lights on for you.</p>
-          </div>
+          </Reveal>
 
-          {/* eslint-disable-next-line @next/next/no-img-element -- decorative inline SVG */}
-          <img
-            src="/footer/vector.svg"
-            alt=""
-            aria-hidden
-            className="h-15 w-30"
-          />
+          <Reveal delay={200}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- decorative inline SVG */}
+            <img
+              src="/footer/vector.svg"
+              alt=""
+              aria-hidden
+              className="h-15 w-30"
+            />
+          </Reveal>
         </div>
 
         {/* Right: contact form */}
-        <form className="flex flex-1 flex-col gap-8 rounded-[10px] border border-line bg-white px-7 py-8">
+        <Reveal as="form" delay={120} x={0} y={28} className="flex flex-1 flex-col gap-8 rounded-[10px] border border-line bg-white px-7 py-8">
           <div className="flex flex-col gap-8 lg:flex-row lg:gap-4">
             <Field label="Name" name="name" />
             <Field label="Company" name="company" />
@@ -105,7 +108,7 @@ export default function SectionFooter() {
           >
             I&rsquo;m in
           </Button>
-        </form>
+        </Reveal>
       </section>
 
       {/* ---- Footer bar ---- */}

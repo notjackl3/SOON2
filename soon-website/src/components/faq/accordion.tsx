@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { Reveal } from "@/components/reveal";
+
 import { FAQS, type FaqEntry } from "./data";
 
 /** Squares centered exactly on the box corners (same motif as the guest vistas). */
@@ -23,12 +25,13 @@ export function FaqList() {
   return (
     <div className="pointer-events-none relative flex flex-col gap-4">
       {FAQS.map((faq, i) => (
-        <FaqItem
-          key={faq.question}
-          {...faq}
-          open={openIndex === i}
-          onToggle={() => setOpenIndex((cur) => (cur === i ? null : i))}
-        />
+        <Reveal key={faq.question} delay={i * 70} y={16}>
+          <FaqItem
+            {...faq}
+            open={openIndex === i}
+            onToggle={() => setOpenIndex((cur) => (cur === i ? null : i))}
+          />
+        </Reveal>
       ))}
     </div>
   );

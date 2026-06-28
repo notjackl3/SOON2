@@ -1,4 +1,5 @@
 import { Button } from "@/components/button";
+import { Reveal } from "@/components/reveal";
 
 export default function SectionSponsors() {
   return (
@@ -25,21 +26,21 @@ export default function SectionSponsors() {
 
         <div className="relative flex flex-col gap-8 md:flex-row md:items-stretch md:gap-10">
           {/* Heading — hugs its text so the group sits snug to its right */}
-          <h2 className="w-fit font-sans text-[clamp(44px,7.5vw,80px)] font-medium leading-none tracking-tight text-ink">
+          <Reveal as="h2" className="w-fit font-sans text-[clamp(44px,7.5vw,80px)] font-medium leading-none tracking-tight text-ink">
             Sponsors
             <br />
             coming <span className="font-display italic">SOON</span>
-          </h2>
+          </Reveal>
 
           {/* Pill (top, level with "Sponsors") + subtext (bottom, level with "coming SOON") */}
-          <div className="flex shrink-0 flex-col items-start gap-5 md:justify-between md:gap-0 md:self-stretch md:py-1">
+          <Reveal delay={140} className="flex shrink-0 flex-col items-start gap-5 md:justify-between md:gap-0 md:self-stretch md:py-1">
             <Button className="py-3 text-[clamp(13px,1.4vw,20px)] tracking-tight">
               Partner with us
             </Button>
             <p className="max-w-52 text-[clamp(16px,1.6vw,20px)] tracking-body text-ink-soft">
               but trust us, you&rsquo;ll know the names.
             </p>
-          </div>
+          </Reveal>
 
           {/* Right bracket — lower (self-end) for the diagonal arrangement */}
           {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}

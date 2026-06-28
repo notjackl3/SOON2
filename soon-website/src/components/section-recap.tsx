@@ -1,6 +1,7 @@
 "use client";
 
 import ShapeGrid from "@/components/ShapeGrid";
+import { Reveal } from "@/components/reveal";
 import { Marquee, type MarqueeTile } from "@/components/recap/marquee";
 import { StatCallout } from "@/components/recap/stat-callout";
 import { useScrollVelocity } from "@/components/recap/use-scroll-velocity";
@@ -56,9 +57,9 @@ export default function SectionRecap() {
           aria-hidden
           className="pointer-events-none absolute left-0 top-0 hidden w-[clamp(160px,17vw,256px)] md:block"
         />
-        <h2 className="mt-4 font-sans text-[clamp(36px,8vw,80px)] font-medium leading-none tracking-tight text-ink">
+        <Reveal as="h2" className="mt-4 font-sans text-[clamp(36px,8vw,80px)] font-medium leading-none tracking-tight text-ink">
           Last time, we had&hellip;
-        </h2>
+        </Reveal>
       </div>
 
       {/* Carousels (full-bleed) with stats overlaid */}
