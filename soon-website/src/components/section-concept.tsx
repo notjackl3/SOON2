@@ -47,7 +47,7 @@ export default function SectionConcept() {
           src="/concept/background-shapes.svg"
           alt=""
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-48 w-228 max-w-full -translate-x-1/2"
+          className="pointer-events-none absolute left-1/2 top-48 -z-10 w-228 max-w-full -translate-x-1/2"
         />
 
         <div className="flex flex-col gap-12">
@@ -114,7 +114,7 @@ export default function SectionConcept() {
                   src="/concept/right-asterik.svg"
                   alt=""
                   aria-hidden
-                  className="h-24 origin-bottom scale-150"
+                  className="h-24 origin-center -translate-x-12 scale-150 transition-transform duration-500 ease-out hover:rotate-90"
                 />
                 <img
                   src="/concept/right-blocks.svg"

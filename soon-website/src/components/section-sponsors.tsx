@@ -15,7 +15,7 @@ export default function SectionSponsors() {
         src="/sponsors/bubbles.svg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute right-0 top-1/2 hidden w-[clamp(260px,28vw,440px)] md:block"
+        className="pointer-events-none absolute right-18 top-1/2 hidden w-[clamp(260px,28vw,440px)] md:block"
       />
 
       <div className="relative mx-auto w-full max-w-360 px-8 md:px-34">
@@ -28,7 +28,7 @@ export default function SectionSponsors() {
           src="/sponsors/bracket-left.svg"
           alt=""
           aria-hidden
-          className="pointer-events-none absolute left-6 top-0 hidden h-[clamp(120px,16vw,183px)] md:block"
+          className="pointer-events-none absolute left-6 top-[-64] hidden h-[clamp(120px,16vw,183px)] md:block"
         />
 
         <div className="relative flex flex-col gap-8 md:flex-row md:items-stretch md:gap-10">

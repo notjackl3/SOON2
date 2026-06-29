@@ -124,7 +124,7 @@ export default function SectionFooter() {
                 height={60}
                 className="size-15 object-contain"
               />
-              <span className="text-4xl font-medium text-muted">
+              <span className="text-4xl font-medium text-muted tracking-body">
                 SOON
               </span>
             </div>
