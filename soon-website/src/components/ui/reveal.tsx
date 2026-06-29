@@ -10,7 +10,7 @@ import {
   type ReactNode,
 } from "react";
 
-import { observeVisibility } from "@/components/visibility";
+import { observeVisibility } from "@/lib/visibility";
 
 /** Same easing the Highlight bar uses, so reveals feel of-a-piece. */
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";

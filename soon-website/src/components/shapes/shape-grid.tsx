@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect } from 'react';
 
-import { observeVisibility, prefersReducedMotion } from "@/components/visibility";
+import { observeVisibility, prefersReducedMotion } from "@/lib/visibility";
 
 type CanvasStrokeStyle = string | CanvasGradient | CanvasPattern;
 

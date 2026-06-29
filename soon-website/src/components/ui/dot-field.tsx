@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, memo } from 'react';
 
-import { observeVisibility, prefersReducedMotion } from "@/components/visibility";
+import { observeVisibility, prefersReducedMotion } from "@/lib/visibility";
 
 const TWO_PI = Math.PI * 2;
 

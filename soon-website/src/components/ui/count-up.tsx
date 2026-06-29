@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { observeVisibility } from "@/components/visibility";
+import { observeVisibility } from "@/lib/visibility";
 
 interface CountUpProps {
   /** Display target, e.g. "70" or "09" — leading zeros are preserved. */

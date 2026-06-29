@@ -1,4 +1,4 @@
-import { FaqList } from "@/sections/faq/accordion";
+import { FaqList } from "@/components/ui/accordion";
 import { Highlight } from "@/components/ui/highlight";
 import { Reveal } from "@/components/ui/reveal";
 import { ShapeGridEdge } from "@/components/shapes/shape-grid-edge";

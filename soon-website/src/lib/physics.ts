@@ -1,4 +1,4 @@
-import { PIC, type Corner, type Person } from "./data";
+import { PIC, type Corner, type Person } from "@/data/guests";
 
 /** Per-vista runtime offset from home (stage px) + velocity. */
 export interface VistaState {

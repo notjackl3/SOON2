@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { ShapeGridEdge } from "@/components/shapes/shape-grid-edge";
-import { Vista } from "@/sections/guests/vista";
+import { Vista } from "@/components/ui/vista";
 import {
   BG_VECTORS,
   EDGES,
@@ -12,13 +12,13 @@ import {
   STAGE_H,
   STAGE_W,
   type EdgeEnd,
-} from "@/sections/guests/data";
+} from "@/data/guests";
 import {
   cornerAnchor,
   clampOffset,
   springStep,
   type VistaState,
-} from "@/sections/guests/physics";
+} from "@/lib/physics";
 
 // --- Physics tuning ---------------------------------------------------------
 const K = 11; // spring stiffness (lower = slower return)

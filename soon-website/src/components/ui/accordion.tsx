@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { Reveal } from "@/components/ui/reveal";
 
-import { FAQS, type FaqEntry } from "./data";
+import { FAQS, type FaqEntry } from "@/data/faq";
 
 /** Squares centered exactly on the box corners (same motif as the guest vistas). */
 const CORNER_POS = [

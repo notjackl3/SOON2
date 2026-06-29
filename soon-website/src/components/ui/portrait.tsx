@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 
 import { Reveal } from "@/components/ui/reveal";
 
-import type { TeamMember } from "./data";
+import type { TeamMember } from "@/data/team";
 
 const CARD = "bg-white border-[0.87px] border-line";
 const PAD = "pl-3.5 pr-3.25 pt-3.25 pb-3.5";

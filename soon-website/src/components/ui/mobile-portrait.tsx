@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 
 import { Reveal } from "@/components/ui/reveal";
 
-import type { MobileCard } from "./data";
+import type { MobileCard } from "@/data/team";
 
 const NAME =
   "font-display font-medium text-[#353535] text-[8.661px] leading-[8.042px] tracking-[0.1732px]";

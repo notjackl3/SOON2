@@ -1,8 +1,8 @@
-import DotField from "@/sections/team/dot-field";
+import DotField from "@/components/ui/dot-field";
 import { Reveal } from "@/components/ui/reveal";
-import { MobileFounder, MobilePortrait } from "@/sections/team/mobile-portrait";
-import { Portrait } from "@/sections/team/portrait";
-import { ScaledStage } from "@/sections/team/scaled-stage";
+import { MobileFounder, MobilePortrait } from "@/components/ui/mobile-portrait";
+import { Portrait } from "@/components/ui/portrait";
+import { ScaledStage } from "@/components/ui/scaled-stage";
 import {
   CELL_W,
   MOBILE_CARDS,
@@ -13,7 +13,7 @@ import {
   MOBILE_TITLE,
   TEAM_COLS,
   TEAM_GROUPS,
-} from "@/sections/team/data";
+} from "@/data/team";
 
 const DESKTOP_W = 1440;
 const DESKTOP_H = 967;

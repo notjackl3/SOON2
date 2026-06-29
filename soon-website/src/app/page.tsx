@@ -1,13 +1,13 @@
 import Nav from "@/components/nav";
-import SectionHero from "@/components/section-hero";
-import SectionConcept from "@/components/section-concept";
-import SectionSpill from "@/components/section-spill";
-import SectionRecap from "@/components/section-recap";
-import SectionGuests from "@/components/section-guests";
-import SectionSponsors from "@/components/section-sponsors";
-import SectionTeam from "@/components/section-team";
-import SectionFaq from "@/components/section-faq";
-import SectionFooter from "@/components/section-footer";
+import SectionHero from "@/components/sections/hero";
+import SectionConcept from "@/components/sections/concept";
+import SectionSpill from "@/components/sections/spill";
+import SectionRecap from "@/components/sections/recap";
+import SectionGuests from "@/components/sections/guests";
+import SectionSponsors from "@/components/sections/sponsors";
+import SectionTeam from "@/components/sections/team";
+import SectionFaq from "@/components/sections/faq";
+import SectionFooter from "@/components/sections/footer";
 import SceneBackground from "@/components/three/scene-background";
 import { SCROLL_SPAN_ID } from "@/components/three/constants";
 

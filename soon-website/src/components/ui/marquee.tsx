@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type RefObject } from "react";
 
-import { observeVisibility } from "@/components/visibility";
+import { observeVisibility } from "@/lib/visibility";
 
 export interface MarqueeTile {
   /** Optional image src under /public; omit for a gray placeholder tile. */

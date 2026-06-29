@@ -2,9 +2,9 @@
 
 import ShapeGrid from "@/components/shapes/shape-grid";
 import { Reveal } from "@/components/ui/reveal";
-import { Marquee, type MarqueeTile } from "@/sections/recap/marquee";
-import { StatCallout } from "@/sections/recap/stat-callout";
-import { useScrollVelocity } from "@/sections/recap/use-scroll-velocity";
+import { Marquee, type MarqueeTile } from "@/components/ui/marquee";
+import { StatCallout } from "@/components/ui/stat-callout";
+import { useScrollVelocity } from "@/hooks/use-scroll-velocity";
 
 /**
  * Placeholder carousel tiles. Drop event photos in /public/recap/ and set

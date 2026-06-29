@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import type { Corner } from "./data";
+import type { Corner } from "@/data/guests";
 
 /** Square centered exactly on the picture corner (matches the line anchors). */
 const CORNER_POS: Record<Corner, string> = {
