@@ -3,7 +3,7 @@ import { Reveal } from "@/components/ui/reveal";
 
 export default function SectionSponsors() {
   return (
-    <section className="relative w-full overflow-hidden bg-white py-20 md:py-28">
+    <section id="sponsors" className="relative w-full overflow-hidden bg-white py-20 md:py-28">
       {/* Decorative bubble cluster — bleeds off the right edge of the screen.
           Keeps its resting -translate-y-1/2 translate-x-[20%] via restTransform. */}
       <Reveal

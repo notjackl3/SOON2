@@ -201,6 +201,7 @@ export default function SectionGuests() {
 
   return (
     <section
+      id="guests"
       className="relative w-full overflow-hidden bg-white"
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}

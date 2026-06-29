@@ -10,7 +10,7 @@ import { ShapeGridEdge } from "@/components/shapes/shape-grid-edge";
  */
 export default function SectionFaq() {
   return (
-    <section className="relative w-full overflow-hidden bg-white py-20 md:h-dvh md:py-28">
+    <section id="faq" className="relative w-full overflow-hidden bg-white py-20 md:h-dvh md:py-28">
       {/* Animated shape grid, faded in from the right edge (desktop only) */}
       <ShapeGridEdge side="right" />
 

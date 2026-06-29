@@ -46,6 +46,7 @@ export default function SectionRecap() {
 
   return (
     <section
+      id="recap"
       data-snap-section
       className="relative w-full overflow-hidden bg-white py-16 md:py-24"
     >

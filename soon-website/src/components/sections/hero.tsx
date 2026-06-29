@@ -28,6 +28,7 @@ function CornerBadge({ children }: { children: React.ReactNode }) {
 export default function SectionHero() {
   return (
     <section
+      id="top"
       data-snap-section
       className="relative flex min-h-dvh flex-col overflow-hidden px-8 pb-16 pt-28 md:px-34"
     >
