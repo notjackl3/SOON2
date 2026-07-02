@@ -3,19 +3,21 @@ import { Reveal } from "@/components/ui/reveal";
 
 export default function SectionSponsors() {
   return (
-    <section id="sponsors" className="relative w-full overflow-hidden bg-white py-20 md:py-28">
-      {/* Decorative bubble cluster — bleeds off the right edge of the screen.
-          Keeps its resting -translate-y-1/2 translate-x-[20%] via restTransform. */}
+    <section id="sponsors" className="relative w-full overflow-x-clip bg-white py-20 md:py-28">
+      {/* Decorative bubble cluster — anchored to the right edge. The rightmost
+          artwork is the colored circles (they reach the full viewBox width), so
+          it sits flush to the edge with no outward push: any translateX would
+          shove those circles under the section's overflow-hidden and clip them. */}
       <Reveal
         as="img"
         x={70}
         y={0}
         duration={900}
-        restTransform="translateY(-50%) translateX(20%)"
+        restTransform="translateY(-50%)"
         src="/sponsors/bubbles.svg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute right-18 top-1/2 hidden w-[clamp(260px,28vw,440px)] md:block"
+        className="pointer-events-none absolute right-0 top-1/2 hidden w-[clamp(260px,28vw,440px)] lg:block"
       />
 
       <div className="relative mx-auto w-full max-w-360 px-8 md:px-34">

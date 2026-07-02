@@ -10,7 +10,6 @@ export default function SectionSpill() {
   return (
     <section
       id={FADE_ID}
-      data-snap-section
       className="relative flex h-dvh items-center justify-center px-8"
     >
       <Reveal

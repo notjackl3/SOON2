@@ -11,14 +11,22 @@ import {
   BLENDER_ASPECT,
   FADE_ID,
   MODEL_URL,
+  SCREEN_PAN,
   SCROLL_SPAN_ID,
   SCRUB_CURVE,
   SCRUB_END_FRACTION,
   UNLIT_BAKED,
 } from "./constants";
 
-/** How quickly the scrub catches up to the scroll position (higher = snappier). */
-const SCRUB_DAMP = 6;
+/**
+ * How quickly the scrub catches up to the scroll position (higher = snappier).
+ *
+ * Lenis already inertially smooths `window.scrollY`, so this is a *second*
+ * smoothing pass — keep it high so the camera tracks the (already-smooth)
+ * scroll tightly instead of lagging behind it by a second easing curve.
+ * Set very high (or bypass the damp for `smoothed = progress`) for a 1:1 lock.
+ */
+const SCRUB_DAMP = 30;
 
 /**
  * Replace every material with an unlit MeshBasicMaterial that shows the baked
@@ -67,6 +75,31 @@ function makeUnlit(root: THREE.Object3D) {
 }
 
 /**
+ * Interpolate the ordered screen-pan stops at scrub progress `p`. Each segment
+ * is eased with smoothstep so the pan velocity is zero at every stop — that
+ * removes the "wobble" a linear ramp leaves when it hits a hold (a sudden slope
+ * change at the knee). Ends clamp, so the pan holds past the first/last stop.
+ */
+function samplePan(
+  stops: typeof SCREEN_PAN,
+  p: number,
+): { x: number; y: number } {
+  if (p <= stops[0].at) return stops[0];
+  const last = stops[stops.length - 1];
+  if (p >= last.at) return last;
+  for (let i = 1; i < stops.length; i++) {
+    const b = stops[i];
+    if (p <= b.at) {
+      const a = stops[i - 1];
+      const t = (p - a.at) / (b.at - a.at);
+      const e = t * t * (3 - 2 * t); // smoothstep: ease in and out of each stop
+      return { x: a.x + (b.x - a.x) * e, y: a.y + (b.y - a.y) * e };
+    }
+  }
+  return last;
+}
+
+/**
  * Loads the Blender GLB, uses its *exported camera* as the render camera, and
  * drives that camera's baked animation purely from scroll position — so
  * scrolling down plays the camera move forward and scrolling up reverses it.
@@ -85,7 +118,8 @@ export function Scene() {
     endFraction: SCRUB_END_FRACTION,
   });
   const smoothed = useRef(0);
-  const refFovDeg = useRef(50);
+  const refFovDeg = useRef(0);
+  const fovReady = useRef(false);
 
   const camera = cameras[0] as THREE.PerspectiveCamera | undefined;
   const duration = animations[0]?.duration ?? 0;
@@ -95,10 +129,15 @@ export function Scene() {
     if (UNLIT_BAKED) makeUnlit(scene);
   }, [scene]);
 
-  // Promote the Blender camera to the render camera and remember its lens.
-  useEffect(() => {
+  // Promote the Blender camera to the render camera and capture its *pristine*
+  // vertical FOV. This must run in a layout effect — before the first animation
+  // frame — because `fitCameraToViewport` overwrites `camera.fov` every frame.
+  // If a frame beat this capture, we'd store an already-reshaped fov as the
+  // reference lens and the model would render at the wrong (inconsistent) size.
+  useLayoutEffect(() => {
     if (!camera) return;
     refFovDeg.current = camera.fov; // vertical FOV at the Blender (16:9) aspect
+    fovReady.current = true;
     set({ camera });
     invalidate(); // draw the first frame now that the camera exists
   }, [camera, set, invalidate]);
@@ -127,7 +166,9 @@ export function Scene() {
   }, [actions, mixer]);
 
   useFrame((_, delta) => {
-    if (!camera || duration <= 0) return;
+    // Wait for the pristine reference lens before fitting, so we never scale the
+    // frustum against a stale/default fov.
+    if (!camera || duration <= 0 || !fovReady.current) return;
 
     // Inertial catch-up toward the raw scroll progress for a smooth scrub.
     smoothed.current = THREE.MathUtils.damp(
@@ -152,6 +193,23 @@ export function Scene() {
       refFovDeg: refFovDeg.current,
       mode: "cover",
     });
+
+    // Screen-space pan: shift the frustum (not the model) to reframe the house
+    // per keyframe. Offsets are fractions of the viewport; +x → right, +y →
+    // down (a negative view offset shifts the rendered window the opposite way).
+    const pan = samplePan(SCREEN_PAN, smoothed.current);
+    if (pan.x !== 0 || pan.y !== 0) {
+      camera.setViewOffset(
+        size.width,
+        size.height,
+        -pan.x * size.width,
+        -pan.y * size.height,
+        size.width,
+        size.height,
+      );
+    } else if (camera.view?.enabled) {
+      camera.clearViewOffset();
+    }
 
     // Still easing toward the scroll position → request another frame. Once the
     // scrub has settled we stop, so an idle page renders nothing.

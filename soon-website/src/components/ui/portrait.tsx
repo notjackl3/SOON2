@@ -54,8 +54,13 @@ export function Portrait({
   }
 
   return (
-    <Reveal className={`${CARD} ${PAD} flex flex-col gap-3`} style={style} delay={delay} y={14}>
-      <div className="relative aspect-square w-full bg-[#d9d9d9]">
+    <Reveal
+      className={`group relative hover:z-20 ${CARD} ${PAD} flex flex-col gap-3`}
+      style={style}
+      delay={delay}
+      y={14}
+    >
+      <div className="relative aspect-square w-full overflow-hidden bg-[#d9d9d9]">
         {member.image && (
           <Image
             src={member.image}
@@ -70,6 +75,19 @@ export function Portrait({
         <p className={`w-full wrap-break-word ${NAME}`}>{member.name}</p>
         <p className={`w-full wrap-break-word ${ROLE}`}>{member.role}</p>
       </div>
+
+      {/* Quote — fades in as a panel to the right of the card on hover, like
+          Jack's founder layout. Absolutely placed (no grid reflow) and the card
+          lifts (hover:z-20) so the panel floats above its neighbours. */}
+      {member.quote && (
+        <div className="pointer-events-none absolute left-full top-0 z-30 ml-2 w-52 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <div className={`${CARD} px-3.5 py-3.25`}>
+            <p className="text-[10px] italic leading-[1.45] tracking-[-0.3px] text-muted">
+              &ldquo;{member.quote}&rdquo;
+            </p>
+          </div>
+        </div>
+      )}
     </Reveal>
   );
 }

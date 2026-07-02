@@ -7,6 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "playwright test",
+    "test:smoke": "playwright test smoke",
+    "test:perf": "playwright test performance --project=desktop",
+    "test:lh": "playwright test lighthouse --project=desktop",
+    "test:visual": "playwright test visual",
+    "test:update": "playwright test visual --update-snapshots",
+    "test:report": "playwright show-report",
     "optimize:glb": "gltf-transform optimize public/models/scene.glb public/models/scene.tmp.glb --simplify false --texture-compress webp --texture-size 2048 && mv -f public/models/scene.tmp.glb public/models/scene.glb"
   },
   "dependencies": {
@@ -28,6 +35,7 @@
     "tw-animate-css": "^1.4.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -35,6 +43,9 @@
     "@types/three": "^0.184.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "lighthouse": "^13.4.0",
+    "playwright": "^1.61.1",
+    "playwright-lighthouse": "^4.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

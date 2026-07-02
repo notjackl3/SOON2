@@ -16,7 +16,7 @@ export default function Nav() {
 
   return (
     <div className="absolute inset-x-0 top-0 z-50 w-full tracking-body">
-      <div className="relative flex items-center px-6 py-4 md:px-0">
+      <div className="relative flex items-center px-6 pb-4 pt-8 md:px-0">
         {/* Logo — sits in the left gutter (mobile: in flow; desktop: pinned to
             the gutter so it doesn't shift the evenly-spread links). */}
         <a

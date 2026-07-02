@@ -40,10 +40,25 @@ export const SCRUB_END_FRACTION = 0.3;
 export const SCRUB_CURVE = 1;
 
 /**
- * Slideshow snap (full-takeover). Sections opt in with `data-snap-section`;
- * once at a section boundary, scroll input is resisted until the accumulated
- * delta passes SNAP_THRESHOLD, then it auto-glides to the next section.
+ * Screen-space pan of the rendered scene, keyed to the scrub progress (0–1 — the
+ * same value that drives the camera timeline). Each stop shifts the house
+ * *within the frame* without changing the baked camera angle:
+ *
+ *   x > 0 → house moves right,  y > 0 → house moves down (fractions of viewport).
+ *
+ * Values interpolate linearly between stops, so the house *drifts* as you
+ * scroll; stops must be in ascending `at` order and the ends clamp. Because the
+ * camera fits with `cover`, panning toward the cropped (overflowing) axis
+ * reveals more of the scene there — panning *down* on a wide desktop viewport
+ * uncovers more roof. Panning along the non-cropped axis can expose the blank
+ * background at the far edge, so keep that component modest.
+ *
+ * This is a 2D reframing, not a new viewpoint — the angle itself is baked in the
+ * GLB (the 3D artist's domain). Set to a single `{ at: 0, x: 0, y: 0 }` stop to
+ * disable.
  */
-export const SNAP_THRESHOLD = 220; // accumulated wheel/touch delta (px) to trigger a slide
-export const SNAP_DURATION = 1.0; // glide duration (seconds) for the auto-slide
-export const SNAP_SECTION_ATTR = "data-snap-section";
+export const SCREEN_PAN: { at: number; x: number; y: number }[] = [
+  { at: 0, x: 0, y: 0 }, // hero: keep the exported framing untouched
+  { at: 0.55, x: 0.12, y: 0.12 }, // this keyframe: drift down-right, revealing the roof
+  { at: 1, x: 0.12, y: 0.12 }, // hold the reframing through the rest of the scrub
+];

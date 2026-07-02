@@ -47,13 +47,12 @@ export default function SectionRecap() {
   return (
     <section
       id="recap"
-      data-snap-section
       className="relative w-full overflow-hidden bg-white py-16 md:py-24"
     >
       {/* Header (z-10 so the grid bleeding up stays behind the heading) */}
       <div className="relative z-10 mx-auto w-full max-w-360 px-8 md:px-34">
         <img
-          src="/recap/vectors-top.svg"
+          src="/recap/top-vectors.svg"
           alt=""
           aria-hidden
           className="pointer-events-none absolute left-0 top-0 hidden w-[clamp(160px,17vw,256px)] md:block"
@@ -102,22 +101,22 @@ export default function SectionRecap() {
         <div className="pointer-events-none absolute inset-0">
           <div className="relative mx-auto h-full w-full max-w-360 px-8 md:px-34">
             <StatCallout
-              value="70"
+              value="45"
               label="Hackers"
               delay={0}
               className="absolute left-8 top-[4%] md:left-34"
             />
             <StatCallout
-              value="18"
+              value="09"
               label="Sponsors"
               align="right"
               delay={150}
               className="absolute right-8 top-1/2 -translate-y-1/2 md:right-34"
             />
             <StatCallout
-              value="09"
-              label="Activities"
-              delay={300}
+              value="10"
+              label="Judges"
+              delay={0}
               className="absolute bottom-[4%] left-8 md:left-34"
             />
           </div>

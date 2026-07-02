@@ -3,6 +3,7 @@ import SectionHero from "@/components/sections/hero";
 import SectionConcept from "@/components/sections/concept";
 import SectionSpill from "@/components/sections/spill";
 import SectionRecap from "@/components/sections/recap";
+import SectionImpact from "@/components/sections/impact";
 import SectionGuests from "@/components/sections/guests";
 import SectionSponsors from "@/components/sections/sponsors";
 import SectionTeam from "@/components/sections/team";
@@ -28,6 +29,8 @@ export default function Home() {
       </div>
 
       <SectionRecap />
+
+      <SectionImpact />
 
       <SectionGuests />
 

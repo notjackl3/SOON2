@@ -22,13 +22,13 @@ export function MobilePortrait({
 }) {
   return (
     <Reveal
-      className="absolute flex h-27.75 w-21.5 items-start border-[0.5px] border-line bg-white px-2 pt-2 pb-2.25"
+      className="group absolute flex h-27.75 w-21.5 items-start border-[0.5px] border-line bg-white px-2 pt-2 pb-2.25"
       style={style}
       delay={delay}
       y={12}
     >
       <div className="flex w-17.25 flex-col gap-1.75">
-        <div className="relative aspect-square w-full bg-[#d9d9d9]">
+        <div className="relative aspect-square w-full overflow-hidden bg-[#d9d9d9]">
           {card.image && (
             <Image
               src={card.image}
@@ -37,6 +37,14 @@ export function MobilePortrait({
               sizes="80px"
               className="object-cover"
             />
+          )}
+          {/* Quote overlay — fades in over the photo on card hover. */}
+          {card.quote && (
+            <div className="pointer-events-none absolute inset-0 flex items-center bg-white/95 p-1.5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <p className="text-[5.5px] italic leading-[1.35] tracking-[-0.15px] text-ink-soft">
+                &ldquo;{card.quote}&rdquo;
+              </p>
+            </div>
           )}
         </div>
         <div className="flex w-full flex-col gap-0.5">

@@ -138,7 +138,9 @@ export default function SectionFooter() {
             <div className="flex flex-col items-end gap-2">
               <div className="flex items-center gap-2.5">
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/soon.hackathon"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Instagram"
                   className="transition-opacity hover:opacity-70"
                 >
@@ -146,7 +148,9 @@ export default function SectionFooter() {
                   <img src="/footer/instagram.svg" alt="" className="size-4.5" />
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/huu-an-duc-le/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="LinkedIn"
                   className="transition-opacity hover:opacity-70"
                 >
