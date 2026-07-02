@@ -22,7 +22,7 @@ const TOP_TILES: MarqueeTile[] = [
 const BOTTOM_TILES: MarqueeTile[] = [
   { src: "/recap/row2-1.jpg", alt: "Presentation to the room", aspect: 1.595 },
   { src: "/recap/row2-2.jpg", alt: "Group portrait", aspect: 1.406 },
-  { src: "/recap/row2-3.jpg", alt: "First place announcement", aspect: 1.406 },
+  { src: "/recap/row2-3.jpg", alt: "Hackers goofing around in the house", aspect: 1.5 },
   { src: "/recap/row2-4.jpg", alt: "Sunset group photo", aspect: 1.488 },
   { src: "/recap/row2-5.jpg", alt: "Winners with awards", aspect: 1.406 },
 ];

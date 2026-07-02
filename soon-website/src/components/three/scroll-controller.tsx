@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 
+import { setLenis } from "@/lib/lenis";
+
 /**
  * Owns the page scroll: Lenis inertial smoothing gives continuous free
  * scrolling the whole way down, which the 3D camera scrub follows directly.
@@ -18,6 +20,7 @@ export default function ScrollController() {
     // raise if scrolling feels slow to cover ground.
     const lenis = new Lenis({ lerp: 0.25, wheelMultiplier: 1 });
     lenisRef.current = lenis;
+    setLenis(lenis);
     let raf = 0;
     const loop = (time: number) => {
       lenis.raf(time);
@@ -28,6 +31,7 @@ export default function ScrollController() {
       cancelAnimationFrame(raf);
       lenis.destroy();
       lenisRef.current = null;
+      setLenis(null);
     };
   }, []);
 

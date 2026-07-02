@@ -39,7 +39,7 @@ export default function SectionFooter() {
     // literal <footer> tag via cosmetic filters, which made this disappear.
     <div role="contentinfo" className="w-full ">
       {/* ---- Contact section ---- */}
-      <section className="mx-auto flex w-full max-w-360 flex-col gap-16 px-8 py-20 mt-12 md:px-34 lg:flex-row lg:items-center lg:gap-12">
+      <section id="contact" className="mx-auto flex w-full max-w-360 flex-col gap-16 px-8 py-20 mt-12 md:px-34 lg:flex-row lg:items-center lg:gap-12">
         {/* Left: heading + copy */}
         <div className="flex flex-1 flex-col gap-12">
           <Reveal className="flex flex-col gap-3">

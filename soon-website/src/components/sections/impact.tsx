@@ -125,12 +125,14 @@ const SCHOOL_ALT: Record<string, string> = {
   queens: "Queen's University",
 };
 
-/** Seeded-random paint splats (spiky lobes + stray drips), generated offline.
- *  Drops with `r` are round droplets; ones with `rx/ry/rot` are drips. */
+/** Seeded-random blocky bursts, generated offline. Each blob is a union of
+ *  overlapping axis-aligned rectangles (same-winding subpaths) — a stepped,
+ *  pixel-explosion silhouette. Drops with `r` render as squares; ones with
+ *  `rx/ry/rot` render as slivers with `rot` snapped to the nearest 90°. */
 type SplatDrop = { cx: number; cy: number; r?: number; rx?: number; ry?: number; rot?: number };
 const SPLATS: { blob: string; drops: SplatDrop[] }[] = [
   {
-    blob: "M 38.3 27.7 Q 43.5 6.0 50.3 29.7 Q 74.0 -7.3 58.1 33.6 Q 92.0 26.2 61.0 47.6 L 69.5 57.1 L 59.2 54.5 L 66.9 77.6 L 48.6 65.8 Q 42.5 97.9 35.8 69.2 L 27.7 64.2 L 29.2 57.5 Q 15.3 60.3 25.0 46.4 Q -20.2 25.8 30.1 34.5 L 27.3 24.8 L 38.3 27.7 Z",
+    blob: "M 30 30 L 63 30 L 63 69 L 30 69 Z M 3 54 L 48 54 L 48 63 L 3 63 Z M 48 42 L 90 42 L 90 54 L 48 54 Z M 48 36 L 84 36 L 84 51 L 48 51 Z M 45 6 L 54 6 L 54 48 L 45 48 Z M 51 48 L 63 48 L 63 96 L 51 96 Z M 27 24 L 42 24 L 42 39 L 27 39 Z M 27 57 L 42 57 L 42 72 L 27 72 Z",
     drops: [
       { cx: 26.3, cy: 82.1, r: 3.3 },
       { cx: 94.6, cy: 59.8, r: 4.2 },
@@ -145,7 +147,7 @@ const SPLATS: { blob: string; drops: SplatDrop[] }[] = [
     ],
   },
   {
-    blob: "M 40.2 61.5 Q 2.1 96.5 27.4 59.5 Q 15.9 54.0 26.2 40.5 Q 22.6 30.0 29.4 25.2 Q 20.2 -5.9 43.1 22.4 Q 57.0 -5.2 61.4 26.3 Q 98.9 20.9 68.6 42.5 Q 76.6 53.6 66.5 58.1 Q 73.7 93.3 54.8 68.6 Q 49.6 88.5 40.2 61.5 Z",
+    blob: "M 30 27 L 63 27 L 63 63 L 30 63 Z M 6 36 L 48 36 L 48 48 L 6 48 Z M 48 42 L 90 42 L 90 54 L 48 54 Z M 48 45 L 81 45 L 81 57 L 48 57 Z M 51 0 L 63 0 L 63 48 L 51 48 Z M 51 9 L 60 9 L 60 48 L 51 48 Z M 45 48 L 54 48 L 54 96 L 45 96 Z M 51 48 L 60 48 L 60 81 L 51 81 Z M 27 57 L 39 57 L 39 69 L 27 69 Z M 57 60 L 69 60 L 69 72 L 57 72 Z",
     drops: [
       { cx: 20.6, cy: -6.4, rx: 7.5, ry: 3, rot: 245 },
       { cx: 2.7, cy: 21.6, r: 3.7 },
@@ -156,7 +158,7 @@ const SPLATS: { blob: string; drops: SplatDrop[] }[] = [
     ],
   },
   {
-    blob: "M 35.6 43.1 L 30.2 27.6 L 41.6 29.7 Q 41.0 10.8 55.2 33.6 Q 74.7 -5.9 65.7 37.3 Q 89.0 34.3 73.6 46.4 Q 86.1 56.2 66.7 57.2 Q 81.5 94.0 57.4 66.4 Q 46.2 99.3 48.7 65.4 Q 16.2 83.0 32.9 57.5 Q 26.4 55.3 35.6 43.1 Z",
+    blob: "M 27 33 L 66 33 L 66 66 L 27 66 Z M 9 39 L 48 39 L 48 51 L 9 51 Z M 48 33 L 93 33 L 93 42 L 48 42 Z M 30 0 L 45 0 L 45 48 L 30 48 Z M 42 48 L 54 48 L 54 90 L 42 90 Z M 54 48 L 63 48 L 63 87 L 54 87 Z M 60 27 L 72 27 L 72 39 L 60 39 Z M 21 54 L 39 54 L 39 72 L 21 72 Z",
     drops: [
       { cx: 14.1, cy: 55.1, rx: 6.2, ry: 2.5, rot: 173 },
       { cx: 9.1, cy: 85, r: 3.7 },
@@ -167,7 +169,7 @@ const SPLATS: { blob: string; drops: SplatDrop[] }[] = [
     ],
   },
   {
-    blob: "M 62.6 67.8 Q 60.2 91.7 47.8 67.4 Q 20.7 85.2 35.2 59.9 Q -2.8 60.9 28.6 47.3 Q 23.7 36.4 36.1 32.7 Q 39.7 6.8 53.8 28.3 Q 85.1 4.6 60.4 41.7 Q 83.1 42.3 68.4 56.5 Q 85.2 71.2 62.6 67.8 Z",
+    blob: "M 30 30 L 63 30 L 63 60 L 30 60 Z M 0 48 L 48 48 L 48 57 L 0 57 Z M 6 33 L 48 33 L 48 42 L 6 42 Z M 48 39 L 78 39 L 78 54 L 48 54 Z M 48 48 L 84 48 L 84 60 L 48 60 Z M 42 18 L 57 18 L 57 48 L 42 48 Z M 48 15 L 57 15 L 57 48 L 48 48 Z M 48 48 L 63 48 L 63 87 L 48 87 Z M 42 48 L 54 48 L 54 99 L 42 99 Z M 54 27 L 69 27 L 69 42 L 54 42 Z M 54 54 L 69 54 L 69 69 L 54 69 Z",
     drops: [
       { cx: 64, cy: 18.2, rx: 6.3, ry: 2.5, rot: 295 },
       { cx: 42, cy: 11.4, r: 2.8 },
@@ -202,10 +204,10 @@ function StatCard({ stat, delay }: { stat: Stat; delay: number }) {
         <span
           className={`relative block w-fit font-display leading-[0.82] tracking-tight text-ink ${numClass}`}
         >
-          {/* paint splash — centered on the numeral's glyphs (top 55% offsets
+          {/* blocky burst splash — centered on the numeral's glyphs (top 55% offsets
               the descender overflow of the 0.82 leading) and sized by the
               number in em units, with a floor so single digits still get a
-              real splat. Blob and drips are animated on HTML wrappers, not
+              real splat. Burst and drops are animated on HTML wrappers, not
               SVG nodes — SVG transforms skip GPU compositing and stutter.
               Entry springs the scale; exit fades in place (transform resets
               only after the 700ms fade). */}
@@ -231,15 +233,24 @@ function StatCard({ stat, delay }: { stat: Stat; delay: number }) {
                 <g fill="currentColor">
                   {splat.drops.map((d, j) =>
                     d.r != null ? (
-                      <circle key={j} cx={d.cx} cy={d.cy} r={d.r} />
-                    ) : (
-                      <ellipse
+                      // square droplet
+                      <rect
                         key={j}
-                        cx={d.cx}
-                        cy={d.cy}
-                        rx={d.rx}
-                        ry={d.ry}
-                        transform={`rotate(${d.rot} ${d.cx} ${d.cy})`}
+                        x={d.cx - d.r}
+                        y={d.cy - d.r}
+                        width={d.r * 2}
+                        height={d.r * 2}
+                      />
+                    ) : (
+                      // sliver: thin bar, rotation snapped to the nearest 90°
+                      // so every edge in the splash stays axis-aligned
+                      <rect
+                        key={j}
+                        x={d.cx - (d.rx ?? 0)}
+                        y={d.cy - (d.ry ?? 0)}
+                        width={(d.rx ?? 0) * 2}
+                        height={(d.ry ?? 0) * 2}
+                        transform={`rotate(${Math.round((d.rot ?? 0) / 90) * 90} ${d.cx} ${d.cy})`}
                       />
                     )
                   )}

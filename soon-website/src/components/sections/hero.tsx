@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { Highlight } from "@/components/ui/highlight";
+import { ReserveButton } from "@/components/ui/reserve-button";
 import { Reveal } from "@/components/ui/reveal";
 
 /** Dotted-grid texture behind the hero. Rendered at its natural size and
@@ -86,7 +86,7 @@ export default function SectionHero() {
 
           {/* CTA row */}
           <Reveal delay={360} className="flex items-center justify-between gap-4">
-            <Button>Reserve your room</Button>
+            <ReserveButton />
             <Reveal delay={1500} y={0} scale={0} duration={450}>
               <CornerBadge>Location: TBA</CornerBadge>
             </Reveal>

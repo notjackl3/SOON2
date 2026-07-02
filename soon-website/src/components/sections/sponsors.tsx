@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { PartnerButton } from "@/components/ui/partner-button";
 import { Reveal } from "@/components/ui/reveal";
 
 export default function SectionSponsors() {
@@ -43,9 +43,7 @@ export default function SectionSponsors() {
 
           {/* Pill (top, level with "Sponsors") + subtext (bottom, level with "coming SOON") */}
           <Reveal delay={140} className="flex shrink-0 flex-col items-start gap-5 md:justify-between md:gap-0 md:self-stretch md:py-1">
-            <Button className="py-3 text-[clamp(13px,1.4vw,20px)] tracking-tight">
-              Partner with us
-            </Button>
+            <PartnerButton />
             <p className="max-w-52 text-[clamp(16px,1.6vw,20px)] tracking-body text-ink-soft">
               but trust us, you&rsquo;ll know the names.
             </p>

@@ -9,17 +9,12 @@ export interface TeamMember {
   col: number; // 0-indexed start column (0–6)
   span?: number; // column span (default 1)
   bio?: string; // present ⇒ wide founder card (Jack)
-  quote?: string; // present ⇒ 2–3 sentence quote revealed on hover
 }
 
 export const TEAM_COLS = 7;
 export const CELL_W = 138.699; // px per column = standard portrait width
 
-const JACK_BIO = `Starting 2026, I have been to 15 hackathons in a row, won 7, and hosted 3 of them. I know exactly what a great hackathon looks like! I had organized Canada's largest AI hackathon for 1,200+ hackers, a smaller one with 100 hackers, and a case comp!  Creating SOON, I want this to the most memorable hackathon ever. We will create space where hackers can bond organically and show off their best abilities. We help companies' products go to market, enhance their branding, improve their product, and introduce them to the most talented builders in Canada.  I gave my team 2 months to plan this entire hackathon from scratch.`;
-
-// Placeholder quote shown on hover — swap per person when the real quotes land.
-const LOREM =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.";
+const JACK_BIO = `Starting 2026, I have been to 15 hackathons in a row, won 7, and hosted 3 of them. I know exactly what a great hackathon looks like! I had organized Canada's largest AI hackathon for 1,200+ hackers, a smaller one with 100 hackers, and a case comp!  Creating SOON, I want this to the most memorable hackathon ever. We will create space where hackers can bond organically and show off their best abilities.`;
 
 /**
  * Rows grouped to match the Figma vertical spacing: 12px gap between groups,
@@ -27,11 +22,11 @@ const LOREM =
  */
 export const TEAM_GROUPS: TeamMember[][][] = [
   [
-    [{ name: "Nikita Nathania", role: "Logistics Lead", image: "/team/nikita.jpg", col: 6, quote: LOREM }],
+    [{ name: "Nikita Nathania", role: "Logistics Lead", image: "/team/nikita.jpg", col: 6 }],
     [
-      { name: "Ariah D'Souza", role: "Marketing Lead", image: "/team/ariah.jpg", col: 0, quote: LOREM },
-      { name: "Natasha Ejercito", role: "Operations Lead", image: "/team/natasha.jpg", col: 3, quote: LOREM },
-      { name: "Phin Truong", role: "Director", image: "/team/phin.jpg", col: 5, quote: LOREM },
+      { name: "Ariah D'Souza", role: "Marketing Lead", image: "/team/ariah.jpg", col: 0 },
+      { name: "Natasha Ejercito", role: "Operations Lead", image: "/team/natasha.jpg", col: 3 },
+      { name: "Phin Truong", role: "Director", image: "/team/phin.jpg", col: 5 },
     ],
   ],
   [
@@ -44,17 +39,17 @@ export const TEAM_GROUPS: TeamMember[][][] = [
         span: 4,
         bio: JACK_BIO,
       },
-      { name: "Saanvi Mogla", role: "Co-President", image: "/team/saanvi.jpg", col: 5, quote: LOREM },
+      { name: "Saanvi Mogla", role: "Co-President", image: "/team/saanvi.jpg", col: 5 },
     ],
   ],
   [
     [
-      { name: "Erin Manalo", role: "Design", image: "/team/erin.jpg", col: 0, quote: LOREM },
-      { name: "Sophie Shu", role: "Design, Tech", image: "/team/sophie.jpg", col: 1, quote: LOREM },
-      { name: "Dorothy Zheng", role: "Operations", image: "/team/dorothy.jpg", col: 3, quote: LOREM },
-      { name: "Sohaila Ali", role: "Operations", image: "/team/sohaila.jpg", col: 4, quote: LOREM },
+      { name: "Erin Manalo", role: "Design", image: "/team/erin.jpg", col: 0 },
+      { name: "Sophie Shu", role: "Design, Tech", image: "/team/sophie.jpg", col: 1 },
+      { name: "Dorothy Zheng", role: "Operations", image: "/team/dorothy.jpg", col: 3 },
+      { name: "Sohaila Ali", role: "Operations", image: "/team/sohaila.jpg", col: 4 },
     ],
-    [{ name: "Mohammad Mashrur", role: "Operations", image: "/team/mohammad.jpg", col: 2, quote: LOREM }]
+    [{ name: "Mohammad Mashrur", role: "Operations", image: "/team/mohammad.jpg", col: 2 }]
   ],
 ];
 
@@ -67,7 +62,6 @@ export interface MobileCard {
   role: string;
   image?: string;
   bio?: string;
-  quote?: string; // present ⇒ 2–3 sentence quote revealed on hover
 }
 
 export interface MobilePlacement {
@@ -89,14 +83,14 @@ export const MOBILE_JACK: MobilePlacement = {
 };
 
 export const MOBILE_CARDS: MobilePlacement[] = [
-  { card: { name: "Saanvi Mogla", role: "Co-President", image: "/team/saanvi.jpg", quote: LOREM }, x: 207, y: 179.68 },
-  { card: { name: "Phin Truong", role: "Director", image: "/team/phin.jpg", quote: LOREM }, x: 303.33, y: 69 },
-  { card: { name: "Ariah D'Souza", role: "Marketing", image: "/team/ariah.jpg", quote: LOREM }, x: 0, y: 359 },
-  { card: { name: "Erin Manalo", role: "Design", image: "/team/erin.jpg", quote: LOREM }, x: 86, y: 470 },
-  { card: { name: "Sophie Shu", role: "Design, Tech", image: "/team/sophie.jpg", quote: LOREM }, x: 198, y: 470 },
-  { card: { name: "Natasha Ejercito", role: "Operations", image: "/team/natasha.jpg", quote: LOREM }, x: 135, y: 620 },
-  { card: { name: "Nikita Nathania", role: "Logistics", image: "/team/nikita.jpg", quote: LOREM }, x: 28, y: 692 },
-  { card: { name: "Mohammad Mashrur", role: "Operations", image: "/team/mohammad.jpg", quote: LOREM }, x: 190, y: 748 },
-  { card: { name: "Dorothy Zheng", role: "Operations", image: "/team/dorothy.jpg", quote: LOREM }, x: 293, y: 581 },
-  { card: { name: "Sohaila Ali", role: "Operations", image: "/team/sohaila.jpg", quote: LOREM }, x: 293, y: 691 },
+  { card: { name: "Saanvi Mogla", role: "Co-President", image: "/team/saanvi.jpg" }, x: 207, y: 179.68 },
+  { card: { name: "Phin Truong", role: "Director", image: "/team/phin.jpg" }, x: 303.33, y: 69 },
+  { card: { name: "Ariah D'Souza", role: "Marketing", image: "/team/ariah.jpg" }, x: 0, y: 359 },
+  { card: { name: "Erin Manalo", role: "Design", image: "/team/erin.jpg" }, x: 86, y: 470 },
+  { card: { name: "Sophie Shu", role: "Design, Tech", image: "/team/sophie.jpg" }, x: 198, y: 470 },
+  { card: { name: "Natasha Ejercito", role: "Operations", image: "/team/natasha.jpg" }, x: 135, y: 620 },
+  { card: { name: "Nikita Nathania", role: "Logistics", image: "/team/nikita.jpg" }, x: 28, y: 692 },
+  { card: { name: "Mohammad Mashrur", role: "Operations", image: "/team/mohammad.jpg" }, x: 190, y: 748 },
+  { card: { name: "Dorothy Zheng", role: "Operations", image: "/team/dorothy.jpg" }, x: 293, y: 581 },
+  { card: { name: "Sohaila Ali", role: "Operations", image: "/team/sohaila.jpg" }, x: 293, y: 691 },
 ];

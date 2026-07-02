@@ -29,7 +29,7 @@ export function Portrait({
   if (member.bio) {
     return (
       <Reveal className={`${CARD} ${PAD} flex items-end gap-4`} style={style} delay={delay} y={14}>
-        <div className="relative h-[152.954px] w-[195.857px] shrink-0 bg-[#d9d9d9]">
+        <div className="relative min-h-[152.954px] w-[195.857px] shrink-0 self-stretch bg-[#d9d9d9]">
           {member.image && (
             <Image
               src={member.image}
@@ -40,12 +40,16 @@ export function Portrait({
             />
           )}
         </div>
-        <div className="flex flex-1 flex-col gap-5">
-          <div className="flex items-center gap-5.5">
-            <p className={`flex-1 ${NAME}`}>{member.name}</p>
-            <p className={`${ROLE} text-right`}>{member.role}</p>
+        <div className="flex flex-1 flex-col gap-4">
+          <div className="flex items-baseline gap-5.5">
+            <p className="flex-1 font-display text-[24px] font-medium leading-none tracking-[0.48px] text-ink-soft">
+              {member.name}
+            </p>
+            <p className="text-[11px] uppercase leading-none tracking-[-0.38px] text-muted text-right">
+              {member.role}
+            </p>
           </div>
-          <p className="whitespace-pre-wrap text-[10px] leading-3 tracking-[-0.4px] text-muted">
+          <p className="whitespace-pre-wrap text-[13px] leading-[1.4] tracking-[-0.4px] text-muted">
             {member.bio}
           </p>
         </div>
@@ -55,7 +59,7 @@ export function Portrait({
 
   return (
     <Reveal
-      className={`group relative hover:z-20 ${CARD} ${PAD} flex flex-col gap-3`}
+      className={`${CARD} ${PAD} flex flex-col gap-3`}
       style={style}
       delay={delay}
       y={14}
@@ -75,19 +79,6 @@ export function Portrait({
         <p className={`w-full wrap-break-word ${NAME}`}>{member.name}</p>
         <p className={`w-full wrap-break-word ${ROLE}`}>{member.role}</p>
       </div>
-
-      {/* Quote — fades in as a panel to the right of the card on hover, like
-          Jack's founder layout. Absolutely placed (no grid reflow) and the card
-          lifts (hover:z-20) so the panel floats above its neighbours. */}
-      {member.quote && (
-        <div className="pointer-events-none absolute left-full top-0 z-30 ml-2 w-52 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <div className={`${CARD} px-3.5 py-3.25`}>
-            <p className="text-[10px] italic leading-[1.45] tracking-[-0.3px] text-muted">
-              &ldquo;{member.quote}&rdquo;
-            </p>
-          </div>
-        </div>
-      )}
     </Reveal>
   );
 }
