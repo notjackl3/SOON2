@@ -9,7 +9,9 @@ import {
 } from "react";
 
 /** What makes the bar expand. Use `active` instead for fully controlled mode. */
-export type HighlightTrigger = "in-view" | "hover" | "click";
+export type HighlightTrigger = "in-view" | "hover" | "click" | "scroll";
+
+const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 
 const toCssLength = (v: number | string | undefined) =>
   typeof v === "number" ? `${v}px` : v;
@@ -36,6 +38,8 @@ export function Highlight({
   once = true,
   active,
   rootMargin = "0px 0px -30% 0px",
+  scrubMs = 160,
+  revealDelay = 0,
   className,
   barClassName = "inset-0",
 }: {
@@ -65,6 +69,14 @@ export function Highlight({
    * the bottom — not right at the edge where it'd be missed.
    */
   rootMargin?: string;
+  /**
+   * scroll only: transition (ms) applied to scroll-scrubbed fill updates once
+   * the initial reveal has played. Small enough to track the scroll, long
+   * enough to smooth out per-frame jitter.
+   */
+  scrubMs?: number;
+  /** scroll only: wait this many ms after mount before the opening reveal plays. */
+  revealDelay?: number;
   /** Classes on the wrapper (positioning, text styles, …). */
   className?: string;
   /** Classes on the bar itself — override to let it bleed past the text. */
@@ -73,8 +85,17 @@ export function Highlight({
   const ref = useRef<HTMLSpanElement>(null);
   const [internal, setInternal] = useState(false);
   const [reduced, setReduced] = useState(false);
+  // scroll mode: `scrollFill` tracks scroll position, but the displayed fill is
+  // gated behind `mounted` so the very first paint is always scaleX(0) — even if
+  // a scroll/resize event lands early — giving a guaranteed left→right reveal.
+  // `revealed` flips once the opening animation is done so later updates use the
+  // snappier scrub transition.
+  const [scrollFill, setScrollFill] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const [revealed, setRevealed] = useState(false);
 
   const isControlled = active !== undefined;
+  const isScroll = !isControlled && trigger === "scroll";
   const expanded = isControlled ? active : internal;
   const hasChildren = children != null && children !== false;
 
@@ -105,8 +126,46 @@ export function Highlight({
     return () => io.disconnect();
   }, [isControlled, trigger, once, rootMargin]);
 
+  useEffect(() => {
+    if (!isScroll) return;
+    const el = ref.current;
+    if (!el) return;
+
+    let raf = 0;
+    // Fill = how much of the element still sits below the viewport's top edge.
+    // 1 while it's comfortably in view; eases to 0 as it scrolls off the top,
+    // and back to 1 when scrolled into view again.
+    const compute = () => {
+      const rect = el.getBoundingClientRect();
+      const travel = rect.height * 1.6;
+      setScrollFill(travel > 0 ? clamp01(rect.bottom / travel) : 0);
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(compute);
+    };
+
+    // Measure right away so scrollFill is correct, but hold the mount gate for
+    // `revealDelay` so the empty bar sits visibly before it sweeps open.
+    compute();
+    const openTimer = window.setTimeout(() => setMounted(true), revealDelay);
+    const revealTimer = window.setTimeout(
+      () => setRevealed(true),
+      revealDelay + duration + 60,
+    );
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearTimeout(openTimer);
+      window.clearTimeout(revealTimer);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [isScroll, duration, revealDelay]);
+
   const handlers =
-    isControlled || trigger === "in-view"
+    isControlled || trigger === "in-view" || trigger === "scroll"
       ? {}
       : trigger === "hover"
         ? {
@@ -119,11 +178,16 @@ export function Highlight({
             onClick: () => setInternal((v) => (once ? true : !v)),
           };
 
+  const fill = isScroll ? (mounted ? scrollFill : 0) : expanded ? 1 : 0;
+  // Long opening animation on mount/reveal; snappier while scrubbing to scroll.
+  const activeMs = isScroll && revealed ? scrubMs : duration;
+  const activeDelay = isScroll && revealed ? 0 : delay;
+
   const barStyle: CSSProperties = {
     backgroundColor: color ?? "var(--color-accent)",
     transformOrigin: "left center",
-    transform: `scaleX(${expanded ? 1 : 0})`,
-    transition: reduced ? "none" : `transform ${duration}ms ${ease} ${delay}ms`,
+    transform: `scaleX(${fill})`,
+    transition: reduced ? "none" : `transform ${activeMs}ms ${ease} ${activeDelay}ms`,
   };
 
   const wrapperStyle: CSSProperties = {

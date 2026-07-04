@@ -39,7 +39,7 @@ export default function SectionFooter() {
     // literal <footer> tag via cosmetic filters, which made this disappear.
     <div role="contentinfo" className="w-full ">
       {/* ---- Contact section ---- */}
-      <section className="mx-auto flex w-full max-w-360 flex-col gap-16 px-8 py-20 mt-12 md:px-34 lg:flex-row lg:items-center lg:gap-12">
+      <section id="contact" className="mx-auto flex w-full max-w-360 flex-col gap-16 px-8 py-20 mt-12 md:px-34 lg:flex-row lg:items-center lg:gap-12">
         {/* Left: heading + copy */}
         <div className="flex flex-1 flex-col gap-12">
           <Reveal className="flex flex-col gap-3">
@@ -138,7 +138,9 @@ export default function SectionFooter() {
             <div className="flex flex-col items-end gap-2">
               <div className="flex items-center gap-2.5">
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/soon.hackathon"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Instagram"
                   className="transition-opacity hover:opacity-70"
                 >
@@ -146,7 +148,9 @@ export default function SectionFooter() {
                   <img src="/footer/instagram.svg" alt="" className="size-4.5" />
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/huu-an-duc-le/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="LinkedIn"
                   className="transition-opacity hover:opacity-70"
                 >

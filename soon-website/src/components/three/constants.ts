@@ -38,12 +38,3 @@ export const SCRUB_END_FRACTION = 0.3;
  * piecewise (Plan B) mapping noted in scene.tsx instead.
  */
 export const SCRUB_CURVE = 1;
-
-/**
- * Slideshow snap (full-takeover). Sections opt in with `data-snap-section`;
- * once at a section boundary, scroll input is resisted until the accumulated
- * delta passes SNAP_THRESHOLD, then it auto-glides to the next section.
- */
-export const SNAP_THRESHOLD = 220; // accumulated wheel/touch delta (px) to trigger a slide
-export const SNAP_DURATION = 1.0; // glide duration (seconds) for the auto-slide
-export const SNAP_SECTION_ATTR = "data-snap-section";

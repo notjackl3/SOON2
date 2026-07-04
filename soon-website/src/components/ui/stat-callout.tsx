@@ -13,6 +13,7 @@ export function StatCallout({
   label,
   align = "left",
   delay = 0,
+  rootMargin = "0px 0px -8% 0px",
   className,
 }: {
   value: string;
@@ -20,6 +21,10 @@ export function StatCallout({
   align?: "left" | "right";
   /** ms stagger before the count + highlight start. */
   delay?: number;
+  /** The highlight's in-view trigger point. Defaults a touch earlier than the
+   *  Highlight default so stats light up a bit sooner; a positive bottom margin
+   *  (e.g. "0px 0px 15% 0px") fires even before the stat fully enters. */
+  rootMargin?: string;
   /** Positioning utilities applied to the wrapper (e.g. absolute placement). */
   className?: string;
 }) {
@@ -35,7 +40,9 @@ export function StatCallout({
       {/* accent highlight, bleeding up under the number's baseline */}
       <Highlight
         trigger="in-view"
+        once={false}
         delay={delay}
+        rootMargin={rootMargin}
         className="mt-[-0.12em]"
         barClassName="-left-1 -right-1 -top-[0.3em] bottom-0"
       >

@@ -27,8 +27,6 @@ export default function SectionConcept() {
   return (
     <section
       id="soon"
-      data-snap-section
-      data-snap-duration="1.5"
       className="relative w-full overflow-hidden"
     >
       <div className="relative mx-auto w-full max-w-360">
@@ -87,9 +85,17 @@ export default function SectionConcept() {
                   aria-hidden
                   className="h-17.25 w-27.25"
                 />
-                <div className="aspect-461/328 w-full border border-[#b8b8b8] bg-white" />
+                <div className="relative aspect-461/328 w-full overflow-hidden border border-[#b8b8b8] bg-white">
+                  <Image
+                    src="/concept/piccc.png"
+                    alt="Inside the SOON hacker house"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 461px"
+                    className="object-cover"
+                  />
+                </div>
                 <div className="flex w-full items-end justify-between gap-6">
-                  <Stat value="40" label="hackers" delay={0} />
+                  <Stat value="50" label="hackers" delay={0} />
                   <Stat value="36" label="hours" delay={120} />
                   <Stat value="01" label="house" delay={240} />
                 </div>
@@ -102,7 +108,7 @@ export default function SectionConcept() {
             {/* text + floating starblock */}
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
               <Reveal as="p" className="max-w-103.75 text-4 tracking-body text-ink-soft">
-                A 36-hour build experience where 40 top hackers live, eat, and
+                A 36-hour build experience where 50 top hackers live, eat, and
                 build under one roof, collaborating with a group of partner
                 companies to turn bold ideas into real products, while exposing
                 talents.

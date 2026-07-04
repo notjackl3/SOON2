@@ -17,8 +17,15 @@ import {
   UNLIT_BAKED,
 } from "./constants";
 
-/** How quickly the scrub catches up to the scroll position (higher = snappier). */
-const SCRUB_DAMP = 6;
+/**
+ * How quickly the scrub catches up to the scroll position (higher = snappier).
+ *
+ * Lenis already inertially smooths `window.scrollY`, so this is a *second*
+ * smoothing pass — keep it high so the camera tracks the (already-smooth)
+ * scroll tightly instead of lagging behind it by a second easing curve.
+ * Set very high (or bypass the damp for `smoothed = progress`) for a 1:1 lock.
+ */
+const SCRUB_DAMP = 30;
 
 /**
  * Replace every material with an unlit MeshBasicMaterial that shows the baked
@@ -85,7 +92,8 @@ export function Scene() {
     endFraction: SCRUB_END_FRACTION,
   });
   const smoothed = useRef(0);
-  const refFovDeg = useRef(50);
+  const refFovDeg = useRef(0);
+  const fovReady = useRef(false);
 
   const camera = cameras[0] as THREE.PerspectiveCamera | undefined;
   const duration = animations[0]?.duration ?? 0;
@@ -95,10 +103,15 @@ export function Scene() {
     if (UNLIT_BAKED) makeUnlit(scene);
   }, [scene]);
 
-  // Promote the Blender camera to the render camera and remember its lens.
-  useEffect(() => {
+  // Promote the Blender camera to the render camera and capture its *pristine*
+  // vertical FOV. This must run in a layout effect — before the first animation
+  // frame — because `fitCameraToViewport` overwrites `camera.fov` every frame.
+  // If a frame beat this capture, we'd store an already-reshaped fov as the
+  // reference lens and the model would render at the wrong (inconsistent) size.
+  useLayoutEffect(() => {
     if (!camera) return;
     refFovDeg.current = camera.fov; // vertical FOV at the Blender (16:9) aspect
+    fovReady.current = true;
     set({ camera });
     invalidate(); // draw the first frame now that the camera exists
   }, [camera, set, invalidate]);
@@ -127,7 +140,9 @@ export function Scene() {
   }, [actions, mixer]);
 
   useFrame((_, delta) => {
-    if (!camera || duration <= 0) return;
+    // Wait for the pristine reference lens before fitting, so we never scale the
+    // frustum against a stale/default fov.
+    if (!camera || duration <= 0 || !fovReady.current) return;
 
     // Inertial catch-up toward the raw scroll progress for a smooth scrub.
     smoothed.current = THREE.MathUtils.damp(

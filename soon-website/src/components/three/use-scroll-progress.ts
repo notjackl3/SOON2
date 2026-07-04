@@ -32,9 +32,14 @@ export function useScrollProgress(
   const progress = useRef(0);
 
   useEffect(() => {
-    let raf = 0;
-    const update = () => {
-      raf = 0;
+    // The scroll *range* (absolute top of the span → scrollY where progress hits
+    // 1) only depends on layout, so it changes on resize, never on scroll. We
+    // measure it once here and on resize; the per-scroll path is then pure
+    // arithmetic — no getBoundingClientRect (layout read) on the hot path.
+    let spanStart = 0;
+    let range = 0;
+
+    const measure = () => {
       const span = document.getElementById(spanId);
       const end = document.getElementById(endId);
       if (!span || !end) return;
@@ -42,28 +47,33 @@ export function useScrollProgress(
       const scrollY = window.scrollY;
       const vh = window.innerHeight;
 
-      const spanStart = span.getBoundingClientRect().top + scrollY; // absolute top
+      spanStart = span.getBoundingClientRect().top + scrollY; // absolute top
       const endTop = end.getBoundingClientRect().top + scrollY;
       const endScrollable = Math.max(0, end.offsetHeight - vh);
       const endScroll = endTop + endFraction * endScrollable; // scrollY where progress hits 1
+      range = endScroll - spanStart;
+    };
 
-      const range = endScroll - spanStart;
+    // Synchronous: run in the scroll event itself so the value is fresh for the
+    // very next render, with no extra rAF frame of latency.
+    const onScroll = () => {
       progress.current =
         range > 0
-          ? Math.min(1, Math.max(0, (scrollY - spanStart) / range))
+          ? Math.min(1, Math.max(0, (window.scrollY - spanStart) / range))
           : 0;
     };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
+    const onResize = () => {
+      measure();
+      onScroll();
     };
 
-    update();
+    measure();
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onResize);
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener("resize", onResize);
     };
   }, [spanId, endId, endFraction]);
 

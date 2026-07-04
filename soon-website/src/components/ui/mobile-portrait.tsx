@@ -28,7 +28,7 @@ export function MobilePortrait({
       y={12}
     >
       <div className="flex w-17.25 flex-col gap-1.75">
-        <div className="relative aspect-square w-full bg-[#d9d9d9]">
+        <div className="relative aspect-square w-full overflow-hidden bg-[#d9d9d9]">
           {card.image && (
             <Image
               src={card.image}
@@ -82,7 +82,7 @@ export function MobileFounder({
       <p className="absolute right-2.25 top-2.25 text-[7.733px] uppercase tracking-[-0.3093px] text-muted">
         {card.role}
       </p>
-      <p className="absolute left-28.25 top-10.25 w-29 whitespace-pre-wrap text-[6.467px] leading-[7.761px] tracking-[-0.2587px] text-muted">
+      <p className="absolute left-28.25 top-10.25 w-29 whitespace-pre-wrap text-[7.5px] leading-[1.25] tracking-[-0.2587px] text-muted">
         {card.bio}
       </p>
     </Reveal>

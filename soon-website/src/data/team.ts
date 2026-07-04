@@ -14,7 +14,7 @@ export interface TeamMember {
 export const TEAM_COLS = 7;
 export const CELL_W = 138.699; // px per column = standard portrait width
 
-const JACK_BIO = `Starting 2026, I have been to 15 hackathons in a row, won 7, and hosted 3 of them. I know exactly what a great hackathon looks like! I had organized Canada's largest AI hackathon for 1,200+ hackers, a smaller one with 100 hackers, and a case comp!  Creating SOON, I want this to the most memorable hackathon ever. We will create space where hackers can bond organically and show off their best abilities. We help companies' products go to market, enhance their branding, improve their product, and introduce them to the most talented builders in Canada.  I gave my team 2 months to plan this entire hackathon from scratch.`;
+const JACK_BIO = `Starting 2026, I have been to 15 hackathons in a row, won 7, and hosted 3 of them. I know exactly what a great hackathon looks like! I had organized Canada's largest AI hackathon for 1,200+ hackers, a smaller one with 100 hackers, and a case comp!  Creating SOON, I want this to the most memorable hackathon ever. We will create space where hackers can bond organically and show off their best abilities.`;
 
 /**
  * Rows grouped to match the Figma vertical spacing: 12px gap between groups,
