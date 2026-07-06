@@ -89,19 +89,19 @@ export default function SectionStats() {
         src="/stats/cloud-left.png"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute -left-10 top-[64%] hidden w-[clamp(220px,24vw,362px)] lg:block"
+        className="pointer-events-none absolute -left-10 top-[calc(64%+24px)] hidden w-[clamp(220px,24vw,362px)] lg:block"
       />
       <img
         src="/stats/cloud-right.png"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute right-0 top-[74%] hidden w-[clamp(200px,22vw,326px)] lg:block"
+        className="pointer-events-none absolute -right-8 top-[calc(74%+24px)] hidden w-[clamp(200px,22vw,326px)] lg:block"
       />
       <img
         src="/stats/dashed-line.svg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute bottom-[6%] left-[24%] hidden w-[clamp(140px,16vw,230px)] lg:block"
+        className="pointer-events-none absolute bottom-[calc(6%-24px)] left-[24%] hidden w-[clamp(140px,16vw,230px)] lg:block"
       />
 
       <div className="relative z-10 mx-auto w-full max-w-360 px-8 md:px-34">
@@ -135,7 +135,7 @@ export default function SectionStats() {
       <div className="relative z-10 mx-auto mt-16 flex w-full max-w-360 flex-col items-center justify-center gap-8 px-8 md:mt-24 md:flex-row md:gap-24">
         <Reveal
           as="p"
-          className="max-w-[12ch] text-center font-sans text-[clamp(24px,3.5vw,39px)] tracking-tight text-ink-soft md:text-left"
+          className="max-w-[12ch] text-center font-sans text-[clamp(24px,3.5vw,39px)] leading-[1.05] tracking-tight text-ink-soft md:text-left"
         >
           Where our hackers..
         </Reveal>

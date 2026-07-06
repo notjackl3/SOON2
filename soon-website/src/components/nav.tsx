@@ -18,11 +18,13 @@ export default function Nav() {
     <div className="absolute inset-x-0 top-0 z-50 w-full tracking-body">
       <div className="relative flex items-center px-6 pb-4 pt-8 md:px-0">
         {/* Logo — sits in the left gutter (mobile: in flow; desktop: pinned to
-            the gutter so it doesn't shift the evenly-spread links). */}
+            the gutter so it doesn't shift the evenly-spread links). Centered
+            within the same top-8/bottom-4 content band as the links (via my-auto)
+            so it lines up with the link text despite the asymmetric padding. */}
         <a
           href="#top"
           aria-label="Back to top"
-          className="z-50 shrink-0 md:absolute md:left-8 md:top-1/2 md:-translate-y-1/2"
+          className="z-50 shrink-0 md:absolute md:left-8 md:bottom-4 md:top-8 md:my-auto md:h-9 md:w-9"
         >
           <Image
             src="/logo.png"

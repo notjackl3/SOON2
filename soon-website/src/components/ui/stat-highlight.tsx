@@ -14,6 +14,19 @@ import {
 const BASIS = 81.944;
 const em = (px: number) => `${px / BASIS}em`;
 
+/** Vertical offset (px) applied to every cluster so it sits lower on the number. */
+const NUDGE_Y = 16;
+
+/**
+ * Per-stat horizontal squeeze (around the rect's center): narrows the green rect
+ * and pulls the scatter pixels inward, without distorting the square pixels the
+ * way a plain scaleX would. 1 = untouched. Use for stats whose designed rect is
+ * wider than the number (e.g. "70%" reuses the wide 236px rect).
+ */
+const COMPRESS_X: Record<string, number> = {
+  "70%": 0.78,
+};
+
 const PIXEL_BG: Record<PixelColor, string> = {
   ink: "var(--color-ink)",
   accent: "var(--color-accent)",
@@ -40,9 +53,16 @@ export function StatHighlight({ value }: { value: string }) {
   if (!cluster) return null;
   const { w, h, rect, pixels } = cluster;
 
+  // Optional horizontal squeeze around the rect's center (keeps pixels square).
+  const s = COMPRESS_X[value] ?? 1;
+  const cx = rect.x + rect.w / 2;
+  const squeeze = (x: number) => cx + (x - cx) * s;
+  const rectW = rect.w * s;
+  const rectX = cx - rectW / 2;
+
   // Center the green rect on the number wrapper (rect widths already match each
   // number's width in the design), then let the pixels fall where they may.
-  const dx = rect.x + rect.w / 2 - w / 2;
+  const dx = cx - w / 2;
   const dy = rect.y + rect.h / 2 - h / 2;
 
   const container: CSSProperties = {
@@ -50,7 +70,9 @@ export function StatHighlight({ value }: { value: string }) {
     height: em(h),
     left: "50%",
     top: "50%",
-    transform: `translate(calc(-50% - ${em(dx)}), calc(-50% - ${em(dy)}))`,
+    // NUDGE_Y drops the cluster a touch so the highlight sits behind the number
+    // rather than riding high on it.
+    transform: `translate(calc(-50% - ${em(dx)}), calc(-50% - ${em(dy)} + ${NUDGE_Y}px))`,
   };
 
   return (
@@ -63,9 +85,9 @@ export function StatHighlight({ value }: { value: string }) {
       <span
         className="absolute origin-left scale-x-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 motion-reduce:transition-none"
         style={{
-          left: em(rect.x),
+          left: em(rectX),
           top: em(rect.y),
-          width: em(rect.w),
+          width: em(rectW),
           height: em(rect.h),
           backgroundColor: "var(--color-accent)",
         }}
@@ -74,9 +96,9 @@ export function StatHighlight({ value }: { value: string }) {
       {pixels.map((p, i) => (
         <span
           key={i}
-          className="absolute scale-50 opacity-0 transition-[opacity,transform] duration-150 ease-out group-hover:scale-100 group-hover:opacity-100 motion-reduce:transition-none"
+          className="absolute opacity-0 transition-opacity duration-150 ease-out group-hover:opacity-100 motion-reduce:transition-none"
           style={{
-            left: em(p.x),
+            left: em(squeeze(p.x)),
             top: em(p.y),
             width: em(PIXEL_SIZE),
             height: em(PIXEL_SIZE),
