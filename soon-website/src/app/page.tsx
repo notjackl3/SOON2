@@ -5,6 +5,7 @@ import SectionSpill from "@/components/sections/spill";
 import SectionRecap from "@/components/sections/recap";
 import SectionGuests from "@/components/sections/guests";
 import SectionSponsors from "@/components/sections/sponsors";
+import SectionStats from "@/components/sections/stats";
 import SectionTeam from "@/components/sections/team";
 import SectionFaq from "@/components/sections/faq";
 import SectionFooter from "@/components/sections/footer";
@@ -32,6 +33,8 @@ export default function Home() {
       <SectionGuests />
 
       <SectionSponsors />
+
+      <SectionStats />
 
       <SectionTeam />
 

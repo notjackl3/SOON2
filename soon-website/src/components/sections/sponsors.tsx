@@ -3,12 +3,12 @@ import { Reveal } from "@/components/ui/reveal";
 
 export default function SectionSponsors() {
   return (
-    <section id="sponsors" className="relative w-full overflow-x-clip bg-white py-20 md:py-28">
+    <section id="sponsors" className="relative w-full bg-white py-20 md:py-28">
       {/* Decorative bubble cluster — anchored to the right edge. The rightmost
           artwork is the colored circles (they reach the full viewBox width), so
           it sits flush to the edge with no outward push: any translateX would
           shove those circles under the section's overflow-hidden and clip them. */}
-      <Reveal
+      <Reveal 
         as="img"
         x={70}
         y={0}

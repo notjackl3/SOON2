@@ -9,7 +9,8 @@ export type CornerSize = "sm" | "lg";
 
 const ALL_CORNERS: BoxCorner[] = ["tl", "tr", "bl", "br"];
 
-const CORNER_SIZE: Record<CornerSize, string> = {
+/** Corner-square Tailwind sizes, shared with the <BoundingGrid> organism. */
+export const CORNER_SIZE: Record<CornerSize, string> = {
   sm: "size-1.5",
   lg: "size-[9.5px]",
 };
