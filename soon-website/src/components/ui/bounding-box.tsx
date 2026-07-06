@@ -4,8 +4,9 @@ import { cn } from "@/lib/utils";
 
 export type BoxCorner = "tl" | "tr" | "bl" | "br";
 
-/** Corner-square sizes: `sm` is the vista size, `lg` matches the FAQ accordion. */
-export type CornerSize = "sm" | "lg";
+/** Corner-square sizes: `sm` is the vista size, `lg` matches the FAQ accordion,
+ *  `xl` matches the past-sponsors map "pin" squares (~15px in stage space). */
+export type CornerSize = "sm" | "lg" | "xl";
 
 const ALL_CORNERS: BoxCorner[] = ["tl", "tr", "bl", "br"];
 
@@ -13,6 +14,7 @@ const ALL_CORNERS: BoxCorner[] = ["tl", "tr", "bl", "br"];
 export const CORNER_SIZE: Record<CornerSize, string> = {
   sm: "size-1.5",
   lg: "size-[9.5px]",
+  xl: "size-[15px]",
 };
 
 /** Square centered exactly on each box corner (matches the vista frame). */

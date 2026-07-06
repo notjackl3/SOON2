@@ -134,3 +134,27 @@ body {
     transition: none !important;
   }
 }
+
+/* Past-sponsors cards "flicker in" on first load. Reduced motion is handled in
+   JS (the animation simply isn't applied), so no media guard needed here. */
+@keyframes sponsor-flicker {
+  0%,
+  25% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  65% {
+    opacity: 1;
+  }
+  78% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

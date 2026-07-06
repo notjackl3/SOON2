@@ -5,6 +5,7 @@ import SectionSpill from "@/components/sections/spill";
 import SectionRecap from "@/components/sections/recap";
 import SectionGuests from "@/components/sections/guests";
 import SectionSponsors from "@/components/sections/sponsors";
+import SectionPastSponsors from "@/components/sections/past-sponsors";
 import SectionStats from "@/components/sections/stats";
 import SectionTeam from "@/components/sections/team";
 import SectionFaq from "@/components/sections/faq";
@@ -14,7 +15,7 @@ import { SCROLL_SPAN_ID } from "@/components/three/constants";
 
 export default function Home() {
   return (
-    <main className="relative flex flex-1 flex-col">
+    <main className="relative flex flex-1 flex-col overflow-x-clip">
       {/* Fixed WebGL canvas pinned behind everything. */}
       <SceneBackground />
 
@@ -33,6 +34,8 @@ export default function Home() {
       <SectionGuests />
 
       <SectionSponsors />
+
+      <SectionPastSponsors />
 
       <SectionStats />
 
