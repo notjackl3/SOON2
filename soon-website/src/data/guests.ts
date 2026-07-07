@@ -109,3 +109,50 @@ export const BG_VECTORS = [
   { src: "/guests/vec-3.svg", x: 905, y: 55, w: 209, h: 219 },
   { src: "/guests/vec-union.svg", x: 1300, y: 300, w: 120, h: 90 },
 ];
+
+// ---------------------------------------------------------------------------
+// Mobile layout (Figma node 256:3). Its own fixed stage — a vertical stagger of
+// the same six people, connected corner-to-corner, scaled to the screen width.
+// ---------------------------------------------------------------------------
+export const MOBILE_STAGE_W = 390;
+export const MOBILE_STAGE_H = 986;
+export const MOBILE_PIC = 125.2; // picture size (square)
+
+export interface MobileLayout {
+  id: string; // → PEOPLE
+  x: number; // picture top-left, mobile-stage px
+  y: number;
+  corners: Corner[]; // which corners show a square
+}
+
+export const MOBILE_LAYOUT: MobileLayout[] = [
+  { id: "barry", x: 264.95, y: 138.23, corners: ["bl"] }, // bl == robert tr (shared, drawn once)
+  { id: "robert", x: 139.75, y: 263.42, corners: ["tl"] },
+  { id: "nikos", x: 14.96, y: 443.02, corners: ["tl", "tr", "bl"] },
+  { id: "arhum", x: 264.95, y: 443.02, corners: ["bl"] },
+  { id: "jen", x: 222.11, y: 620.04, corners: ["tl", "bl", "br"] },
+  { id: "ryan", x: 44.27, y: 745.24, corners: ["tl", "br"] },
+];
+
+const MB = 568.22; // nikos bottom / row y for the left-edge stub
+export const MOBILE_EDGES: Edge[] = [
+  { from: c("robert", "tl"), to: c("nikos", "tl") },
+  { from: c("nikos", "tr"), to: c("arhum", "bl") },
+  { from: c("arhum", "bl"), to: c("jen", "tl") },
+  { from: c("jen", "bl"), to: c("ryan", "br") },
+  // Horizontal stubs to the screen edge:
+  { from: c("nikos", "bl"), to: e(0, MB) },
+  { from: c("ryan", "tl"), to: e(0, 745.24) },
+  { from: c("jen", "br"), to: e(MOBILE_STAGE_W, 745.24) },
+];
+
+/** Mobile decorative SVGs (clouds + colored pixel clusters), stage px. */
+export const MOBILE_DECOR = [
+  { src: "/guests/mobile-pixels-a.svg", x: 202.75, y: 23.67, w: 79.41, h: 52.65, rotate: 0 },
+  { src: "/guests/mobile-cloud-b.svg", x: -1.22, y: 154.28, w: 154.26, h: 80.72, rotate: 0 },
+  { src: "/guests/mobile-pixels-b.svg", x: 244.74, y: 338.64, w: 115.58, h: 120.75, rotate: 0 },
+  { src: "/guests/mobile-cloud-a.svg", x: 42.8, y: 640.34, w: 161.08, h: 115.64, rotate: 0 },
+  // Native 34.14×18.73, rotated 90° (vertical); positioned so the rotated box
+  // lands at Figma's (357.99, 606.21).
+  { src: "/guests/mobile-cloud-c.svg", x: 350.29, y: 613.92, w: 34.14, h: 18.73, rotate: 90 },
+];

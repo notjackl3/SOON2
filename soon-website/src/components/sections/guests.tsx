@@ -1,17 +1,28 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 import { ShapeGridEdge } from "@/components/shapes/shape-grid-edge";
+import { BoundingBox } from "@/components/ui/bounding-box";
+import { ScaledStage } from "@/components/ui/scaled-stage";
 import { Vista } from "@/components/ui/vista";
 import {
   BG_VECTORS,
   EDGES,
+  MOBILE_DECOR,
+  MOBILE_EDGES,
+  MOBILE_LAYOUT,
+  MOBILE_PIC,
+  MOBILE_STAGE_H,
+  MOBILE_STAGE_W,
   PEOPLE,
   PIC,
   STAGE_H,
   STAGE_W,
+  type Corner,
   type EdgeEnd,
+  type Person,
 } from "@/data/guests";
 import {
   cornerAnchor,
@@ -57,6 +68,59 @@ function FeedbackHeading({ className }: { className?: string }) {
     <p className={className}>
       real <span className="font-display italic">feedback</span>.
     </p>
+  );
+}
+
+// --- Mobile stage helpers ---------------------------------------------------
+const PERSON_BY_ID: Record<string, Person> = {};
+PEOPLE.forEach((p) => (PERSON_BY_ID[p.id] = p));
+const MLAYOUT_BY_ID: Record<string, (typeof MOBILE_LAYOUT)[number]> = {};
+MOBILE_LAYOUT.forEach((m) => (MLAYOUT_BY_ID[m.id] = m));
+
+/** A mobile portrait corner (picture corner) in mobile-stage px. */
+function mCorner(id: string, corner: Corner) {
+  const m = MLAYOUT_BY_ID[id];
+  return {
+    x: m.x + (corner === "tr" || corner === "br" ? MOBILE_PIC : 0),
+    y: m.y + (corner === "bl" || corner === "br" ? MOBILE_PIC : 0),
+  };
+}
+const mEnd = (end: EdgeEnd) =>
+  end.kind === "edge" ? { x: end.x, y: end.y } : mCorner(end.id, end.corner);
+
+/** Mobile portrait: framed photo (corner squares via BoundingBox) + name/role. */
+function MobileGuestCard({
+  person,
+  corners,
+}: {
+  person: Person;
+  corners: Corner[];
+}) {
+  return (
+    <div className="flex flex-col gap-1">
+      <BoundingBox
+        corners={corners}
+        cornerSize="sm"
+        color="var(--color-surface)"
+        className="relative aspect-square w-full"
+      >
+        <Image
+          src={person.image}
+          alt={person.name}
+          fill
+          sizes="130px"
+          className="object-cover"
+        />
+      </BoundingBox>
+      <div className="flex flex-col gap-0.5">
+        <p className="font-display text-[9.66px] font-semibold leading-none tracking-[0.02em] text-ink-soft">
+          {person.name}
+        </p>
+        <p className="text-[6.67px] uppercase leading-snug tracking-tight text-muted">
+          {person.role}
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -209,23 +273,76 @@ export default function SectionGuests() {
       {/* Animated shape grid, faded in from the left edge (desktop only) */}
       <ShapeGridEdge side="left" />
 
-      {/* Mobile: static stacked grid, no physics/lines */}
-      <div className="px-8 py-14 md:hidden">
-        <FeedbackHeading className="font-sans text-[clamp(40px,12vw,72px)] font-medium leading-none tracking-tight text-ink" />
-        <p className="mt-3 text-[11px] uppercase tracking-body text-muted">
-          Past judges and speakers
-        </p>
-        <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10">
-          {PEOPLE.map((p) => (
-            <Vista
-              key={p.id}
-              name={p.name}
-              role={p.role}
-              image={p.image}
-              corners={p.corners}
+      {/* Mobile: staggered portraits connected corner-to-corner (Figma 256:3) */}
+      <div className="py-6 md:hidden">
+        <ScaledStage width={MOBILE_STAGE_W} height={MOBILE_STAGE_H}>
+          {/* Decorative clouds + pixel clusters (back) */}
+          {MOBILE_DECOR.map((d) => (
+            // eslint-disable-next-line @next/next/no-img-element -- decorative SVG
+            <img
+              key={d.src}
+              src={d.src}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute"
+              style={{
+                left: d.x,
+                top: d.y,
+                width: d.w,
+                height: d.h,
+                transform: d.rotate ? `rotate(${d.rotate}deg)` : undefined,
+              }}
             />
           ))}
-        </div>
+
+          {/* Header */}
+          <div
+            className="absolute"
+            style={{ left: 44.27, top: 72.71, width: 234.47 }}
+          >
+            <FeedbackHeading className="font-sans text-[34.418px] font-medium leading-none tracking-tight text-ink" />
+            <p className="mt-0.75 text-center text-[6.48px] uppercase tracking-tight text-muted">
+              Past judges and speakers
+            </p>
+          </div>
+
+          {/* Connector lines (behind the portraits) */}
+          <svg
+            className="absolute inset-0 overflow-visible"
+            width={MOBILE_STAGE_W}
+            height={MOBILE_STAGE_H}
+            viewBox={`0 0 ${MOBILE_STAGE_W} ${MOBILE_STAGE_H}`}
+            fill="none"
+            aria-hidden
+          >
+            {MOBILE_EDGES.map((edge, i) => {
+              const p1 = mEnd(edge.from);
+              const p2 = mEnd(edge.to);
+              return (
+                <line
+                  key={i}
+                  x1={p1.x}
+                  y1={p1.y}
+                  x2={p2.x}
+                  y2={p2.y}
+                  stroke="var(--color-line)"
+                  strokeWidth={0.6}
+                />
+              );
+            })}
+          </svg>
+
+          {/* Portraits */}
+          {MOBILE_LAYOUT.map((m) => (
+            <div
+              key={m.id}
+              className="absolute"
+              style={{ left: m.x, top: m.y, width: MOBILE_PIC }}
+            >
+              <MobileGuestCard person={PERSON_BY_ID[m.id]} corners={m.corners} />
+            </div>
+          ))}
+        </ScaledStage>
       </div>
 
       {/* Desktop: floating stage. pointer-events-none so hovers fall through to
