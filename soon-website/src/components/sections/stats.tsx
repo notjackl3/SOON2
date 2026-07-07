@@ -1,9 +1,9 @@
 import { type ReactNode } from "react";
 
 import { BoundingBox } from "@/components/ui/bounding-box";
-import { BoundingGrid } from "@/components/ui/bounding-grid";
 import { Reveal } from "@/components/ui/reveal";
 import { StatHighlight } from "@/components/ui/stat-highlight";
+import { StatsLetterGrid } from "@/components/sections/stats-letter-grid";
 
 /**
  * "A glimpse at what we're capable of" — a grid of achievement stats followed by
@@ -47,9 +47,6 @@ const ROW_TWO: Stat[] = [
   },
   { value: "2,000+", label: "Photos and Videos" },
 ];
-
-/** H A V E / B E E N, laid out as a 4×2 grid of bounding-box cells. */
-const LETTERS = ["H", "A", "V", "E", "B", "E", "E", "N"];
 
 /** Big Playfair number stacked over an uppercase Inter label, framed by the box. */
 function StatCard({ value, label }: Stat) {
@@ -140,21 +137,7 @@ export default function SectionStats() {
           Where our hackers..
         </Reveal>
         <Reveal className="w-[clamp(260px,42vw,492px)]">
-          <BoundingGrid
-            cols={4}
-            rows={2}
-            cornerSize="lg"
-            cellClassName="flex aspect-square items-center justify-center"
-          >
-            {LETTERS.map((letter, i) => (
-              <span
-                key={i}
-                className="font-display text-[clamp(48px,7vw,94px)] leading-none tracking-tight text-ink"
-              >
-                {letter}
-              </span>
-            ))}
-          </BoundingGrid>
+          <StatsLetterGrid />
         </Reveal>
       </div>
     </section>

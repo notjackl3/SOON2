@@ -133,6 +133,11 @@ body {
     transform: none !important;
     transition: none !important;
   }
+  /* Letter-grid flip cards (see stats-letter-grid.tsx): still flip to reveal the
+     logo, just without the animated rotation. */
+  [data-flip] {
+    transition: none !important;
+  }
 }
 
 /* Past-sponsors cards "flicker in" on first load. Reduced motion is handled in
