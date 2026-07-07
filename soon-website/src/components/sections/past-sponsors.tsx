@@ -142,11 +142,11 @@ export default function SectionPastSponsors() {
   };
 
   return (
-    <section id="past-sponsors" className="relative w-full overflow-hidden bg-white">
-      {/* ---------- Desktop: the map stage, fit to one viewport ---------- */}
+    <section id="past-sponsors" className="relative w-full overflow-x-clip bg-white">
+      {/* ---------- Desktop: the map stage, fit to width ---------- */}
       <div
         ref={desktopRef}
-        className="relative hidden h-dvh overflow-hidden md:block"
+        className="relative hidden md:block"
       >
         <FitStage>
             {/* Decorative vectors (back). The arc draws itself on; the rest are
@@ -363,14 +363,25 @@ function QuoteBody({ sponsor }: { sponsor: Sponsor }) {
   );
 }
 
-/** The decorative dashed arc, drawn on (stroke-dashoffset) when active. */
+/** Corner-pin-style squares (white fill + line border, ~15px like the BoundingBox
+ *  "xl" corners) at each end of the arc: the start (top-right, 555.065, 0.62) and
+ *  the terminus (bottom-left, 9.2, 1086.45). `delay` matches each end to when the
+ *  arc reaches it — the start as it begins drawing, the end once it finishes. */
+const ARC_END_SQUARES = [
+  { cx: 555.065, cy: 0.618751, delay: 400 },
+  { cx: 9.20369, cy: 1086.45, delay: 2000 },
+];
+const ARC_SQUARE_SIZE = 15;
+
+/** The decorative dashed arc, drawn on (stroke-dashoffset) when active, with a
+ *  corner-pin square that flickers in at each end as the arc reaches it. */
 function AnimatedArc({ active, reduced }: { active: boolean; reduced: boolean }) {
   return (
     <svg
       viewBox="0 0 555.294 1086.52"
       fill="none"
       preserveAspectRatio="none"
-      className="h-full w-full"
+      className="h-full w-full overflow-visible"
     >
       <path
         d="M555.065 0.618751C221.265 124.321 -51.6657 544.516 9.20369 1086.45"
@@ -383,28 +394,45 @@ function AnimatedArc({ active, reduced }: { active: boolean; reduced: boolean })
           transition: reduced ? undefined : "stroke-dashoffset 1800ms ease 300ms",
         }}
       />
+      {ARC_END_SQUARES.map((sq, i) => (
+        <rect
+          key={i}
+          x={sq.cx - ARC_SQUARE_SIZE / 2}
+          y={sq.cy - ARC_SQUARE_SIZE / 2}
+          width={ARC_SQUARE_SIZE}
+          height={ARC_SQUARE_SIZE}
+          fill="white"
+          stroke="var(--color-line)"
+          strokeWidth={1.32}
+          style={{
+            opacity: active ? 1 : 0,
+            transition: reduced ? undefined : `opacity 300ms ease ${sq.delay}ms`,
+          }}
+        />
+      ))}
     </svg>
   );
 }
 
 /**
- * Scales the fixed STAGE_W×STAGE_H stage to *contain* within its parent (fits
- * both width and height, capped at 1×, centered) so the whole composition fits
- * one viewport. The map bleeds past the 1200 frame and is clipped — as in Figma.
+ * Scales the fixed STAGE_W×STAGE_H stage to fit its parent's *width* (capped at
+ * 1×, centered when the parent is wider than the stage). The wrapper takes the
+ * scaled stage height so the section grows to fit the whole composition rather
+ * than clipping it vertically; horizontal bleed past the stage is clipped by the
+ * section's `overflow-x-clip`.
  */
 function FitStage({ children }: { children: ReactNode }) {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const [t, setT] = useState({ scale: 1, x: 0, y: 0 });
+  const [t, setT] = useState({ scale: 1, x: 0 });
 
   useEffect(() => {
     const wrap = wrapRef.current;
     if (!wrap) return;
     const compute = () => {
       const w = wrap.clientWidth;
-      const h = wrap.clientHeight;
-      if (!w || !h) return;
-      const scale = Math.min(w / STAGE_W, h / STAGE_H, 1);
-      setT({ scale, x: (w - STAGE_W * scale) / 2, y: (h - STAGE_H * scale) / 2 });
+      if (!w) return;
+      const scale = Math.min(w / STAGE_W, 1);
+      setT({ scale, x: (w - STAGE_W * scale) / 2 });
     };
     compute();
     const ro = new ResizeObserver(compute);
@@ -413,13 +441,13 @@ function FitStage({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <div ref={wrapRef} className="absolute inset-0">
+    <div ref={wrapRef} className="relative w-full" style={{ height: STAGE_H * t.scale }}>
       <div
         className="absolute left-0 top-0 origin-top-left"
         style={{
           width: STAGE_W,
           height: STAGE_H,
-          transform: `translate(${t.x}px, ${t.y}px) scale(${t.scale})`,
+          transform: `translateX(${t.x}px) scale(${t.scale})`,
         }}
       >
         {children}

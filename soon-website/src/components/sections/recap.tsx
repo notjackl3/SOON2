@@ -55,7 +55,7 @@ export default function SectionRecap() {
           src="/recap/top-vectors.svg"
           alt=""
           aria-hidden
-          className="pointer-events-none absolute left-0 top-0 hidden w-[clamp(160px,17vw,256px)] md:block"
+          className="pointer-events-none hidden h-auto w-full md:block"
         />
         <Reveal as="h2" className="mt-4 font-sans text-[clamp(36px,8vw,80px)] font-medium leading-none tracking-tight text-ink">
           Last time, we had&hellip;

@@ -41,15 +41,15 @@ export interface Edge {
 
 // --- Standalone cards (rendered generically) --------------------------------
 export const SPONSORS: Sponsor[] = [
-  { id: "composio", city: "San Francisco", logo: "/past-sponsors/composio.png", x: 395.11, y: 797.62, w: 204.04, h: 91.95, kind: "logo" },
-  { id: "althra", city: "Vancouver", logo: "/past-sponsors/althra.png", x: 397.41, y: 540.6, w: 128.46, h: 128.46, kind: "logo" },
-  { id: "cloudinary", city: "San Jose", logo: "/past-sponsors/cloudinary.png", x: 627.86, y: 981.29, w: 128.46, h: 128.46, kind: "logo" },
-  { id: "polarity", city: "Waterloo", logo: "/past-sponsors/polarity.png", x: 712.1, y: 323.3, w: 205.24, h: 105.24, kind: "logo" },
-  { id: "backboard", city: "Ottawa", logo: "/past-sponsors/backboard.png", x: 968.21, y: 419.23, w: 224.92, h: 85.14, kind: "logo" },
+  { id: "composio", city: "San Francisco", logo: "/past-sponsors/sponsor-companies/composio.png", x: 395.11, y: 797.62, w: 204.04, h: 91.95, kind: "logo" },
+  { id: "althra", city: "Vancouver", logo: "/past-sponsors/sponsor-companies/althra.png", x: 397.41, y: 540.6, w: 128.46, h: 128.46, kind: "logo" },
+  { id: "cloudinary", city: "San Jose", logo: "/past-sponsors/sponsor-companies/cloudinary.png", x: 627.86, y: 981.29, w: 128.46, h: 128.46, kind: "logo" },
+  { id: "polarity", city: "Waterloo", logo: "/past-sponsors/sponsor-companies/polarity.png", x: 712.1, y: 323.3, w: 205.24, h: 105.24, kind: "logo" },
+  { id: "backboard", city: "Ottawa", logo: "/past-sponsors/sponsor-companies/backboard.png", x: 968.21, y: 419.23, w: 224.92, h: 85.14, kind: "logo" },
   {
     id: "chatforce",
     city: "Toronto",
-    logo: "/past-sponsors/chatforce.png",
+    logo: "/past-sponsors/sponsor-companies/chatforce.png",
     x: 1088.21,
     y: 749.4,
     w: 292.41,
@@ -65,9 +65,9 @@ export const SPONSORS: Sponsor[] = [
 // aucctus|cystack render as a 2×1 BoundingGrid; P is a box that omits its shared
 // bottom-left corner. The whole cluster shares ONE connector (see CLUSTER_EDGE).
 export const CLUSTER = {
-  aucctus: { id: "aucctus", city: "Toronto", logo: "/past-sponsors/aucctus.png", x: 1171.63, y: 579.69, w: 128.46, h: 128.46 },
-  cystack: { id: "cystack", city: "Toronto", logo: "/past-sponsors/cystack.png", x: 1300.09, y: 579.69, w: 128.46, h: 128.46 },
-  polar: { id: "polar", city: "Toronto", logo: "/past-sponsors/polar.png", x: 1428.56, y: 450.87, w: 128.46, h: 128.46 },
+  aucctus: { id: "aucctus", city: "Toronto", logo: "/past-sponsors/sponsor-companies/aucctus.png", x: 1171.63, y: 579.69, w: 128.46, h: 128.46 },
+  cystack: { id: "cystack", city: "Toronto", logo: "/past-sponsors/sponsor-companies/cystack.png", x: 1300.09, y: 579.69, w: 128.46, h: 128.46 },
+  polar: { id: "polar", city: "Toronto", logo: "/past-sponsors/sponsor-companies/polar.png", x: 1428.56, y: 450.87, w: 128.46, h: 128.46 },
 };
 
 export const AREAS: Area[] = [
