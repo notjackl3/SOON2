@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { BoundingGrid } from "@/components/ui/bounding-grid";
 import { cn } from "@/lib/utils";
@@ -37,6 +37,26 @@ export function StatsLetterGrid() {
       return next;
     });
 
+  // Idle attractor: with nothing hovered/tapped, flip one random cell at a
+  // time (never the same twice in a row) to hint the grid is interactive.
+  const [autoIdx, setAutoIdx] = useState<number | null>(null);
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    let prev = -1;
+    const flip = () => {
+      let next = Math.floor(Math.random() * CELLS.length);
+      if (next === prev) next = (next + 1) % CELLS.length;
+      prev = next;
+      setAutoIdx(next);
+      timer = setTimeout(() => {
+        setAutoIdx(null);
+        timer = setTimeout(flip, 900); // pause with all cells resting
+      }, 1400); // dwell time on the flipped cell
+    };
+    timer = setTimeout(flip, 1200);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <BoundingGrid
       cols={4}
@@ -53,7 +73,7 @@ export function StatsLetterGrid() {
           data-flip
           className={cn(
             "absolute inset-0 cursor-pointer bg-transparent transform-3d transition-transform duration-500 group-hover:rotate-y-180",
-            open.has(i) && "rotate-y-180",
+            (open.has(i) || autoIdx === i) && "rotate-y-180",
           )}
         >
           {/* Front — letter */}
