@@ -296,7 +296,7 @@ export default function SectionPastSponsors() {
         <h2 className="font-sans text-[clamp(40px,11vw,64px)] font-medium leading-none tracking-tight text-ink">
           Our past <span className="font-display italic">sponsors</span>
         </h2>
-        <p className="mt-4 font-sans text-[clamp(16px,4.5vw,20px)] tracking-tight text-ink-soft">
+        <p className="mt-4 font-sans text-[clamp(16px,1.4vw,18px)] tracking-body text-ink-soft">
           Where will you take us next?
         </p>
 

@@ -107,7 +107,7 @@ export default function SectionConcept() {
 
             {/* text + floating starblock */}
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-              <Reveal as="p" className="relative z-10 max-w-103.75 text-4 tracking-body text-ink-soft">
+              <Reveal as="p" className="relative z-10 max-w-103.75 text-[clamp(16px,1.4vw,18px)] tracking-body text-ink-soft">
                 A 36-hour build experience where 50 top hackers live, eat, and
                 build under one roof, collaborating with a group of partner
                 companies to turn bold ideas into real products. Connect with

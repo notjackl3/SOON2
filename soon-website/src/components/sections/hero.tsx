@@ -44,7 +44,7 @@ export default function SectionHero() {
             <div className="flex flex-col gap-2">
               {/* eyebrow + Something */}
               <div className="flex flex-col gap-1">
-                <Reveal as="p" className="px-1.5 text-lg tracking-body text-muted">
+                <Reveal as="p" className="px-1.5 text-[clamp(16px,1.4vw,18px)] tracking-body text-muted">
                   Canada&rsquo;s best builders. All making
                 </Reveal>
                 <Reveal as="h1" delay={90} className="font-display tracking-body text-[clamp(64px,10vw,120px)] leading-none text-black">
@@ -84,7 +84,7 @@ export default function SectionHero() {
                   <CornerBadge>Location: TBA</CornerBadge>
                 </Reveal>
               </div>
-              <p className="max-w-60 text-lg tracking-body text-muted">
+              <p className="max-w-60 text-[clamp(16px,1.4vw,18px)] tracking-body text-muted">
                 Say goodbye to conventional hackathons.
               </p>
             </Reveal>

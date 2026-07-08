@@ -35,7 +35,7 @@ export default function SectionSponsors() {
 
         <div className="relative flex flex-col gap-8 md:flex-row md:items-stretch md:gap-10">
           {/* Heading — hugs its text so the group sits snug to its right */}
-          <Reveal as="h2" className="w-fit font-sans text-[clamp(44px,7.5vw,80px)] font-medium leading-none tracking-tight text-ink">
+          <Reveal as="h2" className="w-fit font-sans text-[clamp(44px,8vw,80px)] font-medium leading-none tracking-tight text-ink">
             Sponsors
             <br />
             coming <span className="font-display italic">SOON</span>
@@ -46,7 +46,7 @@ export default function SectionSponsors() {
             <PartnerButton />
             {/* Hard break keeps "know the names." together on the second line
                 at every size, instead of leaving "names." stranded alone. */}
-            <p className="max-w-52 text-[clamp(16px,1.6vw,20px)] tracking-body text-ink-soft">
+            <p className="max-w-52 text-[clamp(16px,1.4vw,18px)] tracking-body text-ink-soft">
               but trust us, you&rsquo;ll
               <br />
               know the names.

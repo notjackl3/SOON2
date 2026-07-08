@@ -52,10 +52,11 @@ function Field({
 }
 
 /**
- * Contact form. Mirrors the old SOON sponsor page: posts {name, company, email,
- * availability} to the `notify-meeting` Supabase edge function, which stores the
- * request and emails uoft.soon@gmail.com via Resend. Client component because it
- * owns the form state + submit lifecycle.
+ * General contact / feedback form. Posts {name, company, email, availability}
+ * to the `notify-meeting` Supabase edge function, which stores the request and
+ * emails uoft.soon@gmail.com via Resend. (The `availability` key carries the
+ * free-text message — kept for backend compatibility.) Client component because
+ * it owns the form state + submit lifecycle.
  */
 export default function ContactForm() {
   const [form, setForm] = useState<Fields>({ name: "", company: "", email: "", info: "" });
@@ -70,7 +71,6 @@ export default function ContactForm() {
   function validate(): FieldErrors {
     const e: FieldErrors = {};
     if (!form.name.trim()) e.name = "Required";
-    if (!form.company.trim()) e.company = "Required";
     if (!form.email.trim()) e.email = "Required";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email";
     if (!form.info.trim()) e.info = "Required";
@@ -115,14 +115,14 @@ export default function ContactForm() {
     >
       <div className="flex flex-col gap-8 lg:flex-row lg:gap-4">
         <Field label="Name" name="name" value={form.name} error={errors.name} onChange={set} />
-        <Field label="Company" name="company" value={form.company} error={errors.company} onChange={set} />
+        <Field label="Company (optional)" name="company" value={form.company} error={errors.company} onChange={set} />
       </div>
 
       <Field label="Email" name="email" type="email" value={form.email} error={errors.email} onChange={set} />
 
       <div className="flex flex-col gap-1">
         <label htmlFor="info" className="text-sm uppercase text-muted">
-          Availability and Additional Information
+          Message
           {errors.info ? <span className="ml-2 normal-case text-red-500">{errors.info}</span> : null}
         </label>
         <textarea
@@ -140,7 +140,7 @@ export default function ContactForm() {
           disabled={status === "submitting"}
           className="self-start rounded-[18px] border px-8 py-2 text-sm disabled:opacity-60"
         >
-          {status === "submitting" ? "Sending…" : "I’m in"}
+          {status === "submitting" ? "Sending…" : "Send"}
         </Button>
         {status === "done" ? (
           <p className="text-sm text-ink-soft">Thanks &mdash; we&rsquo;ll be in touch.</p>

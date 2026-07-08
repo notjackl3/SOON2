@@ -104,7 +104,7 @@ export default function SectionStats() {
       <div className="relative z-10 mx-auto w-full max-w-360 px-8 md:px-34">
         <Reveal
           as="h2"
-          className="max-w-3xl font-sans text-[clamp(36px,7.5vw,80px)] font-medium leading-none tracking-tight text-ink"
+          className="max-w-3xl font-sans text-[clamp(36px,8vw,80px)] font-medium leading-none tracking-tight text-ink"
         >
           A glimpse at what we&rsquo;re capable of:
         </Reveal>

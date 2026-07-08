@@ -10,7 +10,7 @@ import { ShapeGridEdge } from "@/components/shapes/shape-grid-edge";
  */
 export default function SectionFaq() {
   return (
-    <section id="faq" className="relative w-full overflow-x-clip bg-white py-20 md:h-dvh md:py-28">
+    <section id="faq" className="relative w-full overflow-x-clip bg-white py-20 md:min-h-dvh md:py-28">
       {/* Animated shape grid, faded in from the right edge (desktop only) */}
       <ShapeGridEdge side="right" />
 
@@ -71,7 +71,7 @@ export default function SectionFaq() {
           the accordion re-enables them on itself. */}
       <div className="pointer-events-none relative mx-auto w-full max-w-360 px-8 md:px-34">
         {/* Heading — "FAQ" with the Q in display italic and an accent swipe */}
-        <Reveal as="h2" className="mb-10 w-fit font-sans text-[clamp(52px,9vw,80px)] font-medium leading-none tracking-tight text-ink md:mb-14">
+        <Reveal as="h2" className="mb-10 w-fit font-sans text-[clamp(52px,8vw,80px)] font-medium leading-none tracking-tight text-ink md:mb-14">
           <Highlight
             trigger="in-view"
             barClassName="inset-x-[-0.06em] bottom-[0.1em] top-[0.46em]"
