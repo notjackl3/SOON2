@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 
 type Fields = {
   name: string;
@@ -86,7 +86,7 @@ export default function ContactForm() {
     }
     setStatus("submitting");
     try {
-      const { error } = await supabase.functions.invoke("notify-meeting", {
+      const { error } = await getSupabase().functions.invoke("notify-meeting", {
         body: {
           name: form.name.trim(),
           company: form.company.trim(),
