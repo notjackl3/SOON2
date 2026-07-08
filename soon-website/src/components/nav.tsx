@@ -3,6 +3,16 @@
 import { useState } from "react";
 import Image from "next/image";
 
+import { scrollToId } from "@/lib/lenis";
+
+/** Intercept an in-page anchor so it glides via Lenis instead of jumping. Keeps
+ *  the href intact for right-click/open-in-tab, no-JS, and URL-hash semantics. */
+function smoothTo(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+  if (!href.startsWith("#")) return;
+  e.preventDefault();
+  scrollToId(href.slice(1));
+}
+
 const LINKS = [
   { label: "About", href: "#soon" },
   { label: "Recap", href: "#recap" },
@@ -23,6 +33,7 @@ export default function Nav() {
             so it lines up with the link text despite the asymmetric padding. */}
         <a
           href="#top"
+          onClick={(e) => smoothTo(e, "#top")}
           aria-label="Back to top"
           className="z-50 shrink-0 md:absolute md:left-8 md:bottom-4 md:top-8 md:my-auto md:h-9 md:w-9"
         >
@@ -41,7 +52,12 @@ export default function Nav() {
             section's left margin and FAQ sits a margin's width from the right. */}
         <nav className="mx-auto hidden w-full max-w-360 items-center justify-between px-8 md:flex md:px-34">
           {LINKS.map((link) => (
-            <a key={link.href} href={link.href} className="hover:opacity-70">
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={(e) => smoothTo(e, link.href)}
+              className="hover:opacity-70"
+            >
               {link.label}
             </a>
           ))}
@@ -79,7 +95,10 @@ export default function Nav() {
             <a
               key={link.href}
               href={link.href}
-              onClick={() => setOpen(false)}
+              onClick={(e) => {
+                smoothTo(e, link.href);
+                setOpen(false);
+              }}
               className="border-b border-line/60 py-3 text-ink last:border-b-0 hover:opacity-70"
             >
               {link.label}
