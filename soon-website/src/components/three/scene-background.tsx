@@ -3,6 +3,8 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 
+import { getStableViewportHeight } from "@/lib/viewport";
+
 import { FADE_ID } from "./constants";
 
 // Client-only: the canvas touches WebGL/browser APIs. `ssr: false` is allowed
@@ -31,8 +33,9 @@ export default function SceneBackground() {
         const rect = fadeEl.getBoundingClientRect();
         // Fully visible while the placeholder is at/above the viewport top,
         // ramping to 0 over one viewport of scrolling past it (i.e. across the
-        // glide into the next section).
-        const p = Math.min(1, Math.max(0, -rect.top / window.innerHeight));
+        // glide into the next section). Uses the stable height so the iOS URL
+        // bar toggling doesn't wobble the opacity (flickering the 3D back in).
+        const p = Math.min(1, Math.max(0, -rect.top / getStableViewportHeight()));
         opacity = 1 - p;
       }
       el.style.opacity = String(opacity);

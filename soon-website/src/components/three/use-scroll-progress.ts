@@ -1,5 +1,7 @@
 import { useEffect, useRef, type RefObject } from "react";
 
+import { getStableViewportHeight } from "@/lib/viewport";
+
 /**
  * Tracks scroll progress across a range as a 0→1 value, written to a ref (no
  * React re-render per scroll frame — the value is read inside the r3f
@@ -45,7 +47,9 @@ export function useScrollProgress(
       if (!span || !end) return;
 
       const scrollY = window.scrollY;
-      const vh = window.innerHeight;
+      // Stable against the iOS URL-bar toggle so the scrub range (and thus the
+      // camera) doesn't jump when the bar shows/hides at a section boundary.
+      const vh = getStableViewportHeight();
 
       spanStart = span.getBoundingClientRect().top + scrollY; // absolute top
       const endTop = end.getBoundingClientRect().top + scrollY;
