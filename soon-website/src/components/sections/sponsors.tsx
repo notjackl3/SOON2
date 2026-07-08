@@ -17,7 +17,7 @@ export default function SectionSponsors() {
         src="/sponsors/bubbles.svg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute right-0 top-1/2 hidden w-[clamp(260px,28vw,440px)] lg:block"
+        className="pointer-events-none absolute right-[-10] bottom-[-70] md:top-34 w-[40vw] lg:w-[clamp(260px,28vw,440px)]"
       />
 
       <div className="relative mx-auto w-full max-w-360 px-8 md:px-34">
@@ -44,8 +44,12 @@ export default function SectionSponsors() {
           {/* Pill (top, level with "Sponsors") + subtext (bottom, level with "coming SOON") */}
           <Reveal delay={140} className="flex shrink-0 flex-col items-start gap-5 md:justify-between md:gap-0 md:self-stretch md:py-1">
             <PartnerButton />
+            {/* Hard break keeps "know the names." together on the second line
+                at every size, instead of leaving "names." stranded alone. */}
             <p className="max-w-52 text-[clamp(16px,1.6vw,20px)] tracking-body text-ink-soft">
-              but trust us, you&rsquo;ll know the names.
+              but trust us, you&rsquo;ll
+              <br />
+              know the names.
             </p>
           </Reveal>
 

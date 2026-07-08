@@ -10,7 +10,7 @@ import { ShapeGridEdge } from "@/components/shapes/shape-grid-edge";
  */
 export default function SectionFaq() {
   return (
-    <section id="faq" className="relative w-full overflow-hidden bg-white py-20 md:h-dvh md:py-28">
+    <section id="faq" className="relative w-full overflow-x-clip bg-white py-20 md:h-dvh md:py-28">
       {/* Animated shape grid, faded in from the right edge (desktop only) */}
       <ShapeGridEdge side="right" />
 
@@ -46,6 +46,25 @@ export default function SectionFaq() {
         alt=""
         aria-hidden
         className="pointer-events-none absolute bottom-0 right-0 hidden w-[clamp(320px,46vw,657px)] md:block"
+      />
+      {/* Mobile: the same bottom-right deco, spanning the full viewport width
+          and sitting behind the FAQ text (earlier in the DOM than the content
+          below, so it paints underneath it). Nudged down a touch so it clears
+          the last accordion rows. */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
+      <img
+        src="/faq/deco-bottom-right.svg"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute -bottom-8 right-0 w-full md:hidden"
+      />
+      {/* Mobile: decorative vectors behind the "FAQ" heading. */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
+      <img
+        src="/faq/deco-top.svg"
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute left-2 top-6 w-40 md:hidden"
       />
 
       {/* pointer-events-none lets hovers fall through to the grid behind;

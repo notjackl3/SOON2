@@ -73,9 +73,15 @@ export default function SectionHero() {
 
             {/* goodbye / coming */}
             <Reveal delay={270} className="flex flex-col gap-4 md:pr-35">
-              <div className="flex justify-end">
+              {/* Badges: side-by-side on one line on mobile (Coming Oct +
+                  Location TBA); on desktop only Coming Oct sits here and
+                  Location TBA drops to the CTA row. */}
+              <div className="flex justify-between gap-3 md:justify-end">
                 <Reveal delay={1350} y={0} scale={0} duration={450}>
                   <CornerBadge>Coming Oct &rsquo;26</CornerBadge>
+                </Reveal>
+                <Reveal delay={1500} y={0} scale={0} duration={450} className="md:hidden">
+                  <CornerBadge>Location: TBA</CornerBadge>
                 </Reveal>
               </div>
               <p className="max-w-60 text-lg tracking-body text-muted">
@@ -87,7 +93,8 @@ export default function SectionHero() {
           {/* CTA row */}
           <Reveal delay={360} className="flex items-center justify-between gap-4">
             <ReserveButton />
-            <Reveal delay={1500} y={0} scale={0} duration={450}>
+            {/* Desktop only — on mobile this badge sits beside "Coming Oct". */}
+            <Reveal delay={1500} y={0} scale={0} duration={450} className="hidden md:block">
               <CornerBadge>Location: TBA</CornerBadge>
             </Reveal>
           </Reveal>

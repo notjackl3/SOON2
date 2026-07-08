@@ -47,7 +47,12 @@ export default function SectionRecap() {
   return (
     <section
       id="recap"
-      className="relative w-full overflow-hidden bg-white py-16 md:py-24"
+      // Fade-to-white gradient (transparent → white over the top ~50vh, solid
+      // white below): the fixed white layer shows through the transparent top,
+      // so the 3D scene resolves smoothly to white here regardless of whether
+      // the canvas opacity fade has fully landed — some browsers were leaving a
+      // hard seam. Below the fade it's plain white, same as before.
+      className="relative w-full overflow-hidden bg-[linear-gradient(to_bottom,transparent,white_50vh)] py-16 md:py-24"
     >
       {/* Header (z-10 so the grid bleeding up stays behind the heading) */}
       <div className="relative z-10 mx-auto w-full max-w-360 px-8 md:px-34">
@@ -55,7 +60,7 @@ export default function SectionRecap() {
           src="/recap/top-vectors.svg"
           alt=""
           aria-hidden
-          className="pointer-events-none hidden h-auto w-full md:block"
+          className="pointer-events-none h-auto w-full"
         />
         <Reveal as="h2" className="mt-4 font-sans text-[clamp(36px,8vw,80px)] font-medium leading-none tracking-tight text-ink">
           Last time, we had&hellip;

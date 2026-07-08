@@ -66,7 +66,7 @@ function pointOf(end: ResolvedEnd, states: VistaState[]) {
 function FeedbackHeading({ className }: { className?: string }) {
   return (
     <p className={className}>
-      real <span className="font-display italic">feedback</span>.
+      Real <span className="font-display italic">feedback</span>.
     </p>
   );
 }
@@ -112,7 +112,9 @@ function MobileGuestCard({
           className="object-cover"
         />
       </BoundingBox>
-      <div className="flex flex-col gap-0.5">
+      {/* Name/role get their own horizontal padding so the text is inset from
+          the card (and screen) edges without shrinking the photo above. */}
+      <div className="flex flex-col gap-0.5 px-1.5">
         <p className="font-display text-[9.66px] font-semibold leading-none tracking-[0.02em] text-ink-soft">
           {person.name}
         </p>

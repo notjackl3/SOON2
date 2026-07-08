@@ -25,7 +25,7 @@ const DESKTOP_H = 967;
  */
 export default function SectionTeam() {
   return (
-    <section id="team" className="relative w-full overflow-hidden bg-white">
+    <section id="team" className="relative w-full overflow-x-clip bg-white">
       {/* Animated dot field (bottom), desktop only. Masked so the dots fade
           out toward the edges into the white background. */}
       <div

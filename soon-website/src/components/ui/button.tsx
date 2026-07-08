@@ -18,7 +18,7 @@ export function Button({
     <button
       type={type}
       className={cn(
-        "cursor-pointer rounded-[26px] border-[1.5px] border-[#a8e618] bg-accent/30 px-7 py-2.5 text-[clamp(12px,1.5vw,15px)] uppercase text-ink transition-colors hover:bg-accent/50",
+        "cursor-pointer whitespace-nowrap rounded-[26px] border-[1.5px] border-[#a8e618] bg-accent/30 px-7 py-2.5 text-[clamp(12px,1.5vw,15px)] uppercase text-ink transition-colors hover:bg-accent/50",
         className,
       )}
       {...props}

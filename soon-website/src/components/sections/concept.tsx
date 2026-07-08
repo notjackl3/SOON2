@@ -14,7 +14,7 @@ function Stat({
   delay?: number;
 }) {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center gap-4">
       <span className="font-display text-[clamp(64px,9vw,110px)] leading-none text-black">
         <CountUp value={value} delay={delay} />
       </span>
@@ -110,8 +110,9 @@ export default function SectionConcept() {
               <Reveal as="p" className="relative z-10 max-w-103.75 text-4 tracking-body text-ink-soft">
                 A 36-hour build experience where 50 top hackers live, eat, and
                 build under one roof, collaborating with a group of partner
-                companies to turn bold ideas into real products, while exposing
-                talents.
+                companies to turn bold ideas into real products. Connect with
+                other hackers, learn from industry experts, and gain hands-on
+                experience in a fast-paced and fun environment.
               </Reveal>
               {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
              <div className="flex flex-row">
