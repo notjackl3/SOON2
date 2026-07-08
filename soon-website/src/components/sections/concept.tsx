@@ -36,7 +36,7 @@ export default function SectionConcept() {
           src="/concept/left-blocks.svg"
           alt=""
           aria-hidden
-          className="pointer-events-none absolute left-0 top-0 h-202.5 w-30.25"
+          className="pointer-events-none absolute left-0 top-0 -z-10 h-202.5 w-30.25"
         />
 
         {/* background-shapes — decorative band, centered, a bit above "Welcome" */}

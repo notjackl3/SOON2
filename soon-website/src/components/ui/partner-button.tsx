@@ -1,17 +1,20 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { scrollToId } from "@/lib/lenis";
+
+const PARTNER_DECK_URL =
+  "https://drive.google.com/file/d/1vD6dF0aG7qILG3d3gn-3-pYZy_uC7ZUq/view?usp=sharing";
 
 /**
- * Sponsors CTA. Scrolls down to the contact form (footer `#contact`) using the
- * page's Lenis smoothing so it matches the rest of the site's scroll feel.
+ * Sponsors CTA. Opens the partnership deck (Google Drive) in a new tab.
  */
 export function PartnerButton() {
   return (
     <Button
       className="py-3 text-[clamp(13px,1.4vw,20px)] tracking-tight"
-      onClick={() => scrollToId("contact")}
+      onClick={() =>
+        window.open(PARTNER_DECK_URL, "_blank", "noopener,noreferrer")
+      }
     >
       Partner with us
     </Button>
