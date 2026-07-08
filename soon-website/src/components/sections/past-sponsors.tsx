@@ -67,7 +67,7 @@ function closestEdgeMidpoint(b: Box, target: { x: number; y: number }) {
 /** City label + logo — the shared body of every logo card / cluster cell. */
 function CardContent({ city, logo }: { city: string; logo: string }) {
   return (
-    <div className="flex h-full w-full flex-col items-center gap-1.5 p-3.5">
+    <div className="flex h-full w-full flex-col items-center gap-1.5 px-2.5 py-3">
       <span className="text-center font-sans text-[14px] leading-none tracking-tight text-ink-soft">
         ({city})
       </span>
@@ -340,24 +340,24 @@ export default function SectionPastSponsors() {
   );
 }
 
-/** Chatforce quote card body. */
+/** Quote card body — quote, author, then city + logo along the bottom. */
 function QuoteBody({ sponsor }: { sponsor: Sponsor }) {
   return (
-    <div className="flex h-full flex-col justify-between p-4">
+    <div className="flex h-full flex-col p-4">
       <div>
         <p className="font-sans text-[16px] leading-[1.08] tracking-tight text-ink-soft">
           {sponsor.quote}
         </p>
-        <p className="mt-3 font-sans text-[13px] leading-none tracking-tight text-ink-soft">
+        <p className="mt-3 whitespace-pre-line font-sans text-[13px] leading-none tracking-tight text-ink-soft">
           {sponsor.author}
         </p>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="mt-7 flex items-center justify-between">
         <span className="font-sans text-[13px] leading-none tracking-tight text-ink-soft">
           ({sponsor.city})
         </span>
         {/* eslint-disable-next-line @next/next/no-img-element -- small logo inside a scaled stage */}
-        <img src={sponsor.logo} alt="Chatforce" className="h-7.75 w-39 object-contain object-right" />
+        <img src={sponsor.logo} alt={sponsor.city} className="max-h-7 w-auto max-w-[110px] object-contain object-right" />
       </div>
     </div>
   );

@@ -1,36 +1,8 @@
 import Image from "next/image";
 
-import { Button } from "@/components/ui/button";
+import ContactForm from "@/components/sections/contact-form";
 import { Highlight } from "@/components/ui/highlight";
 import { Reveal } from "@/components/ui/reveal";
-
-/** A labelled text input used in the contact form. */
-function Field({
-  label,
-  type = "text",
-  name,
-}: {
-  label: string;
-  type?: string;
-  name: string;
-}) {
-  return (
-    <div className="flex flex-1 flex-col gap-1">
-      <label
-        htmlFor={name}
-        className="text-sm uppercase text-muted"
-      >
-        {label}
-      </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        className="h-9 rounded-md border border-line bg-surface px-3 text-sm tracking-normal text-ink outline-none focus:border-ink/40"
-      />
-    </div>
-  );
-}
 
 export default function SectionFooter() {
   return (
@@ -80,35 +52,7 @@ export default function SectionFooter() {
         </div>
 
         {/* Right: contact form */}
-        <Reveal as="form" delay={120} x={0} y={28} className="flex flex-1 flex-col gap-8 rounded-[10px] border border-line bg-white px-7 py-8">
-          <div className="flex flex-col gap-8 lg:flex-row lg:gap-4">
-            <Field label="Name" name="name" />
-            <Field label="Company" name="company" />
-          </div>
-
-          <Field label="Email" name="email" type="email" />
-
-          <div className="flex flex-col gap-1">
-            <label
-              htmlFor="info"
-              className="text-sm uppercase text-muted"
-            >
-              Availability and Additional Information
-            </label>
-            <textarea
-              id="info"
-              name="info"
-              className="h-34.75 resize-none rounded-md border border-line bg-surface p-3 text-sm tracking-normal text-ink outline-none focus:border-ink/40"
-            />
-          </div>
-
-          <Button
-            type="submit"
-            className="self-start rounded-[18px] border px-8 py-2 text-sm"
-          >
-            I&rsquo;m in
-          </Button>
-        </Reveal>
+        <ContactForm />
       </section>
 
       {/* ---- Footer bar ---- */}

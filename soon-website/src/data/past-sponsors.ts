@@ -41,10 +41,34 @@ export interface Edge {
 
 // --- Standalone cards (rendered generically) --------------------------------
 export const SPONSORS: Sponsor[] = [
-  { id: "composio", city: "San Francisco", logo: "/past-sponsors/sponsor-companies/composio.png", x: 395.11, y: 797.62, w: 204.04, h: 91.95, kind: "logo" },
+  {
+    id: "composio",
+    city: "San Francisco",
+    logo: "/past-sponsors/sponsor-companies/composio.png",
+    x: 240,
+    y: 757,
+    w: 250,
+    h: 188,
+    kind: "quote",
+    quote:
+      "“TYSM 🙏 you guys did incredible and im so happy to have been able to witness the journey 🥹.”",
+    author: "- Julia Fedorin (Content Creator and Podcaster @ Composio)",
+  },
   { id: "althra", city: "Vancouver", logo: "/past-sponsors/sponsor-companies/althra.png", x: 397.41, y: 540.6, w: 128.46, h: 128.46, kind: "logo" },
   { id: "cloudinary", city: "San Jose", logo: "/past-sponsors/sponsor-companies/cloudinary.png", x: 627.86, y: 981.29, w: 128.46, h: 128.46, kind: "logo" },
-  { id: "polarity", city: "Waterloo", logo: "/past-sponsors/sponsor-companies/polarity.png", x: 712.1, y: 323.3, w: 205.24, h: 105.24, kind: "logo" },
+  {
+    id: "polarity",
+    city: "Waterloo",
+    logo: "/past-sponsors/sponsor-companies/polarity.png",
+    x: 582,
+    y: 230,
+    w: 268,
+    h: 178,
+    kind: "quote",
+    quote:
+      "“Just wanted to say you killed it this weekend. So thankful that I got to be apart of that.”",
+    author: "- Sammy Tourani\n(Head of Growth @ Polarity)",
+  },
   { id: "backboard", city: "Ottawa", logo: "/past-sponsors/sponsor-companies/backboard.png", x: 968.21, y: 419.23, w: 224.92, h: 85.14, kind: "logo" },
   {
     id: "chatforce",
@@ -53,7 +77,7 @@ export const SPONSORS: Sponsor[] = [
     x: 1088.21,
     y: 749.4,
     w: 292.41,
-    h: 186.7,
+    h: 175,
     kind: "quote",
     quote:
       "“The hackers were startup engineers, multi-time hackathon winners, and some of the most impressive builders I’ve met.”",
