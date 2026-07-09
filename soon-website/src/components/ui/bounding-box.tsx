@@ -33,37 +33,59 @@ const CORNER_POS: Record<BoxCorner, string> = {
  * - `cornerSize`: `sm` (vista size, default) or `lg` (FAQ accordion size).
  * - `color`: interior fill, any CSS color. Defaults to the page background;
  *   pass `"transparent"` to let whatever's behind show through.
+ * - `overlayFrame`: draw the border + corner squares as a non-interactive
+ *   layer on top of the children, so inner content (fills, highlights) can
+ *   never cover the frame. Defaults to `false` (frame sits behind content).
  */
 export function BoundingBox({
   corners = ALL_CORNERS,
   cornerSize = "sm",
   color,
+  overlayFrame = false,
   className,
   children,
 }: {
   corners?: BoxCorner[];
   cornerSize?: CornerSize;
   color?: string;
+  overlayFrame?: boolean;
   className?: string;
   children?: ReactNode;
 }) {
   const style: CSSProperties = {
     backgroundColor: color ?? "var(--color-background)",
   };
+  const cornerSquares = corners.map((corner) => (
+    <span
+      key={corner}
+      aria-hidden
+      className={cn(
+        "absolute border border-line bg-white",
+        CORNER_SIZE[cornerSize],
+        CORNER_POS[corner],
+      )}
+    />
+  ));
+
+  if (overlayFrame) {
+    return (
+      <div className={cn("relative", className)} style={style}>
+        {children}
+        {/* Frame layer sits above content; never intercepts pointer events. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 border border-line"
+        >
+          {cornerSquares}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={cn("relative border border-line", className)} style={style}>
       {children}
-      {corners.map((corner) => (
-        <span
-          key={corner}
-          aria-hidden
-          className={cn(
-            "absolute border border-line bg-white",
-            CORNER_SIZE[cornerSize],
-            CORNER_POS[corner],
-          )}
-        />
-      ))}
+      {cornerSquares}
     </div>
   );
 }
