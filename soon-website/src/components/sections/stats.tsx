@@ -51,7 +51,7 @@ const ROW_TWO: Stat[] = [
 /** Big Playfair number stacked over an uppercase Inter label, framed by the box. */
 function StatCard({ value, label }: Stat) {
   return (
-    <BoundingBox cornerSize="lg" overlayFrame className="group flex h-26 flex-col justify-between p-3.5 sm:h-37.5 md:h-43 md:p-5">
+    <BoundingBox cornerSize="lg" className="group flex h-26 flex-col justify-between p-3.5 sm:h-37.5 md:h-43 md:p-5">
       <span className="relative inline-block self-start font-display text-[clamp(38px,6.5vw,82px)] leading-[0.9] tracking-tight text-ink">
         <StatHighlight value={value} />
         <span className="relative z-10">{value}</span>
