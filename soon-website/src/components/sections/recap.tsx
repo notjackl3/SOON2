@@ -12,19 +12,20 @@ import { useScrollVelocity } from "@/hooks/use-scroll-velocity";
  * Tiles without a `src` render as gray "photo" placeholders.
  */
 const TOP_TILES: MarqueeTile[] = [
-  { src: "/recap/row1-1.jpg", alt: "Hackers hanging out", aspect: 1.595 },
-  { src: "/recap/row1-2.jpg", alt: "Hackers in matching tees", aspect: 1.488 },
-  { src: "/recap/row1-3.jpg", alt: "Campfire at night", aspect: 1.406 },
-  { src: "/recap/row1-4.jpg", alt: "Pool table", aspect: 1.406 },
+  { src: "/recap/row1-1.jpg", alt: "Campfire at night", aspect: 1.406 },
+  { src: "/recap/row1-2.jpg", alt: "Hackers hanging out", aspect: 1.595 },
+  { src: "/recap/row1-3.jpg", alt: "Pool table", aspect: 1.406 },
+  { src: "/recap/row1-4.jpg", alt: "SOON hackathon moment", aspect: 1.5 },
   { src: "/recap/row1-5.jpg", alt: "Group celebrating", aspect: 1.406 },
+  { src: "/recap/row1-6.jpg", alt: "SOON hackathon moment", aspect: 1.5 },
+  { src: "/recap/row1-7.jpg", alt: "SOON hackathon moment", aspect: 1.504 },
 ];
 
 const BOTTOM_TILES: MarqueeTile[] = [
-  { src: "/recap/row2-1.jpg", alt: "Presentation to the room", aspect: 1.595 },
-  { src: "/recap/row2-2.jpg", alt: "Group portrait", aspect: 1.406 },
-  { src: "/recap/row2-3.jpg", alt: "Hackers goofing around in the house", aspect: 1.5 },
-  { src: "/recap/row2-4.jpg", alt: "Sunset group photo", aspect: 1.488 },
-  { src: "/recap/row2-5.jpg", alt: "Winners with awards", aspect: 1.406 },
+  { src: "/recap/row2-1.jpg", alt: "Group portrait", aspect: 1.406 },
+  { src: "/recap/row2-2.jpg", alt: "Winners with awards", aspect: 1.406 },
+  { src: "/recap/row2-3.jpg", alt: "SOON hackathon moment", aspect: 1.261 },
+  { src: "/recap/row2-4.jpg", alt: "SOON hackathon moment", aspect: 1.333 },
 ];
 
 /** Small on-brand pixel cluster (the Figma header "vector groups"). */
@@ -106,7 +107,7 @@ export default function SectionRecap() {
         <div className="pointer-events-none absolute inset-0">
           <div className="relative mx-auto h-full w-full max-w-360 px-8 md:px-34">
             <StatCallout
-              value="45"
+              value="50"
               label="Hackers"
               delay={0}
               className="absolute left-8 top-[4%] md:left-34"

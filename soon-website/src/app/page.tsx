@@ -1,5 +1,6 @@
 import Nav from "@/components/nav";
 import SectionHero from "@/components/sections/hero";
+import SectionHousePolaroids from "@/components/sections/house-polaroids";
 import SectionConcept from "@/components/sections/concept";
 import SectionSpill from "@/components/sections/spill";
 import SectionRecap from "@/components/sections/recap";
@@ -23,7 +24,7 @@ export default function Home() {
 
       <div id={SCROLL_SPAN_ID} className="relative">
         <SectionHero />
-        <div className="h-150"/>
+        <SectionHousePolaroids />
         <SectionConcept />
         <div className="h-96"/>
         <SectionSpill />

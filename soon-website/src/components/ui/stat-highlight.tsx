@@ -14,7 +14,12 @@ import {
 const BASIS = 81.944;
 const em = (px: number) => `${px / BASIS}em`;
 
-/** Vertical offset (px) applied to every cluster so it sits lower on the number. */
+/**
+ * Vertical offset applied to every cluster so it sits lower on the number.
+ * Authored in the BASIS px space and expressed in `em` (via NUDGE_Y_EM) so it
+ * scales 1:1 with the responsive number — a fixed px nudge would ride too low on
+ * the smaller mobile sizes.
+ */
 const NUDGE_Y = 16;
 
 /**
@@ -72,7 +77,7 @@ export function StatHighlight({ value }: { value: string }) {
     top: "50%",
     // NUDGE_Y drops the cluster a touch so the highlight sits behind the number
     // rather than riding high on it.
-    transform: `translate(calc(-50% - ${em(dx)}), calc(-50% - ${em(dy)} + ${NUDGE_Y}px))`,
+    transform: `translate(calc(-50% - ${em(dx)}), calc(-50% - ${em(dy)} + ${em(NUDGE_Y)}))`,
   };
 
   return (
