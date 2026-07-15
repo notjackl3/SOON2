@@ -8,8 +8,11 @@ import { prefersReducedMotion } from "@/lib/visibility";
 
 /** Scattered polaroids flanking the 3D house. `desktop` holds the lg+ absolute
  *  scatter position; below lg (mobile + iPad) they ignore it and fall into a
- *  centred, half-overlapping column. `depth` = px each drifts per full mouse
- *  deflection. Add a `src` per entry once the photos are chosen. */
+ *  centred, half-overlapping column. `depth` = px each card drifts per full
+ *  mouse deflection (its max travel). Each desktop top-% keeps a resting gap on
+ *  the drifting edge larger than that depth, so the parallax can never push a
+ *  card out of the bounded zone (the container's h-185 box) into the hero above
+ *  or the section below. Add a `src` per entry once the photos are chosen. */
 const POLAROIDS = [
   {
     caption: "come together",
@@ -17,8 +20,8 @@ const POLAROIDS = [
     rotate: -7,
     x: -220,
     delay: 0,
-    depth: 44,
-    desktop: "lg:left-[8%] lg:top-[6.3%] lg:w-64",
+    depth: 26,
+    desktop: "lg:left-[8%] lg:top-[10%] lg:w-64",
   },
   {
     caption: "build projects",
@@ -26,8 +29,8 @@ const POLAROIDS = [
     rotate: 5,
     x: -300,
     delay: 160,
-    depth: 24,
-    desktop: "lg:left-[31%] lg:top-[56.3%] lg:w-56",
+    depth: 20,
+    desktop: "lg:left-[31%] lg:top-[48%] lg:w-56",
   },
   {
     caption: "have fun",
@@ -35,8 +38,8 @@ const POLAROIDS = [
     rotate: 6,
     x: 300,
     delay: 80,
-    depth: 30,
-    desktop: "lg:right-[31%] lg:top-[0.3%] lg:w-56",
+    depth: 22,
+    desktop: "lg:right-[31%] lg:top-[8%] lg:w-56",
   },
   {
     caption: "create memories",
@@ -44,8 +47,8 @@ const POLAROIDS = [
     rotate: -6,
     x: 220,
     delay: 240,
-    depth: 48,
-    desktop: "lg:right-[8%] lg:top-[48.3%] lg:w-64",
+    depth: 26,
+    desktop: "lg:right-[8%] lg:top-[42%] lg:w-64",
   },
 ] as const;
 
@@ -105,7 +108,7 @@ export default function SectionHousePolaroids() {
 
   return (
     <div className="relative w-full overflow-x-clip">
-      <div className="pointer-events-none relative mx-auto -mt-[35vh] flex max-w-lg flex-col items-center px-6 pt-0 pb-20 lg:max-w-360 lg:-mt-[16vh] lg:block lg:h-150 lg:px-0 lg:py-0">
+      <div className="pointer-events-none relative mx-auto -mt-[34svh] flex max-w-lg flex-col items-center px-6 pt-0 pb-20 lg:max-w-360 lg:-mt-[20vh] lg:block lg:h-185 lg:px-0 lg:py-0">
         {POLAROIDS.map((p, i) => (
           // outer layer carries the mouse-parallax transform; Reveal inside owns
           // the slide-in transform — nesting lets the two compose cleanly.

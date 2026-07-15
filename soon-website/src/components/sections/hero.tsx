@@ -29,7 +29,7 @@ export default function SectionHero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-dvh flex-col overflow-hidden px-8 pb-16 pt-28 md:px-34"
+      className="relative flex min-h-svh flex-col overflow-hidden px-8 pb-16 pt-28 md:px-34"
     >
       <div
         aria-hidden
