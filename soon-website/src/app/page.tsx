@@ -9,6 +9,7 @@ import SectionSponsors from "@/components/sections/sponsors";
 import SectionPastSponsors from "@/components/sections/past-sponsors";
 import SectionStats from "@/components/sections/stats";
 import SectionTeam from "@/components/sections/team";
+import SectionTestimonials from "@/components/sections/testimonials";
 import SectionFaq from "@/components/sections/faq";
 import SectionFooter from "@/components/sections/footer";
 import SceneBackground from "@/components/three/scene-background";
@@ -41,6 +42,8 @@ export default function Home() {
       <SectionStats />
 
       <SectionTeam />
+
+      <SectionTestimonials />
 
       <SectionFaq />
 
