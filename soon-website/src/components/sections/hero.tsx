@@ -84,8 +84,8 @@ export default function SectionHero() {
                   <CornerBadge>Location: TBA</CornerBadge>
                 </Reveal>
               </div>
-              <p className="max-w-105 text-balance text-[clamp(18px,1.7vw,22px)] tracking-body text-muted">
-                A 36-hour experience where 50 builders live, eat, and create under one roof.
+              <p className="max-w-105 text-balance text-[clamp(16px,1.4vw,18px)] tracking-body text-muted">
+                Join 50 of Canada's best builders in a multimillion dollar private mansion. Build, ship, and connect with industry leaders, all in one weekend.
               </p>
             </Reveal>
           </div>

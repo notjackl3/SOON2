@@ -33,6 +33,8 @@ export default function Home() {
 
       <SectionRecap />
 
+      <SectionTestimonials />
+
       <SectionGuests />
 
       <SectionSponsors />
@@ -42,8 +44,6 @@ export default function Home() {
       <SectionStats />
 
       <SectionTeam />
-
-      <SectionTestimonials />
 
       <SectionFaq />
 
