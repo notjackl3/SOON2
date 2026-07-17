@@ -7,7 +7,6 @@ import TargetCursor from "@/components/TargetCursor";
 import { ScaledStage } from "@/components/ui/scaled-stage";
 import { cn } from "@/lib/utils";
 import {
-  HEADSHOTS_READY,
   PEOPLE,
   PHOTO,
   STAGE_H,
@@ -262,9 +261,9 @@ export default function SectionTestimonials() {
                 }}
               />
 
-              <div className="relative flex h-full flex-col gap-6 p-8">
-                <div className="relative h-[148px] w-full shrink-0 overflow-hidden bg-[#d9d9d9]">
-                  {HEADSHOTS_READY && (
+              <div className="relative flex h-full flex-col gap-4 p-8">
+                {selected.image && (
+                  <div className="relative h-[148px] w-full shrink-0 overflow-hidden bg-[#d9d9d9]">
                     <Image
                       src={selected.image}
                       alt={selected.name}
@@ -272,9 +271,9 @@ export default function SectionTestimonials() {
                       sizes="266px"
                       className="object-cover"
                     />
-                  )}
-                </div>
-                <div className="flex min-h-0 flex-col gap-3.5">
+                  </div>
+                )}
+                <div className="flex min-h-0 flex-1 flex-col gap-3.5">
                   <div className="flex flex-col gap-2">
                     <p className="text-[20px] font-medium leading-none tracking-tight text-ink-soft">
                       {selected.name}
@@ -283,10 +282,25 @@ export default function SectionTestimonials() {
                       {selected.role}
                     </p>
                   </div>
-                  <p className="overflow-hidden text-[12px] leading-normal tracking-body text-muted">
+                  <p className="flex-1 overflow-hidden text-[12px] leading-normal tracking-body text-muted">
                     {selected.bio}
                   </p>
                 </div>
+
+                {/* Read-more pill (design-system accent pill, as a link) */}
+                {selected.linkedin && (
+                  <a
+                    href={selected.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Read ${selected.name}'s post on LinkedIn`}
+                    className="cursor-target inline-flex w-fit shrink-0 items-center gap-1.5 rounded-[22px] border-[1.5px] border-[#a8e618] bg-accent/30 px-3.5 py-1.5 text-[10px] uppercase tracking-tight text-ink transition-colors hover:bg-accent/50"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element -- brand icon */}
+                    <img src="/footer/linkedin.svg" alt="" aria-hidden className="size-3" />
+                    Read more on LinkedIn
+                  </a>
+                )}
               </div>
 
               {/* Footer pixel cluster (top-left, over the image corner) */}

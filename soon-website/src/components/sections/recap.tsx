@@ -113,15 +113,15 @@ export default function SectionRecap() {
               className="absolute left-8 top-[4%] md:left-34"
             />
             <StatCallout
-              value="09"
-              label="Sponsors"
+              value="17"
+              label="Projects"
               align="right"
               delay={150}
               className="absolute right-8 top-1/2 -translate-y-1/2 md:right-34"
             />
             <StatCallout
-              value="10"
-              label="Judges"
+              value="09"
+              label="Workshops"
               delay={0}
               className="absolute bottom-[4%] left-8 md:left-34"
             />
