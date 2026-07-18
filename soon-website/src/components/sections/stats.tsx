@@ -17,7 +17,7 @@ import { StatsLetterGrid } from "@/components/sections/stats-letter-grid";
 type Stat = { value: string; label: ReactNode };
 
 const ROW_ONE: Stat[] = [
-  { value: "300K+", label: "Social Views" },
+  { value: "300K+", label: "Social Media Impressions" },
   { value: "70%", label: "Of Hackers Have Interned" },
   { value: "9", label: "Activities" },
   { value: "7", label: "Meals" },
@@ -106,7 +106,7 @@ export default function SectionStats() {
           as="h2"
           className="max-w-3xl font-sans text-[clamp(36px,8vw,80px)] font-medium leading-none tracking-tight text-ink"
         >
-          A glimpse at what we&rsquo;re capable of:
+          At a <span className="font-display italic">glance</span>
         </Reveal>
 
         {/* Stat grids — two rows with the Figma column proportions (369 vs 170px). */}

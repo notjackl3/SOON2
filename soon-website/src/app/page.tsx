@@ -25,7 +25,7 @@ export default function Home() {
 
       <div id={SCROLL_SPAN_ID} className="relative">
         <SectionHero />
-        <SectionHousePolaroids />
+        <SectionHousePolaroids enabled={false} />
         <SectionConcept />
         <div className="h-96"/>
         <SectionSpill />

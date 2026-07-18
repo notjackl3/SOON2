@@ -45,12 +45,13 @@ export default function SectionSponsors() {
           <Reveal delay={140} className="flex shrink-0 flex-col items-start gap-5 md:justify-between md:gap-0 md:self-stretch md:py-1">
             <PartnerButton />
             {/* Hard break keeps "know the names." together on the second line
-                at every size, instead of leaving "names." stranded alone. */}
+                at every size, instead of leaving "names." stranded alone. 
             <p className="max-w-52 text-[clamp(16px,1.4vw,18px)] tracking-body text-ink-soft">
               but trust us, you&rsquo;ll
               <br />
               know the names.
             </p>
+            */}
           </Reveal>
 
           {/* Right bracket — lower (self-end) for the diagonal arrangement */}

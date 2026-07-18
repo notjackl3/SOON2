@@ -109,23 +109,25 @@ export default function SectionConcept() {
 
             {/* text + floating starblock */}
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-              <Reveal className="relative z-10 flex max-w-90 flex-col gap-3">
-                <h3 className="font-sans text-[clamp(15px,1.7vw,20px)] font-bold tracking-tight text-ink-soft">
-                  About SOON
-                </h3>
-                <p className="text-body leading-normal tracking-body text-muted">
-                  We are creating a home for Canada&rsquo;s best builders to reach their full potential. A 36-hour experience where 50 builders live under one roof, collaborating with
-                  companies and sponsors to turn bold ideas into real products.
-                </p>
-              </Reveal>
-              <Reveal delay={120} className="relative z-10 flex max-w-90 flex-col gap-3">
-                <h3 className="font-sans text-[clamp(15px,1.7vw,20px)] font-bold tracking-tight text-ink-soft">
-                  Who we&rsquo;re looking for
-                </h3>
-                <p className="text-body leading-normal tracking-body text-muted">
-                  We&rsquo;re looking for people who are passionate about building, learning, and growing together. If that sounds like you, join us at SOON.
-                </p>
-              </Reveal>
+              <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+                <Reveal className="relative z-10 flex max-w-100 flex-col gap-3">
+                  <h3 className="font-sans text-[clamp(15px,1.7vw,20px)] font-bold tracking-tight text-ink-soft">
+                    About SOON
+                  </h3>
+                  <p className="text-body leading-normal tracking-body text-muted">
+                    We are creating a home for Canada&rsquo;s best builders to reach their full potential. A 36-hour experience where 50 builders live under one roof, collaborating with
+                    companies and sponsors to turn bold ideas into real products.
+                  </p>
+                </Reveal>
+                <Reveal delay={120} className="relative z-10 flex max-w-100 flex-col gap-3">
+                  <h3 className="font-sans text-[clamp(15px,1.7vw,20px)] font-bold tracking-tight text-ink-soft">
+                    Who we&rsquo;re looking for
+                  </h3>
+                  <p className="text-body leading-normal tracking-body text-muted">
+                    We&rsquo;re looking for people who love what they do. Whether you&rsquo;re a seasoned engineer or a self-starter who&rsquo;s built something of your own &mdash; a channel, a business, a project &mdash; if you&rsquo;re passionate about building and learning, we want you to be part of SOON.
+                  </p>
+                </Reveal>
+              </div>
               {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
              <div className="flex flex-row">
                 {/* scale (not height) so it spills over without growing the row */}
