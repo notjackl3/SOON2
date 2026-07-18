@@ -203,7 +203,7 @@ export default function SectionTestimonials() {
     <section
       ref={sectionRef}
       id="testimonials"
-      className="relative w-full overflow-x-clip bg-surface py-8 md:py-16"
+      className="relative w-full overflow-x-clip bg-white py-8 md:py-16"
     >
       {inView && (
         <TargetCursor
