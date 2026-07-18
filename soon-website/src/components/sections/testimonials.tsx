@@ -273,16 +273,16 @@ export default function SectionTestimonials() {
                     />
                   </div>
                 )}
-                <div className="flex min-h-0 flex-1 flex-col gap-3.5">
-                  <div className="flex flex-col gap-2">
-                    <p className="text-[20px] font-medium leading-none tracking-tight text-ink-soft">
+                <div className="flex min-h-0 flex-1 flex-col gap-3">
+                  <div className="flex flex-col gap-1">
+                    <p className="font-display text-2xl font-medium leading-tight tracking-tight text-ink-soft">
                       {selected.name}
                     </p>
-                    <p className="text-[14px] uppercase leading-none tracking-tight text-muted">
+                    <p className="text-xs uppercase tracking-body text-muted">
                       {selected.role}
                     </p>
                   </div>
-                  <p className="flex-1 overflow-hidden text-[12px] leading-normal tracking-body text-muted">
+                  <p className="flex-1 overflow-hidden text-sm leading-snug tracking-body text-muted">
                     {selected.bio}
                   </p>
                 </div>
@@ -303,20 +303,22 @@ export default function SectionTestimonials() {
                 )}
               </div>
 
-              {/* Footer pixel cluster (top-left, over the image corner) */}
-              <div aria-hidden>
-                <span className="absolute left-[27px] top-[27px] size-[10.75px] bg-cobalt" />
-                <span className="absolute left-[37.75px] top-[37.75px] size-[10.75px] bg-cobalt" />
-                <span className="absolute left-[48.5px] top-[27px] size-[10.75px] bg-accent" />
-                <span className="absolute left-[59.25px] top-[27px] size-[10.75px] bg-ink-soft" />
-              </div>
-
-              {/* Image-overlay pixels (bottom-right of the headshot) */}
-              <div aria-hidden>
-                <span className="absolute left-[293px] top-[153px] size-[11px] bg-accent" />
-                <span className="absolute left-[282px] top-[164px] size-[11px] bg-cobalt" />
-                <span className="absolute left-[271px] top-[176px] size-[11px] bg-accent" />
-              </div>
+              {/* Image-corner pixel decorations — only when a headshot is shown
+                  (they're anchored to the image, and would otherwise collide
+                  with the name / float orphaned). */}
+              {selected.image && (
+                <div aria-hidden>
+                  {/* top-left cluster over the image corner */}
+                  <span className="absolute left-[27px] top-[27px] size-[10.75px] bg-cobalt" />
+                  <span className="absolute left-[37.75px] top-[37.75px] size-[10.75px] bg-cobalt" />
+                  <span className="absolute left-[48.5px] top-[27px] size-[10.75px] bg-accent" />
+                  <span className="absolute left-[59.25px] top-[27px] size-[10.75px] bg-ink-soft" />
+                  {/* bottom-right of the headshot */}
+                  <span className="absolute left-[293px] top-[153px] size-[11px] bg-accent" />
+                  <span className="absolute left-[282px] top-[164px] size-[11px] bg-cobalt" />
+                  <span className="absolute left-[271px] top-[176px] size-[11px] bg-accent" />
+                </div>
+              )}
             </div>
 
             {/* Corner squares (outside the clipped body) */}
