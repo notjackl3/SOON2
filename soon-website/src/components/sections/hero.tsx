@@ -1,15 +1,15 @@
+import DotField from "@/components/ui/dot-field";
 import { EmailCta } from "@/components/ui/email-cta";
 import { Highlight } from "@/components/ui/highlight";
 import { Reveal } from "@/components/ui/reveal";
 
-/** Dotted-grid texture behind the hero. Rendered at its natural size and
- *  centered, so resizing the window clips the artwork instead of scaling it. */
-const dotGrid: React.CSSProperties = {
-  backgroundImage: "url('/background-patterns/bg-dots.svg')",
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center",
-  backgroundSize: "auto",
-};
+/** Dotted texture behind the hero: two radial areas that fade out at their edges
+ *  (mirrors the old bg-dots.svg — centres 782,469 and 1276,691.6 on the original
+ *  1440×964 art, radii 20.9%×30.4%), composited as two mask layers so the dots
+ *  show only inside their union. */
+const DOT_MASK =
+  "radial-gradient(ellipse 20.9% 30.4% at 54.3% 48.6%, #000 0%, transparent 100%), " +
+  "radial-gradient(ellipse 20.9% 30.4% at 88.6% 71.7%, #000 0%, transparent 100%)";
 
 /** A bordered label box with little squares at each corner (e.g. "COMING OCT '26"). */
 function CornerBadge({ children }: { children: React.ReactNode }) {
@@ -34,8 +34,16 @@ export default function SectionHero() {
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
-        style={dotGrid}
-      />
+        style={{ maskImage: DOT_MASK, WebkitMaskImage: DOT_MASK }}
+      >
+        <DotField
+          dotRadius={3}
+          dotSpacing={17}
+          gradientFrom="rgba(205, 206, 216, 0.9)"
+          gradientTo="rgba(205, 206, 216, 0.5)"
+          glowColor="transparent"
+        />
+      </div>
       <div className="relative mx-auto flex w-full max-w-360 flex-1 flex-col justify-start">
         <div className="flex w-full max-w-195 flex-col gap-3">
           {/* Everything except the CTA row */}
