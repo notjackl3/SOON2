@@ -36,6 +36,10 @@ type RevealProps = {
   restTransform?: string;
   /** Re-hide when scrolled away and replay on re-entry (default: once). */
   repeat?: boolean;
+  /** With `repeat`, only re-hide when the element leaves below the viewport
+   *  (i.e. scrolling back up past it) — not when it scrolls up out of view.
+   *  Lets a section stay revealed as you continue down into the next one. */
+  reHideBelowOnly?: boolean;
   /** IntersectionObserver rootMargin — default fires a touch before fully in view. */
   rootMargin?: string;
   className?: string;
@@ -62,6 +66,7 @@ export function Reveal({
   scale = 1,
   restTransform,
   repeat = false,
+  reHideBelowOnly = false,
   rootMargin = "0px 0px -12% 0px",
   className,
   style,
@@ -78,18 +83,25 @@ export function Reveal({
     let stop = () => {};
     stop = observeVisibility(
       el,
-      (visible) => {
+      (visible, entry) => {
         if (visible) {
           setRevealed(true);
           if (!repeat) stop();
         } else if (repeat) {
+          // When `reHideBelowOnly`, only re-hide if the element left below the
+          // viewport (scrolling back up past it). Leaving above (scrolling down
+          // into the next section) keeps it revealed.
+          if (reHideBelowOnly && entry) {
+            const bottom = entry.rootBounds?.bottom ?? window.innerHeight;
+            if (entry.boundingClientRect.top < bottom) return;
+          }
           setRevealed(false);
         }
       },
       { rootMargin },
     );
     return () => stop();
-  }, [repeat, rootMargin]);
+  }, [repeat, reHideBelowOnly, rootMargin]);
 
   const hidden = !revealed;
   const rest3d = restTransform ? ` ${restTransform}` : "";

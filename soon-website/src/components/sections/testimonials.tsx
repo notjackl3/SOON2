@@ -30,7 +30,71 @@ const MODAL_W = 330;
 const MODAL_H = 410;
 const SHIFT = 210; // px the photo slides right to make room for the card
 const MODAL_X = 72; // card rest position (left), static
-const MODAL_Y = PHOTO.y + (PHOTO.h - MODAL_H) / 2; // vertically centred on photo
+
+// The photo composition (photo + person outlines) was authored with the photo
+// at y=142; the Figma (node 459-2) drops it to y=205 to make room for the
+// in-stage heading. Shift the whole composite down by this delta rather than
+// re-authoring every outline coordinate.
+const PHOTO_DY = 63;
+const PHOTO_TOP = PHOTO.y + PHOTO_DY; // 205
+const MODAL_Y = PHOTO_TOP + (PHOTO.h - MODAL_H) / 2; // vertically centred on photo
+
+// --- Decorative flicker tiles -----------------------------------------------
+// The 30px "tiles" framing the photo (Figma node 459-2, groups 16–25). Bigger
+// cousins of the stats-highlight squares; authored in stage px (same 1440×883
+// space as the photo) so they scale 1:1 inside <ScaledStage>. Each tile twinkles
+// on a staggered loop — see the `pixel-twinkle` keyframe in globals.css.
+type DecoColor = "ink-soft" | "accent" | "cobalt";
+const PIXEL_CLASS: Record<DecoColor, string> = {
+  "ink-soft": "bg-ink-soft",
+  accent: "bg-accent",
+  cobalt: "bg-cobalt",
+};
+const PIXEL_SIZE = 30;
+
+type DecoPixel = { x: number; y: number; c: DecoColor };
+
+const DECO_PIXELS: DecoPixel[] = [
+  // Group 20 — top-left corner
+  { x: 285, y: 235, c: "cobalt" },
+  { x: 315, y: 205, c: "accent" },
+  { x: 255, y: 265, c: "accent" },
+  // Group 24 — top, beside the subtitle
+  { x: 955, y: 145, c: "ink-soft" },
+  { x: 985, y: 145, c: "accent" },
+  { x: 1015, y: 145, c: "cobalt" },
+  // Group 23 — top-right corner
+  { x: 1099, y: 220, c: "cobalt" },
+  { x: 1159, y: 220, c: "accent" },
+  { x: 1189, y: 250, c: "ink-soft" },
+  // Group 25 — right edge, middle
+  { x: 1159, y: 477, c: "cobalt" },
+  { x: 1159, y: 537, c: "accent" },
+  { x: 1129, y: 567, c: "ink-soft" },
+  // Group 22 — bottom-left corner
+  { x: 235, y: 700, c: "cobalt" },
+  { x: 265, y: 700, c: "accent" },
+  { x: 235, y: 730, c: "accent" },
+  { x: 265, y: 730, c: "cobalt" },
+  { x: 235, y: 760, c: "cobalt" },
+  { x: 265, y: 760, c: "accent" },
+  // Group 16 — bottom, middle
+  { x: 447, y: 790, c: "accent" },
+  { x: 477, y: 790, c: "accent" },
+  { x: 507, y: 790, c: "cobalt" },
+  { x: 537, y: 790, c: "accent" },
+  // Group 18 — bottom-right corner
+  { x: 1189, y: 745, c: "ink-soft" },
+  { x: 1189, y: 775, c: "accent" },
+  { x: 1219, y: 805, c: "cobalt" },
+  { x: 1189, y: 835, c: "cobalt" },
+];
+
+/** Deterministic 0..1 from an index — stable across SSR/CSR (no Math.random). */
+function jitter(n: number) {
+  const s = Math.sin((n + 1) * 12.9898) * 43758.5453;
+  return s - Math.floor(s);
+}
 
 export default function SectionTestimonials() {
   const [selected, setSelected] = useState<PersonOutline | null>(null);
@@ -141,8 +205,6 @@ export default function SectionTestimonials() {
       id="testimonials"
       className="relative w-full overflow-x-clip bg-surface py-8 md:py-16"
     >
-      <h2 className="sr-only">What our community says</h2>
-
       {inView && (
         <TargetCursor
           targetSelector=".cursor-target"
@@ -153,6 +215,24 @@ export default function SectionTestimonials() {
       )}
 
       <ScaledStage width={STAGE_W} height={STAGE_H}>
+        {/* Heading — mirrors the Guests "Real feedback." title (Figma node
+            459-2). pointer-events-none so background clicks fall through to the
+            close layer below. */}
+        <div
+          className="pointer-events-none absolute z-30"
+          style={{ left: 120, top: 75, width: 545 }}
+        >
+          <h2 className="font-sans text-[80px] font-medium leading-none tracking-tight text-ink">
+            Real <span className="font-display italic">builders</span>.
+          </h2>
+        </div>
+        <p
+          className="pointer-events-none absolute z-30 text-[11px] uppercase tracking-body text-muted"
+          style={{ left: 384, top: 162, width: 336 }}
+        >
+          Click to see what our hackers said about SOON
+        </p>
+
         {/* Click-away layer (below the photo group; the group is pointer-events-
             none except the outline paths, so photo/background clicks fall
             through to here and close). */}
@@ -173,7 +253,7 @@ export default function SectionTestimonials() {
         >
           <div
             className="absolute overflow-hidden"
-            style={{ left: PHOTO.x, top: PHOTO.y, width: PHOTO.w, height: PHOTO.h }}
+            style={{ left: PHOTO.x, top: PHOTO_TOP, width: PHOTO.w, height: PHOTO.h }}
           >
             <Image
               src="/testimonials/photo.png"
@@ -182,6 +262,31 @@ export default function SectionTestimonials() {
               sizes="900px"
               className="object-cover"
             />
+          </div>
+
+          {/* Flicker tiles framing the photo (travel with it on slide). They
+              flicker IN on a per-tile stagger once the section enters view —
+              same one-shot reveal as the stats-highlight squares, not a loop. */}
+          <div aria-hidden className="absolute inset-0">
+            {DECO_PIXELS.map((p, i) => (
+              <span
+                key={i}
+                className={cn(
+                  "testimonial-pixel absolute block",
+                  PIXEL_CLASS[p.c],
+                )}
+                style={{
+                  left: p.x,
+                  top: p.y,
+                  width: PIXEL_SIZE,
+                  height: PIXEL_SIZE,
+                  opacity: inView ? undefined : 0,
+                  animation: inView
+                    ? `sponsor-flicker 0.5s ease both ${Math.round(80 + jitter(i) * 360)}ms`
+                    : undefined,
+                }}
+              />
+            ))}
           </div>
 
           <svg
@@ -197,7 +302,7 @@ export default function SectionTestimonials() {
                 <path
                   key={person.id}
                   d={person.path}
-                  transform={`translate(${person.x} ${person.y})`}
+                  transform={`translate(${person.x} ${person.y + PHOTO_DY})`}
                   fillRule="evenodd"
                   role="button"
                   tabIndex={0}

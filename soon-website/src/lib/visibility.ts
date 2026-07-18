@@ -20,7 +20,7 @@ export function prefersReducedMotion(): boolean {
  */
 export function observeVisibility(
   el: Element,
-  onChange: (visible: boolean) => void,
+  onChange: (visible: boolean, entry?: IntersectionObserverEntry) => void,
   { rootMargin = "200px" }: { rootMargin?: string } = {},
 ): () => void {
   if (typeof window === "undefined" || typeof IntersectionObserver === "undefined") {
@@ -32,7 +32,7 @@ export function observeVisibility(
 
   const io = new IntersectionObserver(
     (entries) => {
-      for (const entry of entries) onChange(entry.isIntersecting);
+      for (const entry of entries) onChange(entry.isIntersecting, entry);
     },
     { rootMargin },
   );

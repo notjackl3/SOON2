@@ -37,11 +37,11 @@ export default function Home() {
 
       <SectionGuests />
 
-      <SectionSponsors />
+      <SectionStats />
 
       <SectionPastSponsors />
 
-      <SectionStats />
+      <SectionSponsors />
 
       <SectionTeam />
 

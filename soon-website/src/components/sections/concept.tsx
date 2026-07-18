@@ -94,11 +94,13 @@ export default function SectionConcept() {
                     className="object-cover"
                   />
                 </div>
+                {/* stats 
                 <div className="flex w-full items-end justify-between gap-6">
                   <Stat value="50" label="hackers" delay={0} />
                   <Stat value="36" label="hours" delay={120} />
                   <Stat value="01" label="house" delay={240} />
                 </div>
+                */}
               </Reveal>
             </div>
 
@@ -107,12 +109,22 @@ export default function SectionConcept() {
 
             {/* text + floating starblock */}
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-              <Reveal as="p" className="relative z-10 max-w-103.75 text-[clamp(16px,1.4vw,18px)] tracking-body text-ink-soft">
-                A 36-hour build experience where 50 top hackers live, eat, and
-                build under one roof, collaborating with a group of partner
-                companies to turn bold ideas into real products. Connect with
-                other hackers, learn from industry experts, and gain hands-on
-                experience in a fast-paced and fun environment.
+              <Reveal className="relative z-10 flex max-w-90 flex-col gap-3">
+                <h3 className="font-sans text-[clamp(15px,1.7vw,20px)] font-bold tracking-tight text-ink-soft">
+                  About SOON
+                </h3>
+                <p className="text-body leading-normal tracking-body text-muted">
+                  We are creating a home for Canada&rsquo;s best builders to reach their full potential. A 36-hour experience where 50 builders live under one roof, collaborating with
+                  companies and sponsors to turn bold ideas into real products.
+                </p>
+              </Reveal>
+              <Reveal delay={120} className="relative z-10 flex max-w-90 flex-col gap-3">
+                <h3 className="font-sans text-[clamp(15px,1.7vw,20px)] font-bold tracking-tight text-ink-soft">
+                  Who we&rsquo;re looking for
+                </h3>
+                <p className="text-body leading-normal tracking-body text-muted">
+                  We&rsquo;re looking for people who are passionate about building, learning, and growing together. If that sounds like you, join us at SOON.
+                </p>
               </Reveal>
               {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG */}
              <div className="flex flex-row">

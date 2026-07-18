@@ -304,7 +304,7 @@ export default function SectionGuests() {
           >
             <FeedbackHeading className="font-sans text-[34.418px] font-medium leading-none tracking-tight text-ink" />
             <p className="mt-0.75 text-center text-[6.48px] uppercase tracking-tight text-muted">
-              Past judges and speakers
+              Our past judges and speakers. Hear industry leaders at every SOON.
             </p>
           </div>
 
@@ -383,9 +383,9 @@ export default function SectionGuests() {
           </div>
           <p
             className="absolute text-[11px] uppercase tracking-body text-muted"
-            style={{ left: 410, top: 348, width: 160 }}
+            style={{ left: 280, top: 340, width: 430 }}
           >
-            Past judges and speakers
+            Our past judges and speakers. Hear from industry leaders at every SOON.
           </p>
 
           {/* Connector lines */}

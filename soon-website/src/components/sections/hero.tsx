@@ -1,5 +1,5 @@
+import { EmailCta } from "@/components/ui/email-cta";
 import { Highlight } from "@/components/ui/highlight";
-import { ReserveButton } from "@/components/ui/reserve-button";
 import { Reveal } from "@/components/ui/reveal";
 
 /** Dotted-grid texture behind the hero. Rendered at its natural size and
@@ -85,14 +85,14 @@ export default function SectionHero() {
                 </Reveal>
               </div>
               <p className="max-w-105 text-balance text-[clamp(16px,1.4vw,18px)] tracking-body text-muted">
-                Join 50 of Canada's best builders in a multimillion dollar private mansion. Build, ship, and connect with industry leaders, all in one weekend.
+                Join 50 of Canada&rsquo;s best builders in a multimillion dollar private mansion. Build, ship, and connect with industry leaders, all in one weekend.
               </p>
             </Reveal>
           </div>
 
           {/* CTA row */}
-          <Reveal delay={360} className="flex items-center justify-between gap-4">
-            <ReserveButton />
+          <Reveal delay={360} className="flex items-start justify-between gap-4">
+            <EmailCta />
             {/* Desktop only — on mobile this badge sits beside "Coming Oct". */}
             <Reveal delay={1500} y={0} scale={0} duration={450} className="hidden md:block">
               <CornerBadge>Location: TBA</CornerBadge>
