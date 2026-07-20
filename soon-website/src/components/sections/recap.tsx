@@ -63,7 +63,7 @@ export default function SectionRecap() {
           aria-hidden
           className="pointer-events-none h-auto w-full"
         />
-        <Reveal as="h2" className="mt-4 font-sans text-[clamp(36px,8vw,80px)] font-medium leading-none tracking-tight text-ink">
+        <Reveal as="h2" className="mt-4 font-sans text-h2 font-medium leading-none tracking-tight text-ink">
           Last time, we had&hellip;
         </Reveal>
       </div>

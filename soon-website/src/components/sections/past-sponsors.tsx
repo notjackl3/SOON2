@@ -29,6 +29,10 @@ import {
 } from "@/data/past-sponsors";
 import { observeVisibility, prefersReducedMotion } from "@/lib/visibility";
 
+// Shrinks the whole desktop composition to ~90% ("viewed at 90% zoom"): the map
+// + cards scale down and, staying centred, leave larger side margins.
+const DESKTOP_ZOOM = 0.9;
+
 const MAP_X = 353.04;
 const MAP_Y = 183.19;
 // Crop the map to North America + a little South America (map-local px); the rest
@@ -148,7 +152,7 @@ export default function SectionPastSponsors() {
         ref={desktopRef}
         className="relative hidden md:block"
       >
-        <FitStage>
+        <FitStage zoom={DESKTOP_ZOOM}>
             {/* Decorative vectors (back). The arc draws itself on; the rest are
                 static SVGs. */}
             {BG_VECTORS.map((v) =>
@@ -293,10 +297,10 @@ export default function SectionPastSponsors() {
 
       {/* ---------- Mobile: simplified stacked grid ---------- */}
       <div className="px-8 py-14 md:hidden">
-        <h2 className="font-sans text-[clamp(40px,11vw,64px)] font-medium leading-none tracking-tight text-ink">
+        <h2 className="text-h2 font-medium leading-none tracking-tight text-ink">
           Our past <span className="font-display italic">sponsors</span>
         </h2>
-        <p className="mt-4 font-sans text-[clamp(16px,1.4vw,18px)] tracking-body text-ink-soft">
+        <p className="mt-4 text-body tracking-body">
           Where will you take us next?
         </p>
 
@@ -421,7 +425,7 @@ function AnimatedArc({ active, reduced }: { active: boolean; reduced: boolean })
  * than clipping it vertically; horizontal bleed past the stage is clipped by the
  * section's `overflow-x-clip`.
  */
-function FitStage({ children }: { children: ReactNode }) {
+function FitStage({ children, zoom = 1 }: { children: ReactNode; zoom?: number }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [t, setT] = useState({ scale: 1, x: 0 });
 
@@ -431,14 +435,15 @@ function FitStage({ children }: { children: ReactNode }) {
     const compute = () => {
       const w = wrap.clientWidth;
       if (!w) return;
-      const scale = Math.min(w / STAGE_W, 1);
+      // Fit-to-width (never upscale past native), then apply the zoom factor.
+      const scale = Math.min(w / STAGE_W, 1) * zoom;
       setT({ scale, x: (w - STAGE_W * scale) / 2 });
     };
     compute();
     const ro = new ResizeObserver(compute);
     ro.observe(wrap);
     return () => ro.disconnect();
-  }, []);
+  }, [zoom]);
 
   return (
     <div ref={wrapRef} className="relative w-full" style={{ height: STAGE_H * t.scale }}>

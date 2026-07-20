@@ -77,7 +77,7 @@ export function StatsLetterGrid() {
           )}
         >
           {/* Front — letter */}
-          <span className="absolute inset-0 flex items-center justify-center backface-hidden font-display text-[clamp(48px,7vw,94px)] leading-none tracking-tight text-ink">
+          <span className="absolute inset-0 flex items-center justify-center backface-hidden font-display text-h2 leading-none tracking-tight text-ink">
             {cell.letter}
           </span>
           {/* Back — company logo on an inset opaque panel: just large enough to

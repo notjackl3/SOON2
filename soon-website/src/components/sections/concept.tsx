@@ -60,7 +60,7 @@ export default function SectionConcept() {
                     Welcome
                   </span>
                   {/* sized to match the hero's "out of" */}
-                  <span className="text-[clamp(23px,4.1vw,50px)] leading-none tracking-body text-black">
+                  <span className="text-lead leading-none tracking-body text-black">
                     to
                   </span>
                 </Reveal>
@@ -111,7 +111,7 @@ export default function SectionConcept() {
             <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
               <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
                 <Reveal className="relative z-10 flex max-w-100 flex-col gap-3">
-                  <h3 className="font-sans text-[clamp(15px,1.7vw,20px)] font-bold tracking-tight text-ink-soft">
+                  <h3 className="font-sans text-subhead font-bold tracking-tight text-ink-soft">
                     About SOON
                   </h3>
                   <p className="text-body leading-normal tracking-body text-muted">
@@ -120,7 +120,7 @@ export default function SectionConcept() {
                   </p>
                 </Reveal>
                 <Reveal delay={120} className="relative z-10 flex max-w-100 flex-col gap-3">
-                  <h3 className="font-sans text-[clamp(15px,1.7vw,20px)] font-bold tracking-tight text-ink-soft">
+                  <h3 className="font-sans text-subhead font-bold tracking-tight text-ink-soft">
                     Who we&rsquo;re looking for
                   </h3>
                   <p className="text-body leading-normal tracking-body text-muted">

@@ -19,6 +19,16 @@
   --color-line: #cdced8;
   --color-cobalt: #4662ff;
 
+  /* Font-size tokens (from the type audit). Tailwind v4 generates the matching
+     text-* utilities. Section titles share one `text-h2`; stage-internal fixed
+     px sizes stay literal (they scale with their Figma stage). */
+  --text-body: clamp(16px, 1.4vw, 18px);
+  --text-subhead: clamp(15px, 1.7vw, 20px);
+  --text-lead: clamp(23px, 4.1vw, 50px);
+  --text-h2: clamp(36px, 8vw, 80px);
+  --text-display: clamp(64px, 10vw, 120px);
+  --text-display-xl: clamp(79px, 13.2vw, 165px);
+
   /* Letter-spacing tokens (from Figma text styles).
      -0.04em is the default (set on body); -0.06em = `tracking-body`. */
   --tracking-tight: -0.04em; /* Figma: Caption + display headings */

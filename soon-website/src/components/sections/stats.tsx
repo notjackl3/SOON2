@@ -52,7 +52,7 @@ const ROW_TWO: Stat[] = [
 function StatCard({ value, label }: Stat) {
   return (
     <BoundingBox cornerSize="lg" className="group flex h-26 flex-col justify-between p-3.5 sm:h-37.5 md:h-43 md:p-5">
-      <span className="relative inline-block self-start font-display text-[clamp(38px,6.5vw,82px)] leading-[0.9] tracking-tight text-ink">
+      <span className="relative inline-block self-start font-display text-h2 leading-[0.9] tracking-tight text-ink">
         <StatHighlight value={value} />
         <span className="relative z-10">{value}</span>
       </span>
@@ -104,7 +104,7 @@ export default function SectionStats() {
       <div className="relative z-10 mx-auto w-full max-w-360 px-8 md:px-34">
         <Reveal
           as="h2"
-          className="max-w-3xl font-sans text-[clamp(36px,8vw,80px)] font-medium leading-none tracking-tight text-ink"
+          className="max-w-3xl font-sans text-h2 font-medium leading-none tracking-tight text-ink"
         >
           At a <span className="font-display italic">glance</span>
         </Reveal>

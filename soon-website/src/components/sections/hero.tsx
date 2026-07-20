@@ -52,17 +52,17 @@ export default function SectionHero() {
             <div className="flex flex-col gap-2">
               {/* eyebrow + Something */}
               <div className="flex flex-col gap-1">
-                <Reveal as="p" className="px-1.5 text-[clamp(16px,1.4vw,18px)] tracking-body text-muted">
+                <Reveal as="p" className="px-1.5 text-body tracking-body text-muted">
                   Canada&rsquo;s best builders. All making
                 </Reveal>
-                <Reveal as="h1" delay={90} className="font-display tracking-body text-[clamp(64px,10vw,120px)] leading-none text-black">
+                <Reveal as="h1" delay={90} className="font-display tracking-body text-display leading-none text-black">
                   Something
                 </Reveal>
               </div>
 
               {/* out of / Nothing */}
               <Reveal delay={180} className="flex items-end justify-between gap-3">
-                <span className="self-start shrink-0 text-[clamp(23px,4.1vw,50px)] leading-none tracking-body text-black">
+                <span className="self-start shrink-0 text-lead leading-none tracking-body text-black">
                   out of
                 </span>
                 <span className="h-[clamp(64px,10.5vw,132px)] relative flex flex-1 items-center justify-start">
@@ -71,7 +71,7 @@ export default function SectionHero() {
                     revealDelay={650}
                     barClassName="inset-x-0 top-1/2 h-[55%] -translate-y-1/2"
                   >
-                    <span className="font-display text-[clamp(79px,13.2vw,165px)] italic leading-[0.8] text-black">
+                    <span className="font-display text-display-xl italic leading-[0.8] text-black">
                       Nothing
                     </span>
                   </Highlight>
@@ -92,7 +92,7 @@ export default function SectionHero() {
                   <CornerBadge>Location: TBA</CornerBadge>
                 </Reveal>
               </div>
-              <p className="max-w-105 text-balance text-[clamp(16px,1.4vw,18px)] tracking-body text-muted">
+              <p className="max-w-105 text-balance text-body tracking-body text-muted">
                 Join 50 of Canada&rsquo;s best builders in a multimillion dollar private mansion. Build, ship, and connect with industry leaders, all in one weekend.
               </p>
             </Reveal>

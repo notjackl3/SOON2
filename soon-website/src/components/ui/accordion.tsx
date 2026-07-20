@@ -67,7 +67,7 @@ function FaqItem({
           open ? "" : "hover:bg-surface/60"
         }`}
       >
-        <span className="font-sans text-[clamp(15px,1.7vw,20px)] font-bold tracking-tight text-ink-soft">
+        <span className="font-sans text-subhead font-bold tracking-tight text-ink-soft">
           {question}
         </span>
         <PlusGlyph open={open} />

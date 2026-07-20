@@ -15,10 +15,10 @@ export default function SectionFooter() {
         {/* Left: heading + copy */}
         <div className="flex flex-1 flex-col gap-12">
           <Reveal className="flex flex-col gap-3">
-            <p className="text-[clamp(16px,1.4vw,18px)] tracking-body text-ink-soft">
+            <p className="text-body tracking-body text-ink-soft">
               Knock, knock
             </p>
-            <h2 className="max-w-135.5 text-[clamp(36px,8vw,80px)] font-medium leading-none text-ink tracking-body">
+            <h2 className="max-w-135.5 text-h2 font-medium leading-none text-ink tracking-body">
               We&rsquo;d love to hear from{" "}
               <Highlight
                 trigger="in-view"
@@ -31,7 +31,7 @@ export default function SectionFooter() {
             </h2>
           </Reveal>
 
-          <Reveal delay={130} className="max-w-110.5 space-y-4 text-[clamp(16px,1.4vw,18px)] tracking-body text-ink-soft">
+          <Reveal delay={130} className="max-w-110.5 space-y-4 text-body tracking-body text-ink-soft">
             <p>
               Questions, feedback, or just want to book a coffee chat and say hi? Whether you&rsquo;re a
               hacker, a sponsor, or simply curious about SOON, our team is here to help.

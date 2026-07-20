@@ -71,7 +71,7 @@ export default function SectionFaq() {
           the accordion re-enables them on itself. */}
       <div className="pointer-events-none relative mx-auto w-full max-w-360 px-8 md:px-34">
         {/* Heading — "FAQ" with the Q in display italic and an accent swipe */}
-        <Reveal as="h2" className="mb-8 w-fit font-sans text-[clamp(52px,8vw,80px)] font-medium leading-none tracking-tight text-ink md:mb-10">
+        <Reveal as="h2" className="mb-8 w-fit font-sans text-h2 font-medium leading-none tracking-tight text-ink md:mb-10">
           <Highlight
             trigger="in-view"
             barClassName="inset-x-[-0.06em] bottom-[0.1em] top-[0.46em]"
