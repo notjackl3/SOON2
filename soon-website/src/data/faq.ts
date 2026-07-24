@@ -7,21 +7,31 @@ export const FAQS: FaqEntry[] = [
   {
     question: "Why a house?",
     answer:
-      "Hackathons usually feel like conference halls — rows of tables under fluorescent lights. We wanted the opposite: a space where hackers actually bond, hang out, and build side by side. A house makes SOON feel like home.",
+      "Everyone has been to hackathons on campus — SOON is designed to feel like a builder retreat, with everyone building, eating, resting, and spending time together under one roof.",
   },
   {
-    question: "What kind of activities will there be?",
+    question: "Who can apply?",
     answer:
-      "Beyond building, expect workshops, mentor office hours, mini-games, and plenty of unstructured time to meet other builders. We're designing the weekend so the moments between the code are just as memorable.",
+      "SOON is open to everyone across all education levels and industries. All hackers must be 18 years old or older by the time of the hackathon.",
   },
   {
-    question: "Who can participate, and where?",
+    question: "Where will SOON take place?",
     answer:
-      "Anyone passionate about building is welcome — students, self-taught hackers, and first-timers included. The event is hosted in person; exact location and travel details go out to accepted hackers closer to the date.",
+      "SOON will take place at a private venue around the Greater Toronto Area. The exact address will only be shared with accepted participants.",
   },
   {
-    question: "When do hacker applications open?",
+    question: "Will participants stay overnight?",
     answer:
-      "Applications open soon — drop your email on the site and we'll be the first to let you know the moment they go live.",
+      "Yes. SOON is a 36-hour experience, and participants will be able to remain at the house overnight. Hackers will have a chance to request private bedroom accommodation.",
+  },
+  {
+    question: "What should I bring?",
+    answer:
+      "Bring your laptop, charger, identification, toiletries, comfortable clothes, and anything you need to build your project. Depending on the venue, you might be encouraged to bring swimsuits, sports equipment, snacks, and more.",
+  },
+  {
+    question: "Does it cost anything to attend?",
+    answer:
+      "SOON will have a participation fee due to the exclusiveness of the event, with the final amount to be announced closer to the event. Scholarships will also be available.",
   },
 ];

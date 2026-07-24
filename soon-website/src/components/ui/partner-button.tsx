@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 
 const PARTNER_DECK_URL =
-  "https://drive.google.com/file/d/1vD6dF0aG7qILG3d3gn-3-pYZy_uC7ZUq/view?usp=sharing";
+  "https://drive.google.com/file/d/1I4tjvupyuDLaB_-wHHJ-KTHO05il1GdL/view?usp=sharing";
 
 /**
  * Sponsors CTA. Opens the partnership deck (Google Drive) in a new tab.

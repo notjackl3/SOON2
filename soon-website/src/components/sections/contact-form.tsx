@@ -89,7 +89,10 @@ export default function ContactForm() {
       const { error } = await getSupabase().functions.invoke("notify-meeting", {
         body: {
           name: form.name.trim(),
-          company: form.company.trim(),
+          // The `notify-meeting` function rejects an empty company (it's shared
+          // with the SOON sponsor form, where company is required). This form
+          // keeps it optional, so fall back to a placeholder when it's blank.
+          company: form.company.trim() || "N/A",
           email: form.email.trim(),
           availability: form.info.trim(),
         },
