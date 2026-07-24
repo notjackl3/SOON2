@@ -30,6 +30,20 @@ const NUDGE_Y = 16;
  */
 const COMPRESS_X: Record<string, number> = {
   "70%": 0.78,
+  "25%": 0.78, // same width as 70% (reuses its rect)
+  "300k": 0.72, // one char narrower than the 5-char "300K+" rect it reuses
+};
+
+/**
+ * Values without their own Figma-authored cluster reuse an existing one whose
+ * number is the same visual width (single digit, or ~3 narrow chars). Keeps the
+ * hover highlight working for any stat without re-parsing the design.
+ */
+const CLUSTER_ALIAS: Record<string, string> = {
+  "4": "9", // single digit
+  "30+": "5:1", // three narrow chars (shares the 105.93 rect)
+  "25%": "70%", // percentage — reuse the wide 236.51 rect
+  "300k": "300K+", // renamed value keeps the original 300K cluster
 };
 
 const PIXEL_BG: Record<PixelColor, string> = {
@@ -54,7 +68,7 @@ function jitter(n: number) {
  * Render it as the first child of a `relative` number wrapper inside a `group`.
  */
 export function StatHighlight({ value }: { value: string }) {
-  const cluster = STAT_CLUSTERS[value];
+  const cluster = STAT_CLUSTERS[value] ?? STAT_CLUSTERS[CLUSTER_ALIAS[value] ?? ""];
   if (!cluster) return null;
   const { w, h, rect, pixels } = cluster;
 

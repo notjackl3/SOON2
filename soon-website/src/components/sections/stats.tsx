@@ -6,57 +6,56 @@ import { StatHighlight } from "@/components/ui/stat-highlight";
 import { StatsLetterGrid } from "@/components/sections/stats-letter-grid";
 
 /**
- * "A glimpse at what we're capable of" — a grid of achievement stats followed by
- * the "Where our hackers HAVE BEEN" letter block. Each stat card and each letter
- * cell is a decorative <BoundingBox> (the red/blue placeholder frames in Figma).
- *
- * NOTE: the accent-green highlight + pixel-flicker cluster that sits behind the
- * "300K+" stat is intentionally omitted for now — see the follow-up discussion.
+ * "A glimpse at what we're capable of" — a single row of five achievement stats
+ * from SOON 2025. Each stat card is a decorative <BoundingBox> with a big Playfair
+ * number that reveals an accent-green highlight + pixel-flicker cluster on hover.
+ * Below it sits the "Where our hackers HAVE BEEN" letter block.
  */
 
 type Stat = { value: string; label: ReactNode };
 
-const ROW_ONE: Stat[] = [
-  { value: "300K+", label: "Social Media Impressions" },
-  { value: "70%", label: "Of Hackers Have Interned" },
-  { value: "9", label: "Activities" },
-  { value: "7", label: "Meals" },
-];
-
-const ROW_TWO: Stat[] = [
-  { value: "17", label: "Projects in 36 Hours" },
+const STATS: Stat[] = [
+  {
+    value: "25%",
+    label: (
+      <>
+        Of Hackers Founded A Startup
+      </>
+    ),
+  },
+  {
+    value: "4",
+    label: (
+      <>
+        Actively Hiring
+        <br />
+        Positions
+      </>
+    ),
+  },
   {
     value: "2",
     label: (
       <>
-        Shipped
+        Integrated Into
         <br />
-        To Prod
+        Sponsors&rsquo; System
       </>
     ),
   },
-  {
-    value: "5:1",
-    label: (
-      <>
-        Applicants
-        <br />
-        Per Spot
-      </>
-    ),
-  },
-  { value: "2,000+", label: "Photos and Videos" },
+  { value: "30+", label: "Referrals Given" },
+  { value: "300k", label: "Social Media Impressions" },
 ];
 
 /** Big Playfair number stacked over an uppercase Inter label, framed by the box. */
 function StatCard({ value, label }: Stat) {
   return (
-    <BoundingBox cornerSize="lg" className="group flex h-26 flex-col justify-between p-3.5 sm:h-37.5 md:h-43 md:p-5">
-      <span className="relative inline-block self-start font-display text-h2 leading-[0.9] tracking-tight text-ink">
+    <BoundingBox cornerSize="lg" className="group flex h-26 flex-col justify-between p-3.5 sm:h-37.5 md:h-40 md:p-5">
+      <span className="relative inline-block self-start font-display text-[clamp(40px,4.5vw,64px)] leading-[0.9] tracking-tight text-ink">
         <StatHighlight value={value} />
         <span className="relative z-10">{value}</span>
       </span>
-      <span className="font-sans text-[11px] uppercase leading-tight tracking-tight text-ink-soft md:text-[16px]">
+      <span className="font-sans text-[11px] uppercase leading-tight tracking-tight text-ink-soft md:text-[15px]">
         {label}
       </span>
     </BoundingBox>
@@ -78,7 +77,7 @@ export default function SectionStats() {
         src="/stats/union-top.svg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute -top-12 right-4 hidden w-[clamp(220px,26vw,440px)] md:right-16 lg:block"
+        className="pointer-events-none absolute -top-12 right-4 hidden aspect-[440.611/372.422] h-auto w-[clamp(220px,26vw,440px)] md:right-16 lg:block"
       />
 
       {/* Dashed swoosh (three arc segments) sweeping around the letter block. */}
@@ -109,22 +108,22 @@ export default function SectionStats() {
           At a <span className="font-display italic">glance</span>
         </Reveal>
 
-        {/* Stat grids — two rows with the Figma column proportions (369 vs 170px). */}
-        <div className="mt-10 flex flex-col gap-6 md:mt-14 md:gap-8">
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-[369fr_369fr_170fr_170fr] md:gap-8">
-            {ROW_ONE.map((stat, i) => (
-              <Reveal key={stat.value} delay={i * 80}>
-                <StatCard {...stat} />
-              </Reveal>
-            ))}
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-[369fr_170fr_170fr_369fr] md:gap-8">
-            {ROW_TWO.map((stat, i) => (
-              <Reveal key={stat.value} delay={i * 80}>
-                <StatCard {...stat} />
-              </Reveal>
-            ))}
-          </div>
+        {/* Small eyebrow above the stat row. */}
+        <Reveal
+          as="p"
+          delay={80}
+          className="mt-6 font-sans text-base font-semibold tracking-tight text-ink md:mt-8"
+        >
+          During SOON 2025&hellip;
+        </Reveal>
+
+        {/* Stat row — five equal cards, single row on wide screens. */}
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:mt-8 md:grid-cols-3 md:gap-6 xl:grid-cols-5">
+          {STATS.map((stat, i) => (
+            <Reveal key={stat.value} delay={i * 80}>
+              <StatCard {...stat} />
+            </Reveal>
+          ))}
         </div>
       </div>
 
