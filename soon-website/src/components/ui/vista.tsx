@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import type { Corner } from "@/data/guests";
+import { linkifyCompanies } from "@/lib/companies";
 
 /** Square centered exactly on the picture corner (matches the line anchors). */
 const CORNER_POS: Record<Corner, string> = {
@@ -49,7 +50,7 @@ export function Vista({
           {name}
         </p>
         <p className="text-[11px] uppercase leading-snug tracking-body text-muted">
-          {role}
+          {linkifyCompanies(role)}
         </p>
       </div>
     </div>

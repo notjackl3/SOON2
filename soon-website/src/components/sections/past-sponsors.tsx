@@ -14,6 +14,7 @@ import { DottedMap } from "@/components/ui/dotted-map";
 import { Highlight } from "@/components/ui/highlight";
 import { Reveal } from "@/components/ui/reveal";
 import { ScaledStage } from "@/components/ui/scaled-stage";
+import { linkifyCompanies } from "@/lib/companies";
 import { MAP_W } from "@/data/map-dots";
 import {
   ALL_SPONSORS,
@@ -68,15 +69,29 @@ function closestEdgeMidpoint(b: Box, target: { x: number; y: number }) {
   return best;
 }
 
-/** City label + logo — the shared body of every logo card / cluster cell. */
-function CardContent({ city, logo }: { city: string; logo: string }) {
+/** City label + logo — the shared body of every logo card / cluster cell. When
+ *  `url` is set the logo becomes a clickable link to the sponsor's site. */
+function CardContent({ city, logo, url }: { city: string; logo: string; url?: string }) {
   return (
     <div className="flex h-full w-full flex-col items-center gap-1.5 px-2.5 py-3">
       <span className="text-center font-sans text-[14px] leading-none tracking-tight text-ink-soft">
         ({city})
       </span>
-      {/* eslint-disable-next-line @next/next/no-img-element -- small logo inside a scaled stage */}
-      <img src={logo} alt={city} className="min-h-0 w-full flex-1 object-contain" />
+      {url ? (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${city} sponsor website`}
+          className="flex min-h-0 w-full flex-1 items-center justify-center transition-opacity hover:opacity-70"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element -- small logo inside a scaled stage */}
+          <img src={logo} alt={city} className="max-h-full w-full object-contain" />
+        </a>
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element -- small logo inside a scaled stage
+        <img src={logo} alt={city} className="min-h-0 w-full flex-1 object-contain" />
+      )}
     </div>
   );
 }
@@ -255,7 +270,7 @@ export default function SectionPastSponsors() {
                   {s.kind === "quote" ? (
                     <QuoteBody sponsor={s} />
                   ) : (
-                    <CardContent city={s.city} logo={s.logo} />
+                    <CardContent city={s.city} logo={s.logo} url={s.url} />
                   )}
                 </BoundingBox>
               </Flicker>
@@ -265,7 +280,7 @@ export default function SectionPastSponsors() {
                 (top-right = P's bottom-left) paints on top of P's box, not behind. */}
             <Flicker box={CLUSTER.polar} style={flicker(SPONSORS.length + 1)}>
               <BoundingBox cornerSize="xl" corners={["tl", "tr", "br"]} className="h-full w-full">
-                <CardContent city={CLUSTER.polar.city} logo={CLUSTER.polar.logo} />
+                <CardContent city={CLUSTER.polar.city} logo={CLUSTER.polar.logo} url={CLUSTER.polar.url} />
               </BoundingBox>
             </Flicker>
 
@@ -288,8 +303,8 @@ export default function SectionPastSponsors() {
                 cornerSize="xl"
                 className="h-full w-full grid-rows-1 bg-white"
               >
-                <CardContent city={CLUSTER.aucctus.city} logo={CLUSTER.aucctus.logo} />
-                <CardContent city={CLUSTER.cystack.city} logo={CLUSTER.cystack.logo} />
+                <CardContent city={CLUSTER.aucctus.city} logo={CLUSTER.aucctus.logo} url={CLUSTER.aucctus.url} />
+                <CardContent city={CLUSTER.cystack.city} logo={CLUSTER.cystack.logo} url={CLUSTER.cystack.url} />
               </BoundingGrid>
             </Flicker>
         </FitStage>
@@ -335,7 +350,7 @@ export default function SectionPastSponsors() {
               cornerSize="lg"
               className="flex aspect-3/2 flex-col items-center justify-center"
             >
-              <CardContent city={s.city} logo={s.logo} />
+              <CardContent city={s.city} logo={s.logo} url={s.url} />
             </BoundingBox>
           ))}
         </div>
@@ -353,15 +368,28 @@ function QuoteBody({ sponsor }: { sponsor: Sponsor }) {
           {sponsor.quote}
         </p>
         <p className="mt-3 whitespace-pre-line font-sans text-[13px] leading-none tracking-tight text-ink-soft">
-          {sponsor.author}
+          {sponsor.author ? linkifyCompanies(sponsor.author) : null}
         </p>
       </div>
       <div className="mt-7 flex items-center justify-between">
         <span className="font-sans text-[13px] leading-none tracking-tight text-ink-soft">
           ({sponsor.city})
         </span>
-        {/* eslint-disable-next-line @next/next/no-img-element -- small logo inside a scaled stage */}
-        <img src={sponsor.logo} alt={sponsor.city} className="max-h-7 w-auto max-w-[110px] object-contain object-right" />
+        {sponsor.url ? (
+          <a
+            href={sponsor.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${sponsor.city} sponsor website`}
+            className="transition-opacity hover:opacity-70"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element -- small logo inside a scaled stage */}
+            <img src={sponsor.logo} alt={sponsor.city} className="max-h-7 w-auto max-w-[110px] object-contain object-right" />
+          </a>
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element -- small logo inside a scaled stage
+          <img src={sponsor.logo} alt={sponsor.city} className="max-h-7 w-auto max-w-[110px] object-contain object-right" />
+        )}
       </div>
     </div>
   );

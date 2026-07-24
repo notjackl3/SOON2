@@ -20,6 +20,8 @@ export interface Sponsor {
   w: number;
   h: number;
   kind: SponsorKind;
+  /** Company website — makes the logo/card clickable. Omit to leave it static. */
+  url?: string;
   /** quote-card only */
   quote?: string;
   author?: string;
@@ -45,6 +47,7 @@ export const SPONSORS: Sponsor[] = [
     id: "composio",
     city: "San Francisco",
     logo: "/past-sponsors/sponsor-companies/composio.png",
+    url: "https://composio.dev/",
     x: 240,
     y: 757,
     w: 250,
@@ -54,12 +57,13 @@ export const SPONSORS: Sponsor[] = [
       "“TYSM 🙏 you guys did incredible and im so happy to have been able to witness the journey 🥹.”",
     author: "- Julia Fedorin (Content Creator and Podcaster @ Composio)",
   },
-  { id: "althra", city: "Vancouver", logo: "/past-sponsors/sponsor-companies/althra.png", x: 397.41, y: 540.6, w: 128.46, h: 128.46, kind: "logo" },
-  { id: "cloudinary", city: "San Jose", logo: "/past-sponsors/sponsor-companies/cloudinary.png", x: 627.86, y: 981.29, w: 128.46, h: 128.46, kind: "logo" },
+  { id: "althra", city: "Vancouver", logo: "/past-sponsors/sponsor-companies/althra.png", url: "https://althra.ca/", x: 397.41, y: 540.6, w: 128.46, h: 128.46, kind: "logo" },
+  { id: "cloudinary", city: "San Jose", logo: "/past-sponsors/sponsor-companies/cloudinary.png", url: "https://cloudinary.com/", x: 627.86, y: 981.29, w: 128.46, h: 128.46, kind: "logo" },
   {
     id: "polarity",
     city: "Waterloo",
     logo: "/past-sponsors/sponsor-companies/polarity.png",
+    url: "https://www.polarity.so/",
     x: 582,
     y: 230,
     w: 268,
@@ -69,11 +73,12 @@ export const SPONSORS: Sponsor[] = [
       "“Just wanted to say you killed it this weekend. So thankful that I got to be apart of that.”",
     author: "- Sammy Tourani\n(Head of Growth @ Polarity)",
   },
-  { id: "backboard", city: "Ottawa", logo: "/past-sponsors/sponsor-companies/backboard.png", x: 968.21, y: 419.23, w: 224.92, h: 85.14, kind: "logo" },
+  { id: "backboard", city: "Ottawa", logo: "/past-sponsors/sponsor-companies/backboard.png", url: "https://backboard.io/", x: 968.21, y: 419.23, w: 224.92, h: 85.14, kind: "logo" },
   {
     id: "chatforce",
     city: "Toronto",
     logo: "/past-sponsors/sponsor-companies/chatforce.png",
+    url: "https://chatforce.com/",
     x: 1088.21,
     y: 749.4,
     w: 292.41,
@@ -88,10 +93,11 @@ export const SPONSORS: Sponsor[] = [
 // --- Toronto cluster (aucctus + cystack share an edge; P shares a corner) ----
 // aucctus|cystack render as a 2×1 BoundingGrid; P is a box that omits its shared
 // bottom-left corner. The whole cluster shares ONE connector (see CLUSTER_EDGE).
-export const CLUSTER = {
-  aucctus: { id: "aucctus", city: "Toronto", logo: "/past-sponsors/sponsor-companies/aucctus.png", x: 1171.63, y: 579.69, w: 128.46, h: 128.46 },
-  cystack: { id: "cystack", city: "Toronto", logo: "/past-sponsors/sponsor-companies/cystack.png", x: 1300.09, y: 579.69, w: 128.46, h: 128.46 },
-  polar: { id: "polar", city: "Toronto", logo: "/past-sponsors/sponsor-companies/polar.png", x: 1428.56, y: 450.87, w: 128.46, h: 128.46 },
+type ClusterCell = { id: string; city: string; logo: string; url?: string; x: number; y: number; w: number; h: number };
+export const CLUSTER: Record<"aucctus" | "cystack" | "polar", ClusterCell> = {
+  aucctus: { id: "aucctus", city: "Toronto", logo: "/past-sponsors/sponsor-companies/aucctus.png", url: "https://aucctus.com/", x: 1171.63, y: 579.69, w: 128.46, h: 128.46 },
+  cystack: { id: "cystack", city: "Toronto", logo: "/past-sponsors/sponsor-companies/cystack.png", url: "https://cystack.net/", x: 1300.09, y: 579.69, w: 128.46, h: 128.46 },
+  polar: { id: "polar", city: "Toronto", logo: "/past-sponsors/sponsor-companies/polar.png", url: "https://www.pingram.io/", x: 1428.56, y: 450.87, w: 128.46, h: 128.46 },
 };
 
 export const AREAS: Area[] = [

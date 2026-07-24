@@ -7,6 +7,7 @@ import { ShapeGridEdge } from "@/components/shapes/shape-grid-edge";
 import { BoundingBox } from "@/components/ui/bounding-box";
 import { ScaledStage } from "@/components/ui/scaled-stage";
 import { Vista } from "@/components/ui/vista";
+import { linkifyCompanies } from "@/lib/companies";
 import {
   BG_VECTORS,
   EDGES,
@@ -119,7 +120,7 @@ function MobileGuestCard({
           {person.name}
         </p>
         <p className="text-[6.67px] uppercase leading-snug tracking-tight text-muted">
-          {person.role}
+          {linkifyCompanies(person.role)}
         </p>
       </div>
     </div>
